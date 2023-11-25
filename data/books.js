@@ -35,7 +35,7 @@ export const books = [{
   title: 'How To Win Friends And Influence People',
   text: 'Quotes'
 }, {
-  image: 'images/33 strategies of War.png',
-  title: '33 Strategies Of War',
+  image: 'images/strategies of war.png',
+  title: '33 strategies Of War',
   text: 'Quotes'
 }];

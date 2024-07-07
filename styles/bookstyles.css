@@ -1,0 +1,31 @@
+:root{
+  font-size: 62.5%;
+}
+
+body{
+  background-color: #151f30;
+  color: white;
+}
+
+.quotes{
+  margin-bottom: 12px;
+  font-size: 2rem;
+  font-family: roboto;
+}
+
+.header{
+  margin-bottom: none;
+}
+
+.book-heading{
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  margin-bottom: 12px;
+  text-decoration:underline;
+}
+
+@media only screen and (max-width:412px){
+ 
+}

@@ -4,15 +4,15 @@ let booksHTML = '';
 
 books.forEach((book) => {
   booksHTML += `
-  <div class="book-container">
-    <img class="image" src="${book.image}">
-    <div class="text-container">
-      <div class="book-title">${book.title}.</div>
-      <div class="quotes">${book.text}.</div>
+  <a href="${book.link}">
+    <div class="book-container">
+      <img class="image" src="${book.image}">
+      <div class="text-container">
+        <div class="book-title">${book.title}.</div>
+      </div>
     </div>
-  </div>
-  `;
-  console.log(booksHTML);
+  </a>`;
+  //console.log(booksHTML);
 });
 
 document.querySelector('.js-grid')

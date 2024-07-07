@@ -1,37 +1,41 @@
 export const books = [{
   image: 'images/Way of The Superior Man.png',
-  title: 'Meditation',
-  text: 'Quotes'
+  title: 'Way Of <br>The Superior Man',
+  link: '#'
 }, {
   image: 'images/Think and Grow Rich.png',
-  title: 'Think And Grow Rich',
-  text: 'Quotes'
+  title: 'Think And <br>Grow Rich',
+  link: '#'
 }, {
   image: 'images/Secrets of Closing a Sell.png',
-  title: 'Secrets Of Closing Sell',
-  text: 'Quotes'
+  title: 'Secrets Of<br> Closing Sell',
+  link: '#'
 },{
   image: 'images/Science of Power.png',
   title: 'Science Of Power',
-  text: 'Quotes'
+  link: '#'
 },{
   image: 'images/Richest Man in Babylon.png',
-  title: 'Richest Man in Babylon',
-  text: 'Quotes'
+  title: 'Richest Man<br> in Babylon',
+  link: '#'
 },{
   image: 'images/Rich Dad Poor Dad.png',
-  title: 'Rich Dad Poor Dad',
-  text: 'Quotes'
+  title: 'Rich Dad<br> Poor Dad',
+  link: '#'
 },{
   image: 'images/Meditations.png',
   title: 'Meditations',
-  text: 'Quotes'
+  link: '#' 
 },{
   image: 'images/Laws of Success.png',
   title: 'Laws Of Success',
-  text: 'Quotes'
+  link: '#' 
 },{
   image: 'images/How To Win Friends And Influence people.png',
-  title: 'How To Win Friends And Influence People',
-  text: 'Quotes'
+  title: 'How To Win Friends<br> And Influence People',
+  link: '#' 
+},{
+  image: 'images/7 Habits Of Highly Effective People.jpg',
+  title: '7 Habits Of Highly <br> Effective People',
+  link: '7 habits of highly effective people.html' 
 }];

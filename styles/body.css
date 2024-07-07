@@ -1,7 +1,18 @@
+body{
+  background-color: #151f30;
+  color: white;
+}
+
+.page-heading h3{
+  font-size: 30px;
+  text-decoration: underline;
+}
+
 .grid{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 50px;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 30px;
+  row-gap: 30px;
 }
 
 .book-container{
@@ -14,18 +25,20 @@
   height: 350px;
 }
 
+.text-container{
+  display: flex;
+  align-items: start;
+  justify-content: left;
+}
 
 .book-title{
   margin-left: 18px;
   font-size: 30px;
   font-weight: bold;
-  color: orange;
+  color: white;
 }
 
-.quotes{
-  margin-left: 30px;
-  font-size: 25px;
-  font-weight: bold;
-  color: rbg(252, 186, 3);
+.js-grid a{
+  text-decoration: none;
 }
 

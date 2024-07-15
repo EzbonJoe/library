@@ -10,7 +10,11 @@ export const books = [{
   image: 'images/Way of The Superior Man.png',
   title: 'Way Of <br>The Superior Man',
   link: '#'
-}, {
+},{
+  image: 'images/5am-club.jpg',
+  title: 'The 5am Club',
+  link: '5amClub.html'
+},{
   image: 'images/Think and Grow Rich.png',
   title: 'Think And <br>Grow Rich',
   link: '#'

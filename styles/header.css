@@ -1,5 +1,6 @@
 :root{
   font-size: 62.5%;
+  font-family: Arial;
 }
 
 body{
@@ -47,7 +48,6 @@ body{
   color: white;
   font-size: 6rem;
   font-weight: bold;
-  font-style: italic;
 }
 
 a{

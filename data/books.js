@@ -7,6 +7,10 @@ export const books = [{
   title: 'Goals',
   link: 'goals.html'
 },{
+  image: 'images/monk.jpg',
+  title: 'The Monk Who<br> Sold His Ferrari',
+  link: 'monk.html'
+},{
   image: 'images/Way of The Superior Man.png',
   title: 'Way Of <br>The Superior Man',
   link: '#'

@@ -15,6 +15,10 @@ export const books = [{
   title: 'How To Lead The<br>Family Business',
   link: 'familyBusiness.html'
 },{
+  image: 'images/themillionairefastlane.jpg',
+  title: 'The Millionaire Fastlane',
+  link: 'millionairefastlane.html'
+},{
   image: 'images/Way of The Superior Man.png',
   title: 'Way Of <br>The Superior Man',
   link: '#'

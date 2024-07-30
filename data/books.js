@@ -8,11 +8,11 @@ export const books = [{
   link: 'goals.html'
 },{
   image: 'images/monk.jpg',
-  title: 'The Monk Who<br> Sold His Ferrari',
+  title: 'The Monk Who Sold His Ferrari',
   link: 'monk.html'
 },{
   image:'images/Lead The Family Business.jpg',
-  title: 'How To Lead The<br>Family Business',
+  title: 'How To Lead The Family Business',
   link: 'familyBusiness.html'
 },{
   image: 'images/themillionairefastlane.jpg',
@@ -20,7 +20,7 @@ export const books = [{
   link: 'millionairefastlane.html'
 },{
   image: 'images/Way of The Superior Man.png',
-  title: 'Way Of <br>The Superior Man',
+  title: 'Way Of The Superior Man',
   link: '#'
 },{
   image: 'images/5am-club.jpg',
@@ -28,11 +28,11 @@ export const books = [{
   link: '5amClub.html'
 },{
   image: 'images/Think and Grow Rich.png',
-  title: 'Think And <br>Grow Rich',
+  title: 'Think And Grow Rich',
   link: '#'
 }, {
   image: 'images/Secrets of Closing a Sell.png',
-  title: 'Secrets Of<br> Closing Sell',
+  title: 'Secrets Of Closing Sell',
   link: '#'
 },{
   image: 'images/Science of Power.png',
@@ -40,11 +40,11 @@ export const books = [{
   link: '#'
 },{
   image: 'images/Richest Man in Babylon.png',
-  title: 'Richest Man<br> in Babylon',
+  title: 'Richest Man in Babylon',
   link: '#'
 },{
   image: 'images/Rich Dad Poor Dad.png',
-  title: 'Rich Dad<br> Poor Dad',
+  title: 'Rich Dad Poor Dad',
   link: '#'
 },{
   image: 'images/Meditations.png',
@@ -56,10 +56,10 @@ export const books = [{
   link: '#' 
 },{
   image: 'images/How To Win Friends And Influence people.png',
-  title: 'How To Win Friends<br> And Influence People',
+  title: 'How To Win Friends And Influence People',
   link: '#' 
 },{
   image: 'images/7 Habits Of Highly Effective People.jpg',
-  title: '7 Habits Of Highly <br> Effective People',
+  title: '7 Habits Of Highly Effective People',
   link: '7 habits of highly effective people.html' 
 }];

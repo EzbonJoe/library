@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Books</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="styles/header.css">
+		<link rel="stylesheet" href="styles/body.css">
+		<link rel="stylesheet" href="styles/shared.css">
+		<link rel="stylesheet" href="styles/darkmode-hidden.css">
+	</head>
+	<body>
+		
+		<nav class="drop-down js-drop-down">
+			<ul>
+				<a href="index.html" class="home-link"><li>Home</li></a>
+				<a href="#"><li>About</li></a>
+				<a href="#"><li>Contact</li></a>
+				<a href="books.html"><li>Books</li></a>
+			</ul>
+		</nav>
+
+		<header class="header">
+			<div class="left-section">
+				<a href="index.html"><div class="page-name">Library</div></a>
+				<nav>
+					<ul>
+						<a href="index.html" class="home-link"><li>Home</li></a>
+						<a href="#"><li>About</li></a>
+						<a href="#"><li>Contact</li></a>
+						<a href="books.html"><li>Books</li></a>
+					</ul>
+				</nav>
+			</div>
+	
+			<div class="right-section">
+				<div class="display-color">
+					<input type="checkbox" id="dark-mode" class="input">
+					<label for="dark-mode" class="label">
+						<div class="circle"></div>
+					</label>
+				</div>
+				
+				<div class="display-color-name">
+					<div>Light Mode</div>
+				</div>
+				<div class="icon-container js-icon-container">
+					<img src="icons/burger-menu2.png" class="icon">
+				</div>
+			</div>
+		</header>
+		
+		<div class="grid js-grid"></div>
+
+		<script type="module" src="scripts/library.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/header.js"></script>
+	</body>
+</html>

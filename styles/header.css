@@ -14,7 +14,7 @@ body{
 .header{
   background-color: #131720;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 6px;;
   margin-bottom: 12px;
   border-bottom-style: solid;
   border-bottom-width: 2px;
@@ -160,7 +160,12 @@ a{
 
 @media only screen and (max-width:412px){
   .page-name{
-    font-size: 2.5rem;
+    font-size: 2.7rem;
+  }
+
+  .right-section{
+    display: flex;
+    align-items: center;
   }
 
   .icon-container{
@@ -173,7 +178,7 @@ a{
   }
 
   .close-icon{
-    height: 20px;
+    height: 28px;
   }
 
   .display-color,
@@ -183,18 +188,18 @@ a{
 
   .display-color-name{
     font-size: 1.4rem;
-    margin-left: 25px;
+    margin-left: 28px;
     margin-right: 10px;
   }
 
   .circle{
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
   }
 
   .label{
-    width: 55px;
-    height: 25px;
+    width: 58px;
+    height: 28px;
   }
 
   .page-name{
@@ -205,7 +210,7 @@ a{
     position: fixed;
     z-index: 100;
     display: none;
-    background-color: #131720;
+    background-color: #1c2433;
     top: 40px;
     left: 0;
     right: 0;

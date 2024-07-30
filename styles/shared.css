@@ -1,6 +1,6 @@
 :root{
   font-size: 62.5%;
-  --site-background-color: white;
+  --site-background-color: aliceblue;
   --site-color: black;
   --button-background-color:pink;
 }
@@ -25,6 +25,6 @@
   }
 
   .book-title{
-    font-size: 2.2rem
+    font-size: 2.6rem
   }
 }

@@ -1,12 +1,11 @@
 :root{
   font-size: 62.5%;
+  --site-background-color: white;
+  --site-color: black;
+  --button-background-color:pink;
 }
 
 @media only screen and (max-width:412px){
-  .page-name{
-    font-size: 3.5rem;
-  }
-
   .left-section nav{
     display: none;
   }
@@ -26,6 +25,6 @@
   }
 
   .book-title{
-    font-size: 1.8rem
+    font-size: 2.2rem
   }
 }

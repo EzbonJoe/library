@@ -1,6 +1,5 @@
 body{
-  background-color: #151f30;
-  color: white;
+  background-color: var(--site-background-color);
 }
 
 .page-heading h3{
@@ -35,7 +34,7 @@ body{
   margin-left: 18px;
   font-size: 30px;
   font-weight: bold;
-  color: white;
+  color: var(--site-color);
 }
 
 .js-grid a{

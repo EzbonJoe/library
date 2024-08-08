@@ -1,5 +1,6 @@
 :root{
   font-size: 62.5%;
+  font-family: Arial;
   --site-background-color: aliceblue;
   --site-color: black;
   --button-background-color:pink;

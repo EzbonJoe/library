@@ -7,6 +7,11 @@ body{
   text-decoration: underline;
 }
 
+main h1{
+  font-size: 3rem;
+  color: var(--site-color);
+}
+
 .grid{
   display: grid;
   grid-template-columns: repeat(4, 1fr);

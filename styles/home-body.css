@@ -3,6 +3,12 @@ body{
   color: var(--site-color)
 }
 
+main h1{
+  text-align: center;
+  font-size: 3rem;
+  color: var(--site-color);
+}
+
 .rotator-container{
   margin: 0;
   display: flex;

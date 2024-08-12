@@ -1,23 +1,23 @@
 export const books = [{
   image: 'images/Mastery.jpg',
   title: 'Mastery',
-  link: 'mastery.html'
+  link: 'Quotes from Mastery.html'
 },{
   image: 'images/Goals.jpg',
   title: 'Goals',
-  link: 'goals.html'
+  link: 'Quotes From Goals by Brian Tracy.html'
 },{
   image: 'images/monk.jpg',
   title: 'The Monk Who Sold His Ferrari',
-  link: 'monk.html'
+  link: 'Quotes From The Monk Who Sold His Ferrari.html'
 },{
   image:'images/Lead The Family Business.jpg',
   title: 'How To Lead The Family Business',
-  link: 'familyBusiness.html'
+  link: 'Quotes From How To Lead The Family Business.html'
 },{
   image: 'images/themillionairefastlane.jpg',
   title: 'The Millionaire Fastlane',
-  link: 'millionairefastlane.html'
+  link: 'Quotes From The Millionaire Fastlane.html'
 },{
   image: 'images/Way of The Superior Man.png',
   title: 'Way Of The Superior Man',
@@ -25,7 +25,7 @@ export const books = [{
 },{
   image: 'images/5am-club.jpg',
   title: 'The 5am Club',
-  link: '5amClub.html'
+  link: 'Quotes from The 5am Club.html'
 },{
   image: 'images/Think and Grow Rich.png',
   title: 'Think And Grow Rich',
@@ -61,5 +61,5 @@ export const books = [{
 },{
   image: 'images/7 Habits Of Highly Effective People.jpg',
   title: '7 Habits Of Highly Effective People',
-  link: '7 habits of highly effective people.html' 
+  link: 'Quotes From 7 Habits of Highly Effective People.html' 
 }];

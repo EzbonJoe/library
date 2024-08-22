@@ -5,7 +5,7 @@ export const quotes = [
 
   '3. Maintain a central control of your business.listen to customer feedback about their needs and suggestions they give for improvement of your business.',
 
-  '4.Fame or physical talent is not a prerequisite to wealth.',
+  '4.Fame or physical talent is not a pre-requisite to wealth.',
 
   '5. Fast wealth is created exponentially, not linearly.',
 
@@ -43,7 +43,7 @@ export const quotes = [
 
   '22.Understand that luck is a product of process, action, work, and being “out there.” And when you are “out there” you stand a chance at being in the right place at the right time.',
 
-  '23.Realize luck, engage in processes where better probabilities exist. Luck is intro￾duced when you play. When life is played to win, luck shows its face. Unfortunately, Sidewalkers assign luck to events of faith—luck not engaged by process. If you want luck, engage in process, because process raises events from the ashes.',
+  '23.To realize luck, engage in processes where better probabilities exist. Luck is intro￾duced when you play. When life is played to win, luck shows its face. Unfortunately, Sidewalkers assign luck to events of faith—luck not engaged by process. If you want luck, engage in process, because process raises events from the ashes.',
 
   '24.Responsibility is the price of greatness. ~ Winston Churchill',
 
@@ -115,15 +115,15 @@ export const quotes = [
 
   '58.If you race cars at the drag strip, you know that every ounce of weight counts. Racers remove everything nonessential to make the car as light as possible. This increases efficiency, speed, and performance, resulting in faster finishes. Unnecessary weight forces the car to work harder. Yet on our road trip to wealth, we’re guilty of adding weight. Our vehicle is burdened with junk-in-the-trunk that coerces us to work harder.', 
 
-  '59.you want to be rich, you have to start thinking rich. Time is king.', 
+  '59.You want to be rich, you have to start thinking rich. Time is king.', 
 
   '60.Parasitic debt has to be stopped at the source: instant gratification.',
 
-  '61.Fastlane education is to foster growth of the busi￾ness system. Conversely, Slowlane education is designed to specifically enhance the intrinsic value of the person receiving the education. It is to become a gear in the system.',
+  '61.Fastlane education is to foster growth of the business system. Conversely, Slowlane education is designed to specifically enhance the intrinsic value of the person receiving the education. It is to become a gear in the system.',
 
   '62.Good seminars are under $1,000 and are given by respectable experts, practitioners, and seminar firms. Good seminars are educational and don’t come at the price of a new Cadillac Escalade. Bad seminars are hyped, high-pressure, and exploitative. Bad seminars are about making money and not about helping you.', 
 
-  '63.Interest reads a book; commitment applies the book 50 times. Interest wants to start a business; commitment files LLC paperwork. Interest works on your busi￾ness an hour a day Monday through Friday; commitment works on your business seven days a week whenever time permits. Interest leases an expensive car; com￾mitment rides a bike and puts the money into your system. Interest is looking rich; commitment is planning to be rich.',
+  '63.Interest reads a book; commitment applies the book 50 times. Interest wants to start a business; commitment files LLC paperwork. Interest works on your business an hour a day Monday through Friday; commitment works on your business seven days a week whenever time permits. Interest leases an expensive car; commitment rides a bike and puts the money into your system. Interest is looking rich; commitment is planning to be rich.',
 
   '64.Hard work and commitment separates the winners from the losers. ',
 
@@ -132,16 +132,16 @@ export const quotes = [
   '66.To make millions, you must serve millions.',
 
   `67.The five  fast lane commandments are;
-  i) The Commandment of Need 
-  ii) The Commandment of Entry 
-  iii) The Commandment of Control 
-  iv) The Commandment of Scale 
+  i) The Commandment of Need\n
+  ii) The Commandment of Entry \n
+  iii) The Commandment of Control\n
+  iv) The Commandment of Scale\n
   v) The Commandment of Time
   `,
 
   '68.What do we live for, if not to make life less difficult for each other? ~ George Eliot',
 
-  '69.Money isn’t attracted to selfish people. It is attracted to businesses that solve problems. It’s attracted to people who fill needs and add value. Solve needs mas￾sively and money massively attracts.', 
+  '69.Money isn’t attracted to selfish people. It is attracted to businesses that solve problems. It’s attracted to people who fill needs and add value. Solve needs massively and money massively attracts.', 
 
   '70.A formidable “why” is all you need to turn your daily activities into passionate motivation.',
 
@@ -175,9 +175,9 @@ export const quotes = [
 
   '85.Opportunity is rarely about some blockbuster breakthrough like the light bulb or the car, but as simple as an unmet need, or a need not met adequately.Opportunity is a solution to an inconvenience.Opportunity is simplification. Opportunity is a feeling. Opportunity is comfort. Opportunity is better service. Opportunity is fixing pain. Opportunity is putting weak companies out of business.',
 
-  '86. Successful businesses take existing ideas, services, and products and simply make them bet￾ter, or spin them in new directions.',
+  '86. Successful businesses take existing ideas, services, and products and simply make them better, or spin them in new directions.',
 
-  '87.Opportunities are rarely about inventing breakthroughs, but about perfor￾mance gaps, small inconveniences, and pain points.',
+  '87.Opportunities are rarely about inventing breakthroughs, but about performance gaps, small inconveniences, and pain points.',
 
   '88.The first rule of financial literacy: “Live below your means.” Yes, a pragmatic doc￾trine echoed from Slowlane dogmaticians that is an affable replacement for its mathematical equivalent of “Keep expenses under your income.” Earn 10 bucks and don’t spend 20. But is it Fastlane relevant? Absolutely, with one distinction: Live below your means with the intent to expand your means.', 
 
@@ -197,7 +197,7 @@ export const quotes = [
 
   '96.Bill Cosby once said, “I don’t know the key to success, but the key to failure is trying to please everybody.” ',
 
-  '97.If more money were spent on pleasing existing clients rather than try￾ing to find new ones, the average business would survive longer than five years.', 
+  '97.If more money were spent on pleasing existing clients rather than trying to find new ones, the average business would survive longer than five years.', 
 
   '98.“The customer pays your paycheck, not me—keep them happy."',
 

@@ -11,11 +11,11 @@ export const quotes = [
 
   '6.Your vision will become clear only when you can look into  your heart.He who looks outside, dreams; he who looks inside, awakens.', 
 
-  '7.mental mastery comes through conditioning, nothing more and nothing less.', 
+  '7.Mental mastery comes through conditioning, nothing more and nothing less.', 
 
   '8 You  see, one of the fundamental gems of worldly wisdom I have  learned in my travels to the East is also one of the most simple."  Julian then paused as if to summon up a priceless gift.  "And what might that be?"  "There is no such thing as objective reality or \'the real world.\'  There are no absolutes. The face of your greatest enemy might  be the face of my finest friend. An event that appears to be a  tragedy to one might reveal the seeds of unlimited opportunity to  another. What really separates people who are habitually upbeat  and optimistic from those who are consistently miserable is how  the circumstances of life are interpreted and processed.',
 
-  '9.There are no mistakes in life,  only lessons. There is no such thing as a negative experience, only  opportunities to grow, learn and advance along the road of self￾mastery. From struggle comes strength. Even pain can be a  wonderful teacher.',
+  '9.There are no mistakes in life,  only lessons. There is no such thing as a negative experience, only  opportunities to grow, learn and advance along the road of selfmastery. From struggle comes strength. Even pain can be a  wonderful teacher.',
 
   '10.When you are inspired by some great purpose, some  extraordinary project, all of your thoughts break their  bonds: your mind transcends limitations, your  consciousness expands in every direction and you find  yourself in a new, great and wonderful world. Dormant  forces, faculties and talents become alive and you discover  yourself to be a greater person than you ever dreamed  yourself to be.',
 
@@ -37,7 +37,7 @@ export const quotes = [
 
   '19.Trust yourself. Create the kind of life you will be  happy to live with all your life. Make the most of  yourself by fanning the tiny, inner sparks of possibility  into the flames of achievement.', 
 
-  '20.real source of happiness can  be stated in a word: achievement. Lasting happiness comes from  steadily working to accomplish your goals and advancing  confidently in the direction of your life\'s purpose.', 
+  '20.Real source of happiness can  be stated in a word: achievement. Lasting happiness comes from  steadily working to accomplish your goals and advancing  confidently in the direction of your life\'s purpose.', 
 
   '21.You will never be able to hit a  target that you cannot see.',
 
@@ -45,11 +45,11 @@ export const quotes = [
 
   '23.Make sure that you have fun while you are  advancing along the path of your goals and purpose. Never forget  the importance of living with unbridled exhilaration. Never neglect to see the exquisite beauty in all living things. Today and this very moment that you and I are sharing is a gift. Remain spirited, joyful and curious. Stay focused on your lifework and on giving selfless service to others. The Universe will take care of everything else. This is one of nature\'s truest laws.',
 
-  '24. Aways remember that what lies behind you and what lies in front of you  is nothing when compared to what lies within you."Thanks Julian. I really needed to hear this."',
+  '24. Always remember that what lies behind you and what lies in front of you  is nothing when compared to what lies within you.',
 
   '25.Never forget the importance of living with unbridled exhilaration. Never neglect to see the exquisite beauty in all living things. Today, and this very moment, is a gift. Stay  focused on your purpose. The Universe will take care of  everything else.', 
 
-  '26.Good people strengthen themselves ceaselessly. Confucius',
+  '26.Good people strengthen themselves ceaselessly. "Confucius"',
 
   '27.Self-mastery is the DNA of life mastery.',
 
@@ -57,7 +57,7 @@ export const quotes = [
 
   '29.The only limits on your life are those that you set yourself. When you dare to get out of your circle of comfort and explore the unknown,  you start to liberate your true human potential.',
 
-  '30.You are very much like a high￾performance race car worth millions of dollars; a well-oiled, highly  sophisticated machine.Your mind is the greatest wonder of the universe and your  body has the capacity to perform feats that might astonish you.Knowing the value of this high performance multi-million  dollar machine, would it be wise to run it full out every minute of  every day without taking a pit stop to let the motor cool down? Of course not.Well then, why are you not taking some time every day for your personal pit stop or rest break? Why are you not taking the  time to cool down the high performance engine of your mind? Do  you see my point? Taking the time to renew yourself is the most important thing you can do. Ironically, taking time out from your hectic schedule for self-improvement and personal enrichment will dramatically improve your effectiveness once you get back  into it',
+  '30.You are very much like a high performance race car worth millions of dollars; a well-oiled, highly  sophisticated machine.Your mind is the greatest wonder of the universe and your  body has the capacity to perform feats that might astonish you.Knowing the value of this high performance multi-million  dollar machine, would it be wise to run it full out every minute of  every day without taking a pit stop to let the motor cool down? Of course not.Well then, why are you not taking some time every day for your personal pit stop or rest break? Why are you not taking the  time to cool down the high performance engine of your mind? Do  you see my point? Taking the time to renew yourself is the most important thing you can do. Ironically, taking time out from your hectic schedule for self-improvement and personal enrichment will dramatically improve your effectiveness once you get back  into it',
 
   '31.To  truly get the best out of a great book, you must study it, not just read it. Go through it as you do when you read those contracts your big clients bring to you for your legal opinion. Really consider it, work with it, become one with it.', 
 

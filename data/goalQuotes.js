@@ -5,7 +5,7 @@ export const quotes = [
 
   '3.Happiness is the progressive realization of a worthy ideal, or goal.',
 
-  '4.It is only when you free yourself from negative emotions by accepting complete responsibility that you can begin to set and achieve goals in every area of your life. It is only when you are free, mentally and emotionally, that you canbegin to channel your energy and enthusiasm in a forward direction. Without the acceptance of complete personal responsibility, no progress is possible. On the other hand, once you accept total responsibility  for your life, there are no limits on what you can be, do, and have.',
+  '4.It is only when you free yourself from negative emotions by accepting complete responsibility that you can begin to set and achieve goals in every area of your life. It is only when you are free, mentally and emotionally, that you can begin to channel your energy and enthusiasm in a forward direction. Without the acceptance of complete personal responsibility, no progress is possible. On the other hand, once you accept total responsibility  for your life, there are no limits on what you can be, do, and have.',
 
   '5.The more responsibility you accept, the greater amount of control you feel you have.',
 

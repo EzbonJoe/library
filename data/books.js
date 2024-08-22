@@ -1,4 +1,8 @@
 export const books = [{
+  image: 'images/33 strategies Of War.png',
+  title: '33 Strategies Of War',
+  link: 'Quotes-From-33-Strategies-Of-War' 
+},{
   image: 'images/Mastery.jpg',
   title: 'Mastery',
   link: 'Quotes-from-Mastery'

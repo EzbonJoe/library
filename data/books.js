@@ -21,7 +21,7 @@ export const books = [{
 },{
   image: 'images/Way of The Superior Man.png',
   title: 'Way Of The Superior Man',
-  link: '#'
+  link: 'coming-soon'
 },{
   image: 'images/5am-club.jpg',
   title: 'The 5am Club',
@@ -29,35 +29,35 @@ export const books = [{
 },{
   image: 'images/Think and Grow Rich.png',
   title: 'Think And Grow Rich',
-  link: '#'
+  link: 'coming-soon'
 }, {
   image: 'images/Secrets of Closing a Sell.png',
   title: 'Secrets Of Closing Sell',
-  link: '#'
+  link: 'coming-soon'
 },{
   image: 'images/Science of Power.png',
   title: 'Science Of Power',
-  link: '#'
+  link: 'coming-soon'
 },{
   image: 'images/Richest Man in Babylon.png',
   title: 'Richest Man in Babylon',
-  link: '#'
+  link: 'coming-soon'
 },{
   image: 'images/Rich Dad Poor Dad.png',
   title: 'Rich Dad Poor Dad',
-  link: '#'
+  link: 'coming-soon'
 },{
   image: 'images/Meditations.png',
   title: 'Meditations',
-  link: '#' 
+  link: 'coming-soon' 
 },{
   image: 'images/Laws of Success.png',
   title: 'Laws Of Success',
-  link: '#' 
+  link: 'coming-soon' 
 },{
   image: 'images/How To Win Friends And Influence people.png',
   title: 'How To Win Friends And Influence People',
-  link: '#' 
+  link: 'coming-soon' 
 },{
   image: 'images/7 Habits Of Highly Effective People.jpg',
   title: '7 Habits Of Highly Effective People',

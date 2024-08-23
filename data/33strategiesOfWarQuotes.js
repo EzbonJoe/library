@@ -5,7 +5,7 @@ export const quotes = [
 
 '3.Judge people by their actions.',
 
-'4.Depend on you own arms.',
+'4.Depend on your own arms.',
 
 '5.Being unconquerable lies with yourself.',
 
@@ -27,7 +27,7 @@ export const quotes = [
 
 '14. Once you feel clear and motivated you will have space for true friendship and true compromise.',
 
-'15. Getting along with other people is an important skill  to have but it comes with a danger, by always seeking the path of least resistance, the path of conciliation, you forget who you are and you sink into the center with everyone else. Instead see yourself as an outsider surrounded by enemies. " Constant battle will keep you stron and alert".',
+'15. Getting along with other people is an important skill  to have but it comes with a danger, by always seeking the path of least resistance, the path of conciliation, you forget who you are and you sink into the center with everyone else. Instead see yourself as an outsider surrounded by enemies. " Constant battle will keep you strong and alert".',
 
 '16. Do not be lured by the need to be liked: better to be respected, even feared ',
 
@@ -47,13 +47,13 @@ export const quotes = [
 
 '24 Anyone can plan a campaign but few are capable of waging war because only a true military genius can handle the developments and circumstances.',
 
-'25. Victoryagainst superior numbers depended on suprise.',
+'25. Victory against superior numbers depended on suprise.',
 
 '26. It can be valuable to analyse what went wrong in the past but it is far more important to develop the capacity to think in the moment.In that way you will make far fewer mistakes to analyse. ',
 
 '27.Attention to the details  of the present  is by far the best way to crowd out the past and forget the last war.',
 
-'28. You may think that what you\'d like yo recapture from your youth is your looks, your physical fitness, your simple pleasures but what you really need is the fluidity of mind you once possessed.',
+'28. You may think that what you\'d like to recapture from your youth is your looks, your physical fitness, your simple pleasures but what you really need is the fluidity of mind you once possessed.',
 
 '29. Do not waste time on things you cannot change or influence. Just keep moving.',
 
@@ -79,13 +79,13 @@ export const quotes = [
 
 '40. Meditation on inevitable death should be performed daily. Everyday when one\'s body and mind are at peace one should meditate upon being ripped apart by arrows, rifles, spears and swords, being carried away by surging waves being thrown into the midst of a great fire being, struck by lightning,  being shaken to death by a great earthquake,  falling from thousand foot clifs, dying of a disease or commiting seppuku at the death of one\'s master. And every day without fail one should consider himself as dead.',
 
-'41. A sense if urgency comes from a powerful connection to the present.',
+'41. A sense of urgency comes from a powerful connection to the present.',
 
 '42. Get rid of your safety net. Sometimes you have to become a little desperate to get anywhere.',
 
-'43. The way of the samurai is in desperate Ness. Ten or more cannot kill such a man. Common sense will not accomplish great things. Simply become insane and desperate.',
+'43. The way of the samurai is in desperateness. Ten or more cannot kill such a man. Common sense will not accomplish great things. Simply become insane and desperate.',
 
-'44. Try to get as much as possible done I\'m the shortest time.',
+'44. Try to get as much as possible done in the shortest time.',
 
 '45. Society is organised to make death invisible, to keep it several steps removed. That distance may seem necessary for our comfort but it comes with a terrible price.The illusion of limitless time and a consequent lack of seriousness about daily life. We are running away from the one reality that faces us all.',
 
@@ -113,7 +113,7 @@ export const quotes = [
 
 '57. For what the leaders are that as a rule will the men below them be.',
 
-'58. Today\'s world is complex and chaotic. It is harder than ever to exercise control through a chain of command. You cannot supervise everything yourself,  you cannot keep your eye on everyone.  Being seen as a dictator will do you harm but if you submit to complexity and let go of the chain of command, chaos will consume you. The solution is to operate through a kind of remote control. Hire deputies who share your vision but can think on their own, acting as you would in their place. Instead of wasting time negotiating with every difficult person, work on spreading  a  spirit of camaraderie and efficiency that becomes self policing. Streamline the organisation cutting out waste in staff in the irrelevant reports on your desk, in pointless meetings. The less attention you spend on petty details l, the more time you will have for the larger picture for asserting your authority generally and indirectly. People will follow your lead without feeling bullied. That is ultimate control.',
+'58. Today\'s world is complex and chaotic. It is harder than ever to exercise control through a chain of command. You cannot supervise everything yourself,  you cannot keep your eye on everyone.  Being seen as a dictator will do you harm but if you submit to complexity and let go of the chain of command, chaos will consume you. The solution is to operate through a kind of remote control. Hire deputies who share your vision but can think on their own, acting as you would in their place. Instead of wasting time negotiating with every difficult person, work on spreading  a  spirit of camaraderie and efficiency that becomes self policing. Streamline the organisation cutting out waste in staff in the irrelevant reports on your desk, in pointless meetings. The less attention you spend on petty details, the more time you will have for the larger picture for asserting your authority generally and indirectly. People will follow your lead without feeling bullied. That is ultimate control.',
 
 '59. Madness is the exception in individuals but the rule in groups.',
 
@@ -131,11 +131,11 @@ export const quotes = [
 
 '66. Inorder to control and get information effectively and efficiently deploy spies in every department of your institution inorder to receive information fast.',
 
-'67. The single greatest risk to your chain of command comes from the political animals in the group.people like this are inescapable, they spring up like weeds I\'m any organisation. Not only are they out for themselves but they build factions to further their own agendas and fracture the cohesion you have built. Interpreting your commands for their own purposes, finding loopholes in any ambiguity, they  relate invisible breaks in the chain. Try to weed them out before they arrive. In hiring your team, look at the candidates histories: Are they restless? Do they often move from place to place? That is a sign of the kind of ambition that will keep them from fitting in. When people seem to share your ideas exactly be wary: They are probably mirroring them to charm you.',
+'67. The single greatest risk to your chain of command comes from the political animals in the group.People like this are inescapable, they spring up like weeds in any organisation. Not only are they out for themselves but they build factions to further their own agendas and fracture the cohesion you have built. Interpreting your commands for their own purposes, finding loopholes in any ambiguity, they  relate invisible breaks in the chain. Try to weed them out before they arrive. In hiring your team, look at the candidates histories: Are they restless? Do they often move from place to place? That is a sign of the kind of ambition that will keep them from fitting in. When people seem to share your ideas exactly be wary: They are probably mirroring them to charm you.',
 
 '68. In any event do not be naive. Once you identify the moles in the group, you must act fast to stop them building a power base from which to destroy your authority.',
 
-'69. Better one bad general than two good ones. No good can ever come of fivided leadership. If you are ever offered a positionin which yoj will have to share command, turn it down, for the enterprise will fail and you will be held responsible,. Beyter to take lower positionand let the other person have the job.',
+'69. Better one bad general than two good ones. No good can ever come of divided leadership. If you are ever offered a positionin which you will have to share command, turn it down, for the enterprise will fail and you will be held responsible,. Better to take lower position and let the other person have the job.',
 
 '70. It is always wise to take advantage of your opponents faulty command structure. Never be intimidated by an alliance of forces against you: If they share leadership, if they are ruled by committee, your advantage is more than enough. In fact do as Napoleon did and seek out enemies with that kind of command structure. You cannot fail to win.',
 
@@ -145,7 +145,7 @@ export const quotes = [
 
 '73. The future belongs to groups that are fluid, fast and non linear.',
 
-'74. By decentralising your army and segmenting it into teams you will gain in mobility what you lose I\'m complete control and mobility is the greatest force multiplier of them all.',
+'74. By decentralising your army and segmenting it into teams you will gain in mobility what you lose in complete control and mobility is the greatest force multiplier of them all.',
 
 '75. Fluidity will bring you far more power and control than petty domination.', 
 
@@ -160,7 +160,7 @@ export const quotes = [
 
 '81. Most animals attack along a straight line; the spider weaves a web adapted to its location and spun in a pattern whether simple or complex. Once the Web is woven , the work is done. The spider has no need to hunt; It simply waits for the next fool to fall into the webs barely visible strands.',
 
-'82. The secret to motivating people and maintaining their morale is to get them to think less about themselves and more about yhe group. Involve them in a cause, a crusade against a hated enemy. Make them see their survival as tied to the success of the army as a whole. In a group in which people have truly bonded, moods and emotions are contagious that it becomes easy to infect your troops with enthusiasm.',
+'82. The secret to motivating people and maintaining their morale is to get them to think less about themselves and more about the group. Involve them in a cause, a crusade against a hated enemy. Make them see their survival as tied to the success of the army as a whole. In a group in which people have truly bonded, moods and emotions are contagious that it becomes easy to infect your troops with enthusiasm.',
 
 '83. Lead from the front .Let your soldiers see you in the trenches, making sacrifices for the cause. That will fill them with the desire to emulate and please you. Make both rewards and punishments rare but meaningful. Remember a motivated army can work wonders, making up for any lack of material resources.',
 
@@ -178,7 +178,7 @@ export const quotes = [
 
 '90. Will power is tied to what you believe possible.',
 
-'91. Learn from the master Napoleon: the way to manage people is to keep them in suspense. First create a bond between your soldiers and yourself. They respect you, admire you even fear you a little. To make the bond stronger, hold yourself back, create a little space around yourself; you are warm yet with a touch of distance. Once the bond is forged, appear less often. Make both your punishments and your praises rare and unexpected whether for mistakes or for for successes that may seem minor at the time bit have symbolic meaning. Understand once people know what pleases you and what angers you they turn into trained poodles, working to charm you with  apparent good behaviour. Keep them in suspense, make them think of you constantly and want to please you but never know just how to do it. Once they are in the trap, you will have a magnetic pull over them. Motivation will become automatic. ',
+'91. Learn from the master Napoleon: the way to manage people is to keep them in suspense. First create a bond between your soldiers and yourself. They respect you, admire you even fear you a little. To make the bond stronger, hold yourself back, create a little space around yourself; you are warm yet with a touch of distance. Once the bond is forged, appear less often. Make both your punishments and your praises rare and unexpected whether for mistakes or for successes, that may seem minor at the time but has symbolic meaning. Understand once people know what pleases you and what angers you they turn into trained poodles, working to charm you with  apparent good behaviour. Keep them in suspense, make them think of you constantly and want to please you but never know just how to do it. Once they are in the trap, you will have a magnetic pull over them. Motivation will become automatic. ',
 
 '92. Pick your battles carefully.',
 
@@ -192,13 +192,13 @@ export const quotes = [
 
 '97. When the weapons have grown dull and spirits depressed, when our strength has been expended and resources consumed, then others will take advantage of our exhaustion to arise. Then even if you have wise generals you cannot make things turn out well in the end.',
 
-'98. Limitations are troublesome but they are effective. If we live economically in normal times, we are prepared for tines of want. To be sparing saves us from humiliation. Limitations are also indispensable in the regulation of world conditions. In nature there are fixed limits for summer and winter day and night and these limits give the year its meaning. In the same way economy, by setting fixed limits upon expenditures acts to preserve property and prevent injury to people.',
+'98. Limitations are troublesome but they are effective. If we live economically in normal times, we are prepared for times of want. To be sparing saves us from humiliation. Limitations are also indispensable in the regulation of world conditions. In nature there are fixed limits for summer and winter day and night and these limits give the year its meaning. In the same way economy, by setting fixed limits upon expenditures acts to preserve property and prevent injury to people.',
 
 '99. In life you must be a warrior and war requires realism.',
 
 '100.  It\'s not what you have that brings you victory, it\'s how you use it.',
 
-'101. If you are wealthy, acr poor. The poor are more inventive and often have more fun because they value what they have and know their limits.',
+'101. If you are wealthy, act poor. The poor are more inventive and often have more fun because they value what they have and know their limits.',
 
 '102. Ground yourself not in dreams and plans but in reality.',
 
@@ -232,7 +232,7 @@ export const quotes = [
 
 '117. When an enemy is strong your task is to put him in a position inwhich he can not use his strengths advantage.',
 
-'118. If your opponents advantage comes from a superior style of fighting, the best way to neutralize it is to learn from it l, adapting it to your own purposes. ',
+'118. If your opponents advantage comes from a superior style of fighting, the best way to neutralize it is to learn from it, adapting it to your own purposes. ',
 
 '119. Difficulties with other people are inevitable, you must be willing to defend yourself and sometimes to take the offensive.',
 
@@ -244,7 +244,7 @@ export const quotes = [
 
 '123. When someone attacks or threatens you, you make it clear that he will suffer in return. He or she might be stronger, he may be able to win battles, but you will make him pay for each victory.',
 
-'124. Strategists know you cannot fight strength with strength l, you have to locate your enemies weakness.',
+'124. Strategists know you cannot fight strength with strength, you have to locate your enemies weakness.',
 
 '125. It is more useful to be feared than to be loved.',
 
@@ -266,7 +266,7 @@ export const quotes = [
 
 '134. To become a grand strategist in life you must follow the path of Alexander. First clarify your life.  Decipher your own personal riddle by determing what it is you are destined to achieve, the direction in which your skills and talents seem to push you. Visualise  yourself fulfilling this destiny in glorious detail. Knowing that this action will advance me toward my goal, this one will lead me no where.',
 
-'136. Grand strategists this k and plan further into the future before taking action.',
+'136. Grand strategists think and plan further into the future before taking action.',
 
 '137. Plot against the difficult while it remains easy. Act against the great while it is still minute.',
 
@@ -278,7 +278,7 @@ export const quotes = [
 
 '141. He who knows the enemy and himself will never in a hundred battles be at risk.',
 
-'142. Every individual is like an alien culture. You must get inside his or ger way of thinking  not as an exercise in sensitivity but out of strategic necessity.',
+'142. Every individual is like an alien culture. You must get inside his or her way of thinking  not as an exercise in sensitivity but out of strategic necessity.',
 
 '143. Granting that people generally  acquire fixed habits early in life, a man\'s end may therefore be forseen by midlife.',
 
@@ -296,7 +296,7 @@ export const quotes = [
 
 '150. Men are most terrified by the unknown  and unpredictable.',
 
-'151. The less a thing is forseen the more fright does it cause. This is nowhere seen beyter than in war where every suprise strikes terror even to those who are much stronger.',
+'151. The less a thing is forseen the more fright does it cause. This is nowhere seen better than in war where every suprise strikes terror even to those who are much stronger.',
 
 '152. Blitzkrieg warfare, adapted for daily combat is the perfect strategy for these times.',
 
@@ -308,7 +308,7 @@ export const quotes = [
 
 '156. Given the same amount of intelligence, timidity will do a thousand tines more damage in war than audacity.',
 
-'157. Your enemies will naturally choose to fight on terrain that is to their liking, that allows them to use their power to best advantage. Cede them such power and you end up fighting on their terms. Your goal is to subtly shift the conflict to terrain of your choice. You accept the battle but alter its nature. If it is about money, shift it to something moral. If your opponents want to fight over a particular issue, reframe the battle to encompass something larger and more difficult for them to handle. If they like a slow pace, find a way to quicken it. You are not allowing your enemies to get comfortable or fight in their usual way. And am enemy who is lured onto unfamiliar terrain is one who has lost control of the dynamic l. Once such control slips from his hands, he will compromise, retreat, make mistakes and effect his own destruction.',
+'157. Your enemies will naturally choose to fight on terrain that is to their liking, that allows them to use their power to best advantage. Cede them such power and you end up fighting on their terms. Your goal is to subtly shift the conflict to terrain of your choice. You accept the battle but alter its nature. If it is about money, shift it to something moral. If your opponents wants to fight over a particular issue, reframe the battle to encompass something larger and more difficult for them to handle. If they like a slow pace, find a way to quicken it. You are not allowing your enemies to get comfortable or fight in their usual way. And an enemy who is lured onto unfamiliar terrain is one who has lost control of the dynamic. Once such control slips from his hands, he will compromise, retreat, make mistakes and effect his own destruction.',
 
 '158. Often what separates a medicare general from a superior one is not their strategies or maneuvers but their vision.',
 
@@ -318,11 +318,11 @@ export const quotes = [
 
 '161. As your army faces the enemy and the enemy appears powerful try to attack the enemy in one particular spot. If you are successful in crumbling that one particular spot, leave that spot and attack the next and so on and forth as if you were going down a winding road.',
 
-'162. To make people join you separate then from their past. When you size up your targets, look for what connects them to the past, the source of their resistance to the new.',
+'162. To make people join you separate them from their past. When you size up your targets, look for what connects them to the past, the source of their resistance to the new.',
 
-'163. Before you lunch an outright attack on your enemies. It is always wise forst to weaken them by creating as much division in their ranks as possible.',
+'163. Before you lunch an outright attack on your enemies. It is always wise first to weaken them by creating as much division in their ranks as possible.',
 
-'164. Inorder for divide and rule to work the leader must make the group think their is more to be gained by pleasing the leader than truing to form a power base within the group or organisation.',
+'164. Inorder for divide and rule to work the leader must make the group think their is more to be gained by pleasing the leader than turning to form a power base within the group or organisation.',
 
 '165. The temptation to maintain a favourite is understandable but dangerous.',
 
@@ -353,7 +353,7 @@ export const quotes = [
 
 '180.  People who yield to circumstances and to superior power have the advantage over their stronger rivals.',
 
-'181. Let people commit themselves to a position you can turn into a dead end. Never say you are strong. Shoe you are by making a contrast between yourself and your inconsistent or moderate enemy/opponent.',
+'181. Let people commit themselves to a position you can turn into a dead end. Never say you are strong. Show you are by making a contrast between yourself and your inconsistent or moderate enemy/opponent.',
 
 '182. The greatest power you can have in any conflict is the ability to confuse your opponent about your intentions.',
 
@@ -369,29 +369,29 @@ export const quotes = [
 
 '188. People will break their word if it serves their interests and they will find any moral or legal excuse to justify their moves, sometimes to themselves as well as to others.',
 
-'189. If you ate weak use negotiations to buy yourself sometime to delay battle until you ate ready.',
+'189. If you are weak use negotiations to buy yourself sometime to delay battle until you are ready.',
 
 '190. If you are strong take as much as you can before and during negotiations then later you can give back some of  what you took, conceding the things you least value to make yourself look generous.',
 
-'191. Do not worry about your reputation or about creating distrust. It is amazing how quickly people will forget your promises l, when you are strong and in a position to offer them something.',
+'191. Do not worry about your reputation or about creating distrust. It is amazing how quickly people will forget your promises, when you are strong and in a position to offer them something.',
 
 '192. A confused negotiator is also more easily seduced by emotional demonstrations.',
 
-'193. If you enterbnegotiations with vague notions as to what you want, you will find yourself shifting from position to position depending on what the other side brings to the table. Before anything else you must anchor yourself by determing with utmost clarity your long term goals and the leverage you have for reaching them. That clarity will keep you patient and calm.',
+'193. If you enter negotiations with vague notions as to what you want, you will find yourself shifting from position to position depending on what the other side brings to the table. Before anything else you must anchor yourself by determing with utmost clarity your long term goals and the leverage you have for reaching them. That clarity will keep you patient and calm.',
 
 '194. Everybody wants something without having any idea how to obtain it and the really intriguing aspect of the situation is that nobody quite knows how to achieve what he desires. But because l know what l want and what the others are capable of l am completely  prepared.',
 
-'195. Out of a desire to avoid such unpleasantness,  people will often try to be nice and conciliatory to those around them, in the belief that, that will elicit  the same response in return. But so often experience proves this logic to be wrong: overtime, the people you treat nicely will take you for granted l. They will see you as weak and exploitable. Being generous does not elicit gratitude but creates either a spoiled child or someone who resents behaviour perceived as charity.',
+'195. Out of a desire to avoid such unpleasantness,  people will often try to be nice and conciliatory to those around them, in the belief that, that will elicit  the same response in return. But so often experience proves this logic to be wrong: overtime, the people you treat nicely will take you for granted. They will see you as weak and exploitable. Being generous does not elicit gratitude but creates either a spoiled child or someone who resents behaviour perceived as charity.',
 
 '196. Those who believe against the evidence that niceness breeds niceness in return are doomed to failure in any kind of negotiations let alone in the game of life.',
 
-'197. Understand if you are weak and ask for little, little is what you will be get. But if you act strong, making firm even outrageous demands, you will create the opposite impression, people will think that your confidence must be based on something real. You will earn respect which in turn will translate into leverage.',
+'197. Understand if you are weak and ask for little, little is what you will be given. But if you act strong, making firm even outrageous demands, you will create the opposite impression, people will think that your confidence must be based on something real. You will earn respect which in turn will translate into leverage.',
 
 '198. There are two kinds of negotiators, shopkeepers and warriors. Warriors use negotiations as a way to gain time and a stronger position. Shopkeepers operate on the principle that it is more important to establish trust, to moderate each side\'s demands and come to a mutually satisfying settlement. Whether in diplomacy or in business the problem arises when shopkeepers assume they are dealing with another shopkeeper only to find they are facing a warrior.',
 
 '199. In resolving a conflict with am enemy you do not know well, it is always best to protect yourself by playing the warrior yourself : negotiate while advancing. There will always be time to back off and fix things if you go too far. But if you fall prey to a warrior, you will be unable to recoup anything. In a world in which there are more warriors, you must be willing to wield the sword as well, even if you are a shopkeeper at heart.',
 
-'200. Let us not consider ourselves victorious until the day after battle, nor defeated until four days later. Let us always carry the sword in one hand and the olive branch in the othe, always ready to negotiate but negotiating only while advancing.',
+'200. Let us not consider ourselves victorious until the day after battle, nor defeated until four days later. Let us always carry the sword in one hand and the olive branch in the other, always ready to negotiate but negotiating only while advancing.',
 
 '201. In negotiation as in war, you must not let yourself get carried away: there is a danger in advancing too far, taking too much to the point where you create an embittered enemy who will work for revenge. So it was after world war 1with the Allies, who imposed such harsh conditions on Germany in negotiating the peace that they arguably laid the foundations for world war 2. A century earlier on the other hand when Mrtternich negotiated, it was always his goal to prevent the other side from feeling wronged. Your purpose in any settlement you negotiate is never to satisfy greed or to punish the other side but to secure your own interests in the long run , a punitive settlement will only win you insecurity.',
 
@@ -407,9 +407,9 @@ export const quotes = [
 
 '207. Either don\'t attempt it, or carry it through to the end.',
 
-'208. When you catch yourself in a situation where you gam led and now you\'re in a big mess l, you have only two rational solutions: either end the conflict as quickly as you can with a strong violent blow aimed to win, accepting the costs and knowing they are better than a slow and painful death or cut your losses and quit without delay. Never let pride or concern for your reputation pull you further into the morass; both will suffer far greater blows by your persistence. Short term defeat is better than long term disaster.',
+'208. When you catch yourself in a situation where you gamled and now you\'re in a big mess, you have only two rational solutions: either end the conflict as quickly as you can with a strong violent blow aimed to win, accepting the costs and knowing they are better than a slow and painful death or cut your losses and quit without delay. Never let pride or concern for your reputation pull you further into the morass; both will suffer far greater blows by your persistence. Short term defeat is better than long term disaster.',
 
-'209. If you concentrate exclusively on victory with no thought for the after effect, you may be too exhausted to profit by the peace, while it is almost certain that the peace will be a bad one containing the germs of another war. This is a lesson supported byabundant experience. ',
+'209. If you concentrate exclusively on victory with no thought for the after effect, you may be too exhausted to profit by the peace, while it is almost certain that the peace will be a bad one containing the germs of another war. This is a lesson supported by abundant experience. ',
 
 '210. Only the man who can achieve results with limited means has really hit the mark.',
 
@@ -437,7 +437,7 @@ export const quotes = [
 
 '221. In war time, truth is so precious that she should always be attended by a bodyguard of lies.',
 
-'222. You can never by deception persuade an enemy of anything not according with his own expectations, which usually are not far removed from his hopes. It is only using your knowledge of them that you are able to hypnotise him not just into thi thinking but doing what you want.',
+'222. You can never by deception persuade an enemy of anything not according with his own expectations, which usually are not far removed from his hopes. It is only using your knowledge of them that you are able to hypnotise him not just into  thinking but doing what you want.',
 
 '223. What we wish we readily believe and what we ourselves think we imagine others think also.',
 
@@ -449,7 +449,7 @@ export const quotes = [
 
 '227. People are much more likely to believe something they see with their own eyes than something they are told. They are more likely to believe something they discover than something pushed at them. If you plant the false information you desire them to have with third parties, in neutral territory, when they pick up the clues, they have the impression they are the ones discovering the truth.',
 
-'228. No matter how good a liar you are, when you deceive, it\'s hard to be completely natural. Your tendency is to try so hard to seem natural and sincere they it stands out and can be read. That is why it is so effective to spread your deceptions through people whom you keep ignorant of the truth, people who belive the lie themselves. When working with double agents of this kind, it\'s always wise to initially feed them some true information, this will establish the credibility of the intelligence they pass along. After that they will be perfect conduits for your lies.',
+'228. No matter how good a liar you are, when you deceive, it\'s hard to be completely natural. Your tendency is to try so hard to seem natural and sincere that it stands out and can be read. That is why it is so effective to spread your deceptions through people whom you keep ignorant of the truth, people who belive the lie themselves. When working with double agents of this kind, it\'s always wise to initially feed them some true information, this will establish the credibility of the intelligence they pass along. After that they will be perfect conduits for your lies.',
 
 '229. Anything which the enemy least expects will succeed the best.',
 
@@ -470,7 +470,7 @@ export const quotes = [
 '237. In trying to destroy your enemies morale reputation do not be subtle. Make your language and distinction of good and evil as strong as possible; speak in terms of black and white. It is hard to get people to fight for  a grey area.',
 
 '238. If a fight with your enemies is inevitable, always work to make them start it. This puts you on the moral high ground.',
-'239.  The best defence against moral warriors is to give them no target. Live up to your good name; practice what you preach at least in public; ally yourself with the most just causes of the day. Make your opponents work so hard to undermine your reputation that they seem desperate and their attacks blow up in their faces. If you have Something nasty and not in harmony with your stated position or  public image, use a cat\'s paw --some agent to act for you you and hide your role in the action If that is not possible, think ahead and plan a self-defense. At all costs avoid actions that carry the taint of hypocrisy',
+'239. The best defence against moral warriors is to give them no target. Live up to your good name; practice what you preach at least in public; ally yourself with the most just causes of the day. Make your opponents work so hard to undermine your reputation that they seem desperate and their attacks blow up in their faces. If you have Something nasty and not in harmony with your stated position or  public image, use a cat\'s paw --some agent to act for you you and hide your role in the action If that is not possible, think ahead and plan a self-defense. At all costs avoid actions that carry the taint of hypocrisy',
 
 '240. Sensible men, when their enemies attack them , divert them to someone better able to defend them than they are themselves.',
 
@@ -486,7 +486,7 @@ export const quotes = [
 
 '246. The art of forming alliances depends on your ability to separate friendship from need.',
 
-'247. Resist thr temptation to let your decisions about alliances be governed by your emotions. Your emotional needs are what your personal life is for and you must leave them behind when you enter the arena of social battle.',
+'247. Resist the temptation to let your decisions about alliances be governed by your emotions. Your emotional needs are what your personal life is for and you must leave them behind when you enter the arena of social battle.',
 
 '248. The alliance that will help you most is the one involving mutual self interest.',
 
@@ -494,27 +494,27 @@ export const quotes = [
 
 '250. The ally of today maybe the enemy of tomorrow.',
 
-'251. The key to playing the alliance game is to find who can best seve your interests at that moment.',
+'251. The key to playing the alliance game is to find who can best serve your interests at that moment.',
 
-'252. One of the best strategems in the alliance game is to beginby seeming to help another person ins some cause or fight only for the purpose of furthering your own interests in the end.',
+'252. One of the best strategems in the alliance game is to begin by seeming to help another person in some cause or fight only for the purpose of furthering your own interests in the end.',
 
 '253. The moment you enter into any kind of lasting alliance your power is greatly reduced.',
 
 '254. The worst kind of leadership is divided leadership.',
 
-'255. Never interfere with an enemy that is in 5he process of commiting suicide.',
+'255. Never interfere with an enemy that is in the process of commiting suicide.',
 
-'256. Your enemies could so metime try and make you so self conscious of your style of doing things, which is not in your advantage if you have to act in the moment. They might trick you into focusing on the wrong thing.',
+'256. Your enemies could sometime try and make you so self conscious of your style of doing things, which is not in your advantage if you have to act in the moment. They might trick you into focusing on the wrong thing.',
 
 '257. Lee Atwater believed that adults could be divided into two groups; the overly mature and the childlike. The overly mature are inflexible and over serious, making them highly vulnerable in politics,particularly in the age of television. ',
 
 '258. If you seem too ambitious, you stir up resentment in other people; overt power grabs and sharp rises to the top are dangerous, creating envy, distrust and suspicion often the best solution is to take small bites, swallow little territories, playing upon people’s relatively short attention spans. Stay under the radar and they won\'t see your moves. And if they do it may already be too late; the territory is yours, a fait accompli. You can always claim you acted out of self defence. Before people realize it you have accumulated an empire.',
 
-'259. It is not easy to make one\'s way in this world, to strive with energy to get what you want without incurring the envy or antipathy of others who may see you as aggressive and ambitious, someone to thwart. The answer is not to lower your ambitions but rather to disguise them. A piecemeal approach to conquest of anything is perfect for these political times, the ultimate mask of aggression. The key to making it work is to have a clear sensebofbyour objective, the empire that you will first gamble up. Each bite must have a logic in an overall strategy but must be small enough that no one senses your larger intentions. If your bites are too big, you will take on more than you are ready for and find yourself overwhelmed by problems; if you bite too fast, other people will see what you are upto. Let the passage of time masterfully disguise your intentions and give you the appearance of someone of modest ambition. By the time your rivals wake up to what you have consumed, they risk being consumed themselves if they stand in your way.',
+'259. It is not easy to make one\'s way in this world, to strive with energy to get what you want without incurring the envy or antipathy of others who may see you as aggressive and ambitious, someone to thwart. The answer is not to lower your ambitions but rather to disguise them. A piecemeal approach to conquest of anything is perfect for these political times, the ultimate mask of aggression. The key to making it work is to have a clear sense of your objective, the empire that you will first gobble up. Each bite must have a logic in an overall strategy but must be small enough that no one senses your larger intentions. If your bites are too big, you will take on more than you are ready for and find yourself overwhelmed by problems; if you bite too fast, other people will see what you are upto. Let the passage of time masterfully disguise your intentions and give you the appearance of someone of modest ambition. By the time your rivals wake up to what you have consumed, they risk being consumed themselves if they stand in your way.',
 
 '260. All the conceptions born of impatience and aimed at obtaining speedy victory could only be gross errors. It was necessary to accumulate thousands of small victories to turn them into a great success.',
 
-'261. To gain control of qny project, you must be willing to make time Your ally. If you start out with complete control l, you sap people’s spirit and stir up envy and resentment. So begin by generating the illusion that you\'re all working together on a team effort; then slowly nibble away. If in the process you make people angry, do not worry. That\'s just a sign that their  emotions are engaged which means they can be manipulated.',
+'261. To gain control of any project, you must be willing to make time Your ally. If you start out with complete control, you sap people’s spirit and stir up envy and resentment. So begin by generating the illusion that you\'re all working together on a team effort; then slowly nibble away. If in the process you make people angry, do not worry. That\'s just a sign that their  emotions are engaged which means they can be manipulated.',
 
 '262. Make your words a spark for action, not passive contemplation.',
 

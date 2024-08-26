@@ -61,7 +61,7 @@ export const books = [{
 },{
   image: 'images/How To Win Friends And Influence people.png',
   title: 'How To Win Friends And Influence People',
-  link: 'coming-soon' 
+  link: 'Quotes-From-How-To-Win-Friends-And-Influence-People' 
 },{
   image: 'images/7 Habits Of Highly Effective People.jpg',
   title: '7 Habits Of Highly Effective People',

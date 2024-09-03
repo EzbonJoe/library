@@ -13,7 +13,7 @@ function loadPage(){
       return book.title.toLowerCase().includes(search.toLowerCase());
     });
   }
-  
+
   filteredBooks.forEach((book) => {
     booksHTML += `
     <a href="${book.link}">
@@ -33,6 +33,16 @@ function loadPage(){
   document.querySelector('.js-search-button').addEventListener('click', () => {
     const search = document.querySelector('.js-search-input').value;
     window.location.href= `Best-book-quotes-and-the-books-they-come-from.html?search=${search}`;
+  })
+
+  document.querySelector('.js-search-input').addEventListener('keydown', (event) => {
+    if(event.key === 'Enter'){
+      const search = document.querySelector('.js-search-input').value;
+      window.location.href= `Best-book-quotes-and-the-books-they-come-from.html?search=${search}`;
+    }else if(event.key === 'Go'){
+      const search = document.querySelector('.js-search-input').value;
+      window.location.href= `Best-book-quotes-and-the-books-they-come-from.html?search=${search}`;
+    }
   })
 }
 

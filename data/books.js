@@ -37,7 +37,7 @@ export const books = [{
 }, {
   image: 'images/Secrets of Closing a Sell.png',
   title: 'Secrets Of Closing Sell',
-  link: 'coming-soon'
+  link: 'Quotes-From-Secrets-Of-Closing-A-Sell'
 },{
   image: 'images/Science of Power.png',
   title: 'Science Of Power',

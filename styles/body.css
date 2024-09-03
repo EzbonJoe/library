@@ -53,3 +53,49 @@ main h1{
   align-items: center;
   text-align: center;
 }
+
+.search-icon{
+  height: 20px;
+}
+
+.search-input{
+  width: 500px;
+  padding: 10px;
+  font-size: 15px;
+  /*outline: none;*/
+  
+}
+
+.search-button{
+  margin-left: 6px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  background-color: orange;
+  border: none;
+}
+
+.search-section{
+  text-align: center;
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 412px){
+  .search-input{
+    width: 300px;
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+
+  .search-button{
+    width: 35px;
+    height: 35px;
+  }
+
+  .search-icon{
+    height: 16px;
+  }
+}

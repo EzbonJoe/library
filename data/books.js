@@ -45,7 +45,7 @@ export const books = [{
 },{
   image: 'images/Richest Man in Babylon.png',
   title: 'Richest Man in Babylon',
-  link: 'coming-soon'
+  link: 'Quotes-From-The-Richest-Man-In-Babylon'
 },{
   image: 'images/Rich Dad Poor Dad.png',
   title: 'Rich Dad Poor Dad',

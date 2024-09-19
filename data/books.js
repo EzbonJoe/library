@@ -49,7 +49,7 @@ export const books = [{
 },{
   image: 'images/Rich Dad Poor Dad.png',
   title: 'Rich Dad Poor Dad',
-  link: 'coming-soon'
+  link: 'Quotes-From-Rich-Dad-Poor-Dad'
 },{
   image: 'images/Meditations.png',
   title: 'Meditations',

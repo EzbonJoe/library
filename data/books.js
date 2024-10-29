@@ -39,7 +39,7 @@ export const books = [{
   title: 'Secrets Of Closing Sell',
   link: 'Quotes-From-Secrets-Of-Closing-A-Sell'
 },{
-  image: 'images/lawsOfHumanNature.jpg',
+  image: 'images/LawsOfHumanNature.jpg',
   title: 'Laws of Human Nature',
   link: 'Quotes-From-Laws-of-Human-Nature' 
 },{

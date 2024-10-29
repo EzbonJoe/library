@@ -1,5 +1,5 @@
-const quotes = [
-  '1.The most effective means of influence is to alter your moods and attitude.People are responding to your energy and demeanor even more than to your words.',
+export const quotes = [
+'1.The most effective means of influence is to alter your moods and attitude.People are responding to your energy and demeanor even more than to your words.',
 
 '2.We are all self-absorbed, locked in our own worlds. It is a therapeutic and liberating experience to be drawn outside ourselves and into the world of another. It is what attracts us to film and any form of fiction, entering the minds and perspectives of people so different from ourselves.',
 

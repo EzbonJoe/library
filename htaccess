@@ -1,0 +1,26 @@
+# mod_rewrites starts here
+
+RewriteEngine on
+
+# Custom 404 page
+ErrorDocument 404 /404.html
+
+# 1) If someone requests a page directly with its .html extension, send them to
+#    the clean URL instead (permanent redirect) so search engines don't see
+#    /about and /about.html as two separate pages. book.html and admin.html are
+#    exempt since they're meant to be reached with their .html extension.
+RewriteCond %{REQUEST_URI} !^/(book|admin)\.html$ [NC]
+RewriteCond %{REQUEST_URI} ^/(.+)\.html$
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# 2) does not apply to existing directories meaning that if the folder exists on the server then don't change anything and don't run the Rule!
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# check for a matching file with a .html extension
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+
+# Here we actually show the page that has the .html extension, without changing the URL shown in the browser
+
+RewriteRule ^(.*)$ $1.html [NC,L]

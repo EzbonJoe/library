@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books — curated by Gadzeke, not AI-generated.">
+  <title>Gadzeke — Words That Change Perspectives</title>
+  <link rel="canonical" href="https://gadzeke.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gadzeke — Words That Change Perspectives">
+  <meta property="og:description" content="Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books — curated by Gadzeke, not AI-generated.">
+  <meta property="og:url" content="https://gadzeke.com/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gadzeke — Words That Change Perspectives">
+  <meta name="twitter:description" content="Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books — curated by Gadzeke, not AI-generated.">
+  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/shared.css">
+  <link rel="stylesheet" href="styles/feed.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Gadzeke",
+    "url": "https://gadzeke.com/",
+    "description": "Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://gadzeke.com/Best-book-quotes-and-the-books-they-come-from?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Gadzeke",
+    "url": "https://gadzeke.com/",
+    "founder": { "@type": "Person", "name": "Rami Zeke" }
+  }
+  </script>
+</head>
+<body class="feed-page">
+
+  <div class="mobile-menu-backdrop js-mobile-menu-backdrop"></div>
+  <nav class="drop-down js-drop-down">
+    <ul>
+      <li><a href="./" class="home-link">Home</a></li>
+      <li><a href="Best-book-quotes-and-the-books-they-come-from">Books</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="header">
+    <div class="left-section">
+      <a href="./"><div class="page-name">Gadzeke</div></a>
+      <nav>
+        <ul>
+          <a href="./" class="home-link"><li>Home</li></a>
+          <a href="Best-book-quotes-and-the-books-they-come-from"><li>Books</li></a>
+          <a href="about"><li>About</li></a>
+          <a href="contact"><li>Contact</li></a>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="right-section">
+      <div class="display-color js-display-color">
+        <input type="checkbox" id="dark-mode" class="input">
+        <label for="dark-mode" class="label">
+          <div class="circle"></div>
+        </label>
+      </div>
+
+      <div class="display-color-name js-display-color-name">
+        <div>Light Mode</div>
+      </div>
+      <button type="button" class="icon-container js-icon-container" aria-label="Toggle menu" aria-expanded="false">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="feed-main">
+    <section class="hero">
+      <h1 class="hero-heading">Words That Change Perspectives</h1>
+      <p class="hero-subtext">Discover timeless wisdom from the world's greatest books.</p>
+      <div class="hero-search">
+        <input type="text" class="hero-search-input js-search-input" placeholder="Search quotes, books, authors...">
+      </div>
+    </section>
+
+    <div class="chip-bar js-chip-bar">
+      <button type="button" class="chip is-active" data-category="">All</button>
+      <button type="button" class="chip" data-category="Business">Business</button>
+      <button type="button" class="chip" data-category="Psychology">Psychology</button>
+      <button type="button" class="chip" data-category="Philosophy">Philosophy</button>
+      <button type="button" class="chip" data-category="Money">Money</button>
+      <button type="button" class="chip" data-category="Relationships">Relationships</button>
+      <button type="button" class="chip" data-category="Leadership">Leadership</button>
+      <button type="button" class="chip" data-category="Success">Success</button>
+      <button type="button" class="chip" data-category="Habits">Habits</button>
+      <button type="button" class="chip" data-category="Spirituality">Spirituality</button>
+      <button type="button" class="chip" data-category="Productivity">Productivity</button>
+    </div>
+
+    <section class="featured js-featured"></section>
+
+    <div class="feed-layout">
+      <div class="feed-column">
+        <div class="feed-toolbar">
+          <button type="button" class="bookmark-toggle js-bookmark-toggle">🔖 Bookmarked only</button>
+        </div>
+
+        <div class="skeleton-grid js-skeleton-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+
+        <div class="quote-grid js-quote-grid"></div>
+
+        <div class="empty-state js-empty-state" hidden>
+          <div class="empty-state-icon">📖</div>
+          <p>No quotes found.</p>
+          <a class="empty-state-cta" href="Best-book-quotes-and-the-books-they-come-from">Explore Books</a>
+        </div>
+
+        <div class="js-scroll-sentinel"></div>
+      </div>
+
+      <aside class="feed-sidebar">
+        <div class="sidebar-block">
+          <h3>Recently Added</h3>
+          <div class="js-recently-added"></div>
+        </div>
+        <div class="sidebar-block">
+          <h3>Authors to Explore</h3>
+          <div class="js-authors-list"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script type="module" src="scripts/feed.js"></script>
+  <script src="scripts/header.js"></script>
+  <script src="scripts/darkmode.js"></script>
+  <footer class="site-footer">
+    <p>&copy; 2026 Gadzeke — quotes are excerpted from their original books for personal inspiration and commentary.</p>
+    <div class="footer-links">
+      <a href="privacy-policy">Privacy Policy</a>
+      <a href="terms-and-conditions">Terms &amp; Conditions</a>
+    </div>
+  </footer>
+</body>
+</html>

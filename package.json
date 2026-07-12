@@ -1,0 +1,6 @@
+{
+  "name": "gadzeke",
+  "private": true,
+  "type": "module",
+  "description": "No build step for the site itself — this file only exists so Node can run the one-time migration script in migration/migrate.js."
+}

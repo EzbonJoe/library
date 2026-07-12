@@ -1,0 +1,41 @@
+:root{
+  --font-display: 'Clash Display', 'Manrope', sans-serif;
+  --font-body: 'Manrope', Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --color-bg: aliceblue;
+  --color-surface: #ffffff;
+  --color-text: black;
+  --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+
+  --color-accent: #131720;
+  --color-accent-strong: #0d1017;
+  --color-accent-contrast: white;
+
+  --button-background-color: pink;
+}
+
+:root[data-theme="dark"]{
+  --color-bg: #131720;
+  --color-surface: #1c2130;
+  --color-text: white;
+  --color-text-muted: rgba(255, 255, 255, 0.65);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
+
+  --color-accent: white;
+  --color-accent-strong: #cccccc;
+  --color-accent-contrast: #131720;
+}

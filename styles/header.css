@@ -1,0 +1,302 @@
+:root{
+  font-size: 62.5%;
+  font-family: 'Manrope', Arial, sans-serif;
+}
+
+body{
+  padding-top: 90px;
+}
+
+body.menu-open{
+  overflow: hidden;
+}
+
+.header{
+  background-color: #131720;
+  padding-top: 10px;
+  padding-left: 6px;;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-section nav ul a{
+  text-decoration: none;
+}
+
+.left-section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.left-section nav ul{
+  display: flex;
+  flex-direction: row;
+}
+
+.left-section nav ul li{
+  margin-right: 12px;
+  list-style-type: none;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.page-name{
+  color: white;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  transition: opacity 0.3s ease;
+}
+
+.page-name:hover{
+  opacity: 0.75;
+}
+
+a{
+  text-decoration: none;
+}
+
+.left-section nav ul a{
+  position: relative;
+  padding: 10px;
+}
+
+.left-section nav ul a::after{
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.left-section nav ul a:hover::after{
+  transform: scaleX(1);
+}
+
+/*Dark Mode button*/
+
+.right-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.display-color-name{
+  color: white;
+  font-size: 1.5rem;
+}
+
+.display-color{
+  margin-right: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.input{
+  visibility: hidden;
+}
+
+.label{
+  position: absolute;
+  width: 56px;
+  height: 30px;
+  background-color: #3a4150;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.4s ease;
+}
+
+.circle{
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  animation: toggleOff 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.circle::before{
+  content: '☀';
+  color: #e8a838;
+  line-height: 1;
+}
+
+.input:checked + .label{
+  background-color: #0d1017;
+}
+
+.input:checked + .label .circle::before{
+  content: '🌙';
+}
+
+.input:checked + .label .circle{
+  animation: toggleOn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes toggleOn {
+  0%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(26px);
+  }
+}
+
+@keyframes toggleOff {
+  0%{
+    transform: translateX(26px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+
+/* Mobile menu button (hidden on desktop, shown under the breakpoint below) */
+.icon-container{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-bar{
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-container.is-open .menu-bar:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+
+.icon-container.is-open .menu-bar:nth-child(2){
+  opacity: 0;
+}
+
+.icon-container.is-open .menu-bar:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu panel: sits off-screen at all times unless opened, so it's
+   inert on desktop without needing a separate display:none toggle. */
+.mobile-menu-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+
+.mobile-menu-backdrop.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drop-down{
+  position: fixed;
+  top: 90px;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 80vw);
+  background-color: #131720;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  padding: 32px 28px;
+}
+
+.drop-down.is-open{
+  transform: translateX(0);
+}
+
+.drop-down ul{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drop-down li{
+  list-style: none;
+}
+
+.drop-down a{
+  display: block;
+  padding: 16px 6px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: opacity 0.2s ease, padding-left 0.2s ease;
+}
+
+.drop-down li:last-child a{
+  border-bottom: none;
+}
+
+.drop-down a:hover{
+  opacity: 0.7;
+  padding-left: 12px;
+}
+
+@media only screen and (max-width:768px){
+  .left-section nav{
+    display: none;
+  }
+
+  .page-name{
+    font-size: 2.5rem;
+  }
+
+  .icon-container{
+    display: flex;
+  }
+
+  .display-color-name{
+    display: none;
+  }
+
+  .drop-down{
+    top: 78px;
+  }
+}

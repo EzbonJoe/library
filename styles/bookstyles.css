@@ -1,0 +1,85 @@
+body{
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+main{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.book-heading{
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.book-heading::after{
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: var(--space-2);
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+.js-quotes{
+  margin-top: var(--space-6);
+  column-count: 3;
+  column-gap: var(--space-5);
+}
+
+.quotes{
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: var(--space-5);
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+}
+
+.quote-number{
+  position: absolute;
+  top: -14px;
+  left: var(--space-4);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.quote-text{
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.7rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+@media only screen and (max-width: 900px){
+  .js-quotes{
+    column-count: 2;
+  }
+}
+
+@media only screen and (max-width: 560px){
+  .js-quotes{
+    column-count: 1;
+  }
+}

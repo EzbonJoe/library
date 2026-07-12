@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Gadzeke Admin</title>
+  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/feed.css">
+  <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body class="feed-page admin-page">
+
+  <main class="admin-main">
+    <h1>Gadzeke Admin</h1>
+    <p><a href="./">&larr; Back to site</a></p>
+
+    <section class="js-login-section admin-card">
+      <h2>Log in</h2>
+      <form class="js-login-form">
+        <label>Email
+          <input type="email" class="js-login-email" required>
+        </label>
+        <label>Password
+          <input type="password" class="js-login-password" required>
+        </label>
+        <button type="submit">Log in</button>
+      </form>
+      <p class="js-login-error error-text"></p>
+    </section>
+
+    <section class="js-admin-section" hidden>
+      <button type="button" class="js-logout-button">Log out</button>
+
+      <div class="admin-card">
+        <h2>Add a quote</h2>
+        <form class="js-quote-form">
+          <label>Book
+            <select class="js-quote-book" required></select>
+          </label>
+          <label>Quote
+            <textarea class="js-quote-text" rows="4" required></textarea>
+          </label>
+          <button type="submit">Add quote</button>
+        </form>
+        <p class="js-quote-status status-text"></p>
+      </div>
+
+      <div class="admin-card">
+        <h2>Add a new book</h2>
+        <form class="js-book-form">
+          <label>Title
+            <input type="text" class="js-book-title" required>
+          </label>
+          <label>Author
+            <input type="text" class="js-book-author">
+          </label>
+          <label>Category
+            <select class="js-book-category">
+              <option value="">— none —</option>
+              <option>Business</option>
+              <option>Psychology</option>
+              <option>Philosophy</option>
+              <option>Money</option>
+              <option>Relationships</option>
+              <option>Leadership</option>
+              <option>Success</option>
+              <option>Habits</option>
+              <option>Spirituality</option>
+              <option>Productivity</option>
+            </select>
+          </label>
+          <label>Slug (used in the page URL — leave blank to generate from the title)
+            <input type="text" class="js-book-slug" placeholder="Quotes-From-My-Book">
+          </label>
+          <label>Cover image
+            <input type="file" accept="image/*" class="js-book-image-file" required>
+          </label>
+          <label>Status
+            <select class="js-book-status">
+              <option value="published">Published</option>
+              <option value="coming_soon">Coming soon</option>
+            </select>
+          </label>
+          <button type="submit">Add book</button>
+        </form>
+        <p class="js-book-status-text status-text"></p>
+      </div>
+
+      <div class="admin-card">
+        <h2>Manage books</h2>
+        <p class="admin-hint">Edit author, category, status, or cover for any book, or remove one (this also removes its quotes).</p>
+        <input type="text" class="js-books-search admin-search" placeholder="Search books by title or author...">
+        <div class="js-books-manage manage-book-list"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Manage quotes</h2>
+        <p class="admin-hint">Pick a book to edit or delete any of its quotes, or leave it on "All books" to see the most recent additions. Mark one quote as Featured to control the home page's hero section.</p>
+        <div class="quote-filter-bar">
+          <select class="js-quotes-book-filter">
+            <option value="">All books (recent 20)</option>
+          </select>
+          <input type="text" class="js-quotes-search admin-search" placeholder="Search quote text...">
+        </div>
+        <div class="js-recent-quotes"></div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="scripts/admin.js"></script>
+</body>
+</html>

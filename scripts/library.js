@@ -46,7 +46,7 @@ async function loadPage(){
 
   function goToSearch(){
     const search = document.querySelector('.js-search-input').value;
-    window.location.href = `Best-book-quotes-and-the-books-they-come-from.html?search=${encodeURIComponent(search)}`;
+    window.location.href = `best-book-quotes-and-the-books-they-come-from.html?search=${encodeURIComponent(search)}`;
   }
 
   document.querySelector('.js-search-button').addEventListener('click', goToSearch);

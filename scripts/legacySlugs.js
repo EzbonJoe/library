@@ -20,6 +20,10 @@ export const LEGACY_BOOK_SLUGS = new Set([
   'Quotes-From-7-Habits-of-Highly-Effective-People',
 ]);
 
+// Links use a lowercased path — Netlify's static file serving is case-insensitive
+// (so the real, mixed-case .html file still resolves), but requesting the exact
+// mixed-case path triggers an extra 301 redirect to the lowercase canonical form.
+// Generating lowercase links avoids that hop entirely.
 export function bookLink(slug){
-  return LEGACY_BOOK_SLUGS.has(slug) ? slug : `book.html?book=${encodeURIComponent(slug)}`;
+  return LEGACY_BOOK_SLUGS.has(slug) ? slug.toLowerCase() : `book.html?book=${encodeURIComponent(slug)}`;
 }

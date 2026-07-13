@@ -256,6 +256,26 @@ const scrollObserver = new IntersectionObserver((entries) => {
 
 scrollObserver.observe(scrollSentinel);
 
+let lastScrollY = window.scrollY;
+let scrollTicking = false;
+
+function handleChipBarScroll(){
+  const currentScrollY = window.scrollY;
+  const scrollingDown = currentScrollY > lastScrollY;
+
+  chipBar.classList.toggle('is-hidden', currentScrollY > 120 && scrollingDown);
+
+  lastScrollY = currentScrollY;
+  scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if(!scrollTicking){
+    requestAnimationFrame(handleChipBarScroll);
+    scrollTicking = true;
+  }
+}, { passive: true });
+
 async function loadFeatured(){
   const { data: quote, error } = await supabase
     .from('quotes')

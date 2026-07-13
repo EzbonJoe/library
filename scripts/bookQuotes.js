@@ -51,7 +51,7 @@ async function loadQuotes(){
   const { data: book, error: bookError } = await supabase
     .from('books')
     .select('id, title, author, category, image, slug')
-    .eq('slug', slug)
+    .ilike('slug', slug)
     .single();
 
   if(bookError || !book){
@@ -63,7 +63,7 @@ async function loadQuotes(){
   const pageTitle = `${book.title} Quotes${byAuthor} | Gadzeke`;
   const description = `Hand-picked quotes from ${book.title}${byAuthor}${book.category ? ` on ${book.category}` : ''} — curated by Gadzeke, not AI-generated.`;
   const canonicalPath = LEGACY_BOOK_SLUGS.has(book.slug)
-    ? `/${book.slug}`
+    ? `/${book.slug.toLowerCase()}`
     : `${window.location.pathname}?book=${encodeURIComponent(book.slug)}`;
   const canonicalUrl = `${window.location.origin}${canonicalPath}`;
   const imageUrl = new URL(book.image, window.location.href).href;
@@ -129,7 +129,7 @@ async function loadQuotes(){
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${window.location.origin}/` },
-      { '@type': 'ListItem', position: 2, name: 'Books', item: `${window.location.origin}/Best-book-quotes-and-the-books-they-come-from` },
+      { '@type': 'ListItem', position: 2, name: 'Books', item: `${window.location.origin}/best-book-quotes-and-the-books-they-come-from` },
       { '@type': 'ListItem', position: 3, name: book.title, item: canonicalUrl },
     ],
   });

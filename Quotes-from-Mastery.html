@@ -79,11 +79,20 @@
   <script src="scripts/darkmode.js"></script>
   <script src="scripts/header.js"></script>
   <footer class="site-footer">
-    <p>&copy; 2026 Gadzeke — quotes are excerpted from their original books for personal inspiration and commentary.</p>
-    <div class="footer-links">
-      <a href="privacy-policy">Privacy Policy</a>
-      <a href="terms-and-conditions">Terms &amp; Conditions</a>
-    </div>
-  </footer>
+      <div class="footer-subscribe">
+        <p class="footer-subscribe-text">Get a quote in your inbox — no spam, just the good lines.</p>
+        <form class="js-subscribe-form footer-subscribe-form">
+          <input type="email" class="js-subscribe-email" placeholder="you@example.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="js-subscribe-status footer-subscribe-status"></p>
+      </div>
+      <p>&copy; 2026 Gadzeke — quotes are excerpted from their original books for personal inspiration and commentary.</p>
+      <div class="footer-links">
+        <a href="privacy-policy">Privacy Policy</a>
+        <a href="terms-and-conditions">Terms &amp; Conditions</a>
+      </div>
+    </footer>
+  <script type="module" src="scripts/subscribe.js"></script>
 </body>
 </html>

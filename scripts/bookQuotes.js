@@ -1,5 +1,11 @@
 import { supabase } from './supabaseClient.js';
 import { LEGACY_BOOK_SLUGS } from './legacySlugs.js';
+import { AMAZON_AFFILIATE_TAG } from './config.js';
+
+function buildAmazonSearchUrl(title, author){
+  const query = author ? `${title} ${author}` : title;
+  return `https://www.amazon.com/s?k=${encodeURIComponent(query)}&tag=${AMAZON_AFFILIATE_TAG}`;
+}
 
 function setMetaByName(name, content){
   let el = document.querySelector(`meta[name="${name}"]`);
@@ -76,7 +82,17 @@ async function loadQuotes(){
   setMetaByName('twitter:image', imageUrl);
 
   const headingEl = document.querySelector('.book-heading');
-  if(headingEl) headingEl.textContent = `Quotes From ${book.title}`;
+  if(headingEl){
+    headingEl.textContent = `Quotes From ${book.title}`;
+
+    const buyLink = document.createElement('a');
+    buyLink.className = 'buy-book-link';
+    buyLink.href = buildAmazonSearchUrl(book.title, book.author);
+    buyLink.target = '_blank';
+    buyLink.rel = 'noopener sponsored';
+    buyLink.textContent = 'Buy this book on Amazon ↗';
+    headingEl.insertAdjacentElement('afterend', buyLink);
+  }
 
   const { data: quotes, error: quotesError } = await supabase
     .from('quotes')

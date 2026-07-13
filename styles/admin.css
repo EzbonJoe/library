@@ -273,3 +273,35 @@
   color: #c0392b;
   border: 1px solid rgba(192, 57, 43, 0.3);
 }
+
+/* Subscribers */
+.js-copy-subscribers{
+  margin-bottom: 16px;
+}
+
+.subscriber-list{
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.subscriber-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--feed-border);
+  font-size: 1.25rem;
+}
+
+.subscriber-row:last-child{
+  border-bottom: none;
+}
+
+.subscriber-row .js-delete-subscriber{
+  padding: 4px 12px;
+  font-size: 1.1rem;
+  background-color: transparent;
+  color: #c0392b;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+}

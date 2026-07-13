@@ -44,7 +44,13 @@ const booksSearchInput = document.querySelector('.js-books-search');
 const quotesBookFilter = document.querySelector('.js-quotes-book-filter');
 const quotesSearchInput = document.querySelector('.js-quotes-search');
 
+const subscriberCountEl = document.querySelector('.js-subscriber-count');
+const subscribersListEl = document.querySelector('.js-subscribers-list');
+const copySubscribersButton = document.querySelector('.js-copy-subscribers');
+const copySubscribersStatus = document.querySelector('.js-copy-subscribers-status');
+
 let allBooks = [];
+let allSubscriberEmails = [];
 
 function showLoggedIn(){
   loginSection.hidden = true;
@@ -52,6 +58,7 @@ function showLoggedIn(){
   loadBooksDropdown();
   loadQuotesManage();
   loadBooksManage();
+  loadSubscribers();
 }
 
 function showLoggedOut(){
@@ -253,6 +260,47 @@ async function loadBooksManage(){
     });
   });
 }
+
+async function loadSubscribers(){
+  const { data: subscribers, error } = await supabase
+    .from('subscribers')
+    .select('id, email, created_at')
+    .order('created_at', { ascending: false });
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  allSubscriberEmails = subscribers.map((subscriber) => subscriber.email);
+  subscriberCountEl.textContent = subscribers.length;
+
+  subscribersListEl.innerHTML = subscribers.map((subscriber) => `
+    <div class="subscriber-row" data-id="${subscriber.id}">
+      <span class="subscriber-email">${subscriber.email}</span>
+      <button type="button" class="js-delete-subscriber">Remove</button>
+    </div>
+  `).join('');
+
+  subscribersListEl.querySelectorAll('.js-delete-subscriber').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const row = button.closest('.subscriber-row');
+      await supabase.from('subscribers').delete().eq('id', row.dataset.id);
+      loadSubscribers();
+    });
+  });
+}
+
+copySubscribersButton.addEventListener('click', async () => {
+  if(allSubscriberEmails.length === 0){
+    copySubscribersStatus.textContent = 'No subscribers yet.';
+    return;
+  }
+
+  await navigator.clipboard.writeText(allSubscriberEmails.join(', '));
+  copySubscribersStatus.textContent = `Copied ${allSubscriberEmails.length} emails ✓`;
+  setTimeout(() => { copySubscribersStatus.textContent = ''; }, 2000);
+});
 
 loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();

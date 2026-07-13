@@ -29,6 +29,24 @@ main{
   border-radius: 2px;
 }
 
+.buy-book-link{
+  display: inline-block;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: filter 0.2s ease;
+}
+
+.buy-book-link:hover{
+  filter: brightness(1.1);
+}
+
 .js-quotes{
   margin-top: var(--space-6);
   column-count: 3;

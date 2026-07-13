@@ -5,7 +5,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const port = Number(process.argv[2] || 8080);
+const port = process.argv[2] ? Number(process.argv[2]) : 8080;
+
+if (!Number.isInteger(port) || port < 0 || port > 65535) {
+  console.error(`Invalid port "${process.argv[2]}" — expected a number between 0 and 65535, e.g.: node dev-server.mjs 8080`);
+  process.exit(1);
+}
 
 const mimeTypes = {
   '.html': 'text/html',

@@ -37,6 +37,52 @@ main{
   font-weight: 700;
 }
 
+.suggestions{
+  margin-top: 56px;
+  text-align: left;
+}
+
+.suggestions-heading{
+  font-family: var(--font-display);
+  font-size: 2rem;
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.suggestions-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.suggestions-grid .book-container{
+  margin: 0;
+  padding: var(--space-2);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.suggestions-grid .book-container:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.suggestions-grid .book-title{
+  font-size: 1.5rem;
+}
+
+.coming-soon-text{
+  text-align: center;
+  font-size: 1.7rem;
+  color: var(--color-text-muted, var(--color-text));
+  margin-top: 12px;
+}
+
 main h1{
   font-family: var(--font-display);
   font-size: 3.4rem;

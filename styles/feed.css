@@ -156,6 +156,19 @@
   color: #ffffff;
 }
 
+.featured-label{
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .featured-cover{
   width: 96px;
   height: 144px;
@@ -237,6 +250,7 @@
 }
 
 .quote-card{
+  position: relative;
   break-inside: avoid;
   margin-bottom: 28px;
   padding: 32px 28px 24px;
@@ -256,6 +270,108 @@
 .quote-card:hover{
   box-shadow: var(--feed-shadow-hover);
   transform: translateY(-4px);
+}
+
+/* Editor's Pick badge — appears on any card marked as a pick */
+.quote-card-editors-badge{
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c5cff, #b18cff);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(124, 92, 255, 0.4);
+  z-index: 1;
+}
+
+/* Magazine-style variant — larger type within the normal column flow */
+.quote-card--large{
+  padding: 44px 36px 32px;
+}
+
+.quote-card--large .quote-card-text{
+  font-size: 2.6rem;
+  line-height: 1.45;
+  font-family: var(--feed-font-display);
+  font-weight: 600;
+}
+
+/* Spotlight variant — full-width cinematic break, inserted periodically */
+.quote-card--spotlight{
+  column-span: all;
+  break-inside: auto;
+  padding: 0;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.quote-card-spotlight-overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+}
+
+.quote-card-spotlight-content{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  padding: 56px 32px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.quote-card--spotlight .quote-card-text{
+  font-family: var(--feed-font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.quote-card-spotlight-book{
+  margin-top: 16px;
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+.quote-card--spotlight .quote-card-footer{
+  justify-content: center;
+  gap: 16px;
+  border-top: none;
+  margin-top: 24px;
+  padding-top: 0;
+}
+
+.quote-card--spotlight .quote-card-meta{
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.quote-card--spotlight .icon-btn{
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.quote-card--spotlight .icon-btn:hover{
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.quote-card--spotlight .quote-card-link{
+  display: block;
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.quote-card--spotlight .quote-card-link:hover{
+  color: white;
 }
 
 .quote-card-top{

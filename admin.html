@@ -36,15 +36,16 @@
       <button type="button" class="js-logout-button">Log out</button>
 
       <div class="admin-card">
-        <h2>Add a quote</h2>
+        <h2>Add quotes</h2>
+        <p class="admin-hint">Paste one quote per line to add several at once — each line becomes its own quote.</p>
         <form class="js-quote-form">
           <label>Book
             <select class="js-quote-book" required></select>
           </label>
-          <label>Quote
-            <textarea class="js-quote-text" rows="4" required></textarea>
+          <label>Quote(s)
+            <textarea class="js-quote-text" rows="8" placeholder="One quote per line..." required></textarea>
           </label>
-          <button type="submit">Add quote</button>
+          <button type="submit">Add quote(s)</button>
         </form>
         <p class="js-quote-status status-text"></p>
       </div>
@@ -99,7 +100,7 @@
 
       <div class="admin-card">
         <h2>Manage quotes</h2>
-        <p class="admin-hint">Pick a book to edit or delete any of its quotes, or leave it on "All books" to see the most recent additions. Mark one quote as Featured to control the home page's hero section.</p>
+        <p class="admin-hint">Pick a book to edit or delete any of its quotes, or leave it on "All books" to see the most recent additions. "Featured" controls the home page's main hero (one at a time); "Editor's Pick" can be applied to any number of quotes and feeds the daily-rotating hero plus badges shown in the feed.</p>
         <div class="quote-filter-bar">
           <select class="js-quotes-book-filter">
             <option value="">All books (recent 20)</option>

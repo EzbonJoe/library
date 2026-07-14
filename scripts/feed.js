@@ -25,6 +25,10 @@ let state = {
   hasMore: true,
 };
 
+// Running count of cards rendered so far (across pagination), used to place
+// periodic spotlight/magazine cards for visual rhythm instead of a uniform grid.
+let renderedCount = 0;
+
 function getBookmarks(){
   try{
     return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || [];
@@ -57,12 +61,14 @@ function estimateReadingTime(text){
   return seconds < 60 ? `${seconds} sec read` : `${Math.round(seconds / 60)} min read`;
 }
 
-function quoteCardHTML(quote){
+function quoteCardHTML(quote, variant){
   const book = quote.book;
   const bookmarked = isBookmarked(quote.id);
+  const sizeClass = variant === 'large' ? ' quote-card--large' : '';
 
   return `
-    <article class="quote-card" data-quote-id="${quote.id}">
+    <article class="quote-card${sizeClass}" data-quote-id="${quote.id}">
+      ${quote.editors_pick ? `<span class="quote-card-editors-badge">✨ Editor's Pick</span>` : ''}
       <div class="quote-card-top">
         <img class="quote-card-cover" src="${book.image}" alt="${book.title} cover" loading="lazy">
         <div class="quote-card-book-meta">
@@ -88,6 +94,39 @@ function quoteCardHTML(quote){
   `;
 }
 
+function spotlightCardHTML(quote){
+  const book = quote.book;
+  const bookmarked = isBookmarked(quote.id);
+
+  return `
+    <article class="quote-card quote-card--spotlight" data-quote-id="${quote.id}" style="background-image:url('${book.image}')">
+      <div class="quote-card-spotlight-overlay"></div>
+      <div class="quote-card-spotlight-content">
+        ${quote.editors_pick ? `<span class="quote-card-editors-badge">✨ Editor's Pick</span>` : ''}
+        <p class="quote-card-text">${quote.text}</p>
+        <div class="quote-card-spotlight-book">${book.title}${book.author ? ` — ${book.author}` : ''}</div>
+        <div class="quote-card-footer">
+          <span class="quote-card-meta">${estimateReadingTime(quote.text)}</span>
+          <div class="quote-card-actions">
+            <button type="button" class="icon-btn js-bookmark-btn ${bookmarked ? 'is-bookmarked' : ''}" aria-label="Bookmark this quote">${bookmarked ? '★' : '☆'}</button>
+            <button type="button" class="icon-btn js-share-btn" aria-label="Share this quote">⤴</button>
+            <button type="button" class="icon-btn js-copy-btn" aria-label="Copy this quote">⧉</button>
+          </div>
+        </div>
+        <a class="quote-card-link" href="${bookLink(book.slug)}">Read more from this book →</a>
+      </div>
+    </article>
+  `;
+}
+
+function renderQuoteCard(quote){
+  renderedCount += 1;
+
+  if(renderedCount % 7 === 0) return spotlightCardHTML(quote);
+  if(renderedCount % 4 === 0) return quoteCardHTML(quote, 'large');
+  return quoteCardHTML(quote);
+}
+
 function observeCardEntrance(cardEl){
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -103,7 +142,7 @@ function observeCardEntrance(cardEl){
 
 function appendQuotes(quotes){
   const wrapper = document.createElement('div');
-  wrapper.innerHTML = quotes.map(quoteCardHTML).join('');
+  wrapper.innerHTML = quotes.map(renderQuoteCard).join('');
 
   [...wrapper.children].forEach((cardEl) => {
     quoteGrid.appendChild(cardEl);
@@ -153,7 +192,7 @@ quoteGrid.addEventListener('click', async (event) => {
 function buildQuery(){
   let query = supabase
     .from('quotes')
-    .select('id, text, book:books!inner(title, image, author, category, slug)');
+    .select('id, text, editors_pick, book:books!inner(title, image, author, category, slug)');
 
   if(state.category){
     query = query.eq('book.category', state.category);
@@ -216,6 +255,7 @@ async function loadNextPage(){
 function resetFeed(){
   state.page = 0;
   state.hasMore = true;
+  renderedCount = 0;
   quoteGrid.innerHTML = '';
   emptyState.hidden = true;
   loadNextPage();
@@ -276,15 +316,46 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-async function loadFeatured(){
-  const { data: quote, error } = await supabase
-    .from('quotes')
-    .select('id, text, book:books(title, image, author, slug)')
-    .eq('featured', true)
-    .limit(1)
-    .maybeSingle();
+async function loadHero(){
+  // The hero rotates daily through quotes marked "Editor's Pick" — same quote
+  // for everyone on a given day, changing once every 24 hours. Falls back to
+  // the single manually-featured quote if no picks have been marked yet.
+  let quote = null;
+  let label = 'Featured Quote';
 
-  if(error || !quote){
+  const { count } = await supabase
+    .from('quotes')
+    .select('id', { count: 'exact', head: true })
+    .eq('editors_pick', true);
+
+  if(count && count > 0){
+    const daysSinceEpoch = Math.floor(Date.now() / 86400000);
+    const dayIndex = daysSinceEpoch % count;
+
+    const { data } = await supabase
+      .from('quotes')
+      .select('id, text, book:books(title, image, author, slug)')
+      .eq('editors_pick', true)
+      .order('id')
+      .range(dayIndex, dayIndex);
+
+    if(data && data[0]){
+      quote = data[0];
+      label = 'Quote of the Day';
+    }
+  }
+
+  if(!quote){
+    const { data } = await supabase
+      .from('quotes')
+      .select('id, text, book:books(title, image, author, slug)')
+      .eq('featured', true)
+      .limit(1)
+      .maybeSingle();
+    quote = data;
+  }
+
+  if(!quote){
     featuredEl.remove();
     return;
   }
@@ -293,6 +364,7 @@ async function loadFeatured(){
   featuredEl.innerHTML = `
     <div class="featured-overlay"></div>
     <div class="featured-content">
+      <span class="featured-label">${label}</span>
       <img class="featured-cover" src="${quote.book.image}" alt="${quote.book.title} cover">
       <p class="featured-quote">${quote.text}</p>
       <div class="featured-book">${quote.book.title} — ${quote.book.author ?? ''}</div>
@@ -350,7 +422,7 @@ async function loadAuthors(){
   });
 }
 
-loadFeatured();
+loadHero();
 loadRecentlyAdded();
 loadAuthors();
 loadNextPage();

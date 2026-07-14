@@ -97,7 +97,7 @@ async function loadQuotesManage(){
   const bookId = quotesBookFilter.value;
   const search = quotesSearchInput.value.trim();
 
-  let query = supabase.from('quotes').select('id, text, featured, books(title)');
+  let query = supabase.from('quotes').select('id, text, featured, editors_pick, books(title)');
 
   if(bookId){
     query = query.eq('book_id', bookId).order('position');
@@ -125,6 +125,9 @@ async function loadQuotesManage(){
           <button type="button" class="js-save-quote">Save</button>
           <button type="button" class="js-feature-quote ${quote.featured ? 'is-featured' : ''}">
             ${quote.featured ? '★ Featured' : '☆ Set as Featured'}
+          </button>
+          <button type="button" class="js-editors-pick ${quote.editors_pick ? 'is-picked' : ''}">
+            ${quote.editors_pick ? '✨ Editor\'s Pick' : '☆ Mark as Pick'}
           </button>
           <button type="button" class="js-delete-quote">Delete</button>
         </div>
@@ -156,6 +159,12 @@ async function loadQuotesManage(){
     row.querySelector('.js-feature-quote').addEventListener('click', async () => {
       await supabase.from('quotes').update({ featured: false }).eq('featured', true);
       await supabase.from('quotes').update({ featured: true }).eq('id', id);
+      loadQuotesManage();
+    });
+
+    row.querySelector('.js-editors-pick').addEventListener('click', async () => {
+      const isPicked = row.querySelector('.js-editors-pick').classList.contains('is-picked');
+      await supabase.from('quotes').update({ editors_pick: !isPicked }).eq('id', id);
       loadQuotesManage();
     });
   });
@@ -325,9 +334,12 @@ quoteForm.addEventListener('submit', async (event) => {
   quoteStatus.textContent = '';
 
   const bookId = quoteBookSelect.value;
-  const text = quoteTextInput.value.trim();
+  const lines = quoteTextInput.value
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
 
-  if(!bookId || !text) return;
+  if(!bookId || lines.length === 0) return;
 
   const { data: lastQuote } = await supabase
     .from('quotes')
@@ -337,11 +349,10 @@ quoteForm.addEventListener('submit', async (event) => {
     .limit(1)
     .maybeSingle();
 
-  const nextPosition = (lastQuote?.position ?? 0) + 1;
+  let nextPosition = (lastQuote?.position ?? 0) + 1;
+  const rows = lines.map((text) => ({ book_id: bookId, text, position: nextPosition++ }));
 
-  const { error } = await supabase
-    .from('quotes')
-    .insert({ book_id: bookId, text, position: nextPosition });
+  const { error } = await supabase.from('quotes').insert(rows);
 
   if(error){
     quoteStatus.textContent = error.message;
@@ -349,7 +360,7 @@ quoteForm.addEventListener('submit', async (event) => {
   }
 
   quoteTextInput.value = '';
-  quoteStatus.textContent = 'Quote added.';
+  quoteStatus.textContent = lines.length === 1 ? 'Quote added.' : `${lines.length} quotes added.`;
   loadQuotesManage();
 });
 

@@ -209,6 +209,18 @@ html, body{
   border-color: var(--feed-accent);
 }
 
+.js-editors-pick{
+  background-color: var(--feed-bg);
+  color: var(--feed-text);
+  border: 1px solid var(--feed-border);
+}
+
+.js-editors-pick.is-picked{
+  background-color: #7c5cff;
+  color: white;
+  border-color: #7c5cff;
+}
+
 .js-delete-quote{
   background-color: transparent;
   color: #c0392b;

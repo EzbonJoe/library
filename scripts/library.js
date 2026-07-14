@@ -1,9 +1,22 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
 
-async function loadPage(){
-  let booksHTML = '';
+function bookCardHTML(book){
+  const link = book.status === 'coming_soon' ? 'coming-soon' : bookLink(book.slug);
+  return `
+    <a href="${link}">
+      <div class="book-container">
+        <div class="cover-frame">
+          <img class="image" src="${book.image}" alt="${book.title} cover" loading="lazy">
+        </div>
+        <div class="text-container">
+          <div class="book-title">${book.title}</div>
+        </div>
+      </div>
+    </a>`;
+}
 
+async function loadPage(){
   const url = new URL(window.location.href);
   const search = url.searchParams.get('search');
 
@@ -26,21 +39,6 @@ async function loadPage(){
     });
   }
 
-  filteredBooks.forEach((book) => {
-    const link = book.status === 'coming_soon' ? 'coming-soon' : bookLink(book.slug);
-    booksHTML += `
-    <a href="${link}">
-      <div class="book-container">
-        <div class="cover-frame">
-          <img class="image" src="${book.image}" alt="${book.title} cover" loading="lazy">
-        </div>
-        <div class="text-container">
-          <div class="book-title">${book.title}</div>
-        </div>
-      </div>
-    </a>`;
-  });
-
   const gridEl = document.querySelector('.js-grid');
   const emptyStateEl = document.querySelector('.js-empty-state');
 
@@ -50,10 +48,23 @@ async function loadPage(){
     document.querySelector('.js-empty-state-text').textContent = search
       ? `No books found for "${search}".`
       : 'No books found.';
+
+    const suggestionsWrap = document.querySelector('.js-empty-state-suggestions-wrap');
+    const suggestions = books
+      .filter((book) => book.status !== 'coming_soon')
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 4);
+
+    if(suggestions.length > 0){
+      suggestionsWrap.hidden = false;
+      document.querySelector('.js-empty-state-suggestions').innerHTML = suggestions.map(bookCardHTML).join('');
+    }else{
+      suggestionsWrap.hidden = true;
+    }
   }else{
     gridEl.hidden = false;
     emptyStateEl.hidden = true;
-    gridEl.innerHTML = booksHTML;
+    gridEl.innerHTML = filteredBooks.map(bookCardHTML).join('');
   }
 
   function goToSearch(){

@@ -13,6 +13,30 @@ main{
   text-decoration: underline;
 }
 
+.empty-state{
+  text-align: center;
+  padding: 64px 16px;
+}
+
+.empty-state-icon{
+  font-size: 4rem;
+}
+
+.empty-state p{
+  margin: 16px 0 24px;
+  font-size: 1.7rem;
+  color: var(--color-text-muted, var(--color-text));
+}
+
+.empty-state-cta{
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm, 6px);
+  background-color: var(--color-accent, #131720);
+  color: var(--color-accent-contrast, white);
+  font-weight: 700;
+}
+
 main h1{
   font-family: var(--font-display);
   font-size: 3.4rem;
@@ -25,6 +49,10 @@ main h1{
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   column-gap: var(--space-4);
   row-gap: var(--space-5);
+}
+
+.grid[hidden]{
+  display: none;
 }
 
 .book-container{

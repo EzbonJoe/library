@@ -41,8 +41,20 @@ async function loadPage(){
     </a>`;
   });
 
-  document.querySelector('.js-grid')
-    .innerHTML = booksHTML;
+  const gridEl = document.querySelector('.js-grid');
+  const emptyStateEl = document.querySelector('.js-empty-state');
+
+  if(filteredBooks.length === 0){
+    gridEl.hidden = true;
+    emptyStateEl.hidden = false;
+    document.querySelector('.js-empty-state-text').textContent = search
+      ? `No books found for "${search}".`
+      : 'No books found.';
+  }else{
+    gridEl.hidden = false;
+    emptyStateEl.hidden = true;
+    gridEl.innerHTML = booksHTML;
+  }
 
   function goToSearch(){
     const search = document.querySelector('.js-search-input').value;

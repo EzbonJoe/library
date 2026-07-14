@@ -1,7 +1,14 @@
 const inputEl = document.querySelector('.input');
 const displayColorNameEl = document.querySelector('.display-color-name');
+const prefersDarkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 
-inputEl.checked = JSON.parse(localStorage.getItem('display-color'));
+function getInitialIsDark(){
+  const stored = localStorage.getItem('display-color');
+  if(stored !== null) return JSON.parse(stored);
+  return prefersDarkQuery ? prefersDarkQuery.matches : false;
+}
+
+inputEl.checked = getInitialIsDark();
 
 updateDisplayColor();
 
@@ -28,4 +35,14 @@ inputEl.addEventListener('input', () => {
 
 function updateLocalStorage(){
   localStorage.setItem('display-color', JSON.stringify(inputEl.checked));
+}
+
+// Keep following the OS/browser preference live — but only until the visitor
+// picks a theme themselves, at which point their explicit choice wins.
+if(prefersDarkQuery){
+  prefersDarkQuery.addEventListener('change', (event) => {
+    if(localStorage.getItem('display-color') !== null) return;
+    inputEl.checked = event.matches;
+    updateDisplayColor();
+  });
 }

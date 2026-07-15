@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Gadzeke Admin</title>
-  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/favicon-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
@@ -37,7 +38,7 @@
 
       <div class="admin-card">
         <h2>Add quotes</h2>
-        <p class="admin-hint">Paste one quote per line to add several at once — each line becomes its own quote.</p>
+        <p class="admin-hint">Paste one quote per line to add several at once — each line becomes its own quote. Duplicates already saved for this book are automatically skipped.</p>
         <form class="js-quote-form">
           <label>Book
             <select class="js-quote-book" required></select>
@@ -77,6 +78,9 @@
           <label>Slug (used in the page URL — leave blank to generate from the title)
             <input type="text" class="js-book-slug" placeholder="Quotes-From-My-Book">
           </label>
+          <label>Description (shown on the book's page — optional)
+            <textarea class="js-book-description" rows="3"></textarea>
+          </label>
           <label>Cover image
             <input type="file" accept="image/*" class="js-book-image-file" required>
           </label>
@@ -85,6 +89,10 @@
               <option value="published">Published</option>
               <option value="coming_soon">Coming soon</option>
             </select>
+          </label>
+          <label class="admin-checkbox-label">
+            <input type="checkbox" class="js-book-featured">
+            Feature on the Books page (rotating hero)
           </label>
           <button type="submit">Add book</button>
         </form>

@@ -567,6 +567,42 @@
   color: var(--feed-text);
 }
 
+/* Browse grids — shared by categories.html and authors.html */
+.browse-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.browse-card{
+  display: block;
+  padding: 28px 24px;
+  background-color: var(--feed-surface);
+  border: 1px solid var(--feed-border);
+  border-radius: 18px;
+  box-shadow: var(--feed-shadow);
+  color: var(--feed-text);
+  font-family: var(--feed-font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.browse-card:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--feed-shadow-hover);
+}
+
+.browse-card-meta{
+  display: block;
+  margin-top: 6px;
+  font-family: var(--feed-font-body);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--feed-text-muted);
+}
+
 @media (max-width: 960px){
   .feed-layout{
     grid-template-columns: 1fr;

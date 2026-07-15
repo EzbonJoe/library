@@ -39,6 +39,30 @@ html, body{
   text-decoration: underline;
 }
 
+.footer-social{
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.footer-social a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.footer-social a:hover{
+  background-color: var(--color-accent, #131720);
+  color: var(--color-accent-contrast, white);
+  transform: translateY(-2px);
+}
+
 .footer-subscribe{
   margin-bottom: 24px;
   padding-bottom: 24px;

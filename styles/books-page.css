@@ -1,0 +1,235 @@
+/* Books browse page — built on the same --feed-* tokens as feed.css/hero/chip-bar,
+   which this page already loads and reuses as-is. */
+
+/* Featured book cinematic section reuses .featured/.featured-overlay/.featured-content
+   from feed.css almost verbatim; these are the book-specific additions. */
+.featured-stat{
+  margin-top: 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--feed-accent);
+  letter-spacing: 0.02em;
+}
+
+/* Horizontal rows */
+.book-row-section{
+  margin-top: 56px;
+}
+
+.book-row-heading{
+  font-family: var(--feed-font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.book-row{
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+.book-row .book-card{
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+}
+
+/* Editorial breakout — full-width single-book pattern break between rows */
+.editorial-breakout{
+  margin-top: 56px;
+  padding: 56px 40px;
+  border-radius: 28px;
+  background-color: var(--feed-surface);
+  box-shadow: var(--feed-shadow);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.editorial-breakout-cover{
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.editorial-breakout-label{
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background-color: var(--feed-bg);
+  border: 1px solid var(--feed-border);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--feed-accent);
+}
+
+.editorial-breakout-title{
+  font-family: var(--feed-font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.editorial-breakout-quote{
+  font-size: 1.7rem;
+  font-style: italic;
+  color: var(--feed-text-muted);
+  margin: 12px 0;
+}
+
+/* Book card — used in rows, the flat grid, recommended sections, and empty-state suggestions */
+.book-card{
+  position: relative;
+  display: block;
+  color: var(--feed-text);
+}
+
+.book-card-cover-wrap{
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--feed-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:hover .book-card-cover-wrap{
+  transform: translateY(-6px);
+  box-shadow: var(--feed-shadow-hover);
+}
+
+.book-card-cover{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.book-card-cta{
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.75));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.book-card:hover .book-card-cta{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.book-card-badges{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.book-badge{
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: white;
+  background-color: rgba(17, 17, 17, 0.75);
+}
+
+.book-badge--new{
+  background-color: var(--feed-accent);
+  color: var(--feed-accent-contrast);
+}
+
+.book-badge--pick{
+  background: linear-gradient(135deg, #7c5cff, #b18cff);
+}
+
+.book-card-title{
+  margin-top: 12px;
+  font-family: var(--feed-font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-card-author{
+  font-size: 1.2rem;
+  color: var(--feed-text-muted);
+}
+
+.book-card-meta{
+  margin-top: 4px;
+  font-size: 1.1rem;
+  color: var(--feed-text-muted);
+}
+
+/* Toolbar: sort control, shown only in flat/search mode */
+.books-toolbar{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 48px;
+}
+
+.books-toolbar label{
+  font-size: 1.3rem;
+  color: var(--feed-text-muted);
+}
+
+.sort-select{
+  font-size: 1.3rem;
+  font-family: var(--feed-font-body);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--feed-border);
+  background-color: var(--feed-surface);
+  color: var(--feed-text);
+}
+
+@media (max-width: 700px){
+  .editorial-breakout{
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .editorial-breakout-cover{
+    width: 140px;
+    margin: 0 auto;
+  }
+
+  .book-row .book-card{
+    flex-basis: 62vw;
+  }
+
+  .book-card-cta{
+    opacity: 1;
+    transform: none;
+    position: static;
+    background: none;
+    color: var(--feed-accent);
+    text-align: left;
+    padding: 8px 0 0;
+  }
+}

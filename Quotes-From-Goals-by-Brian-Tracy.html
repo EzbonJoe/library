@@ -15,7 +15,8 @@
   <meta name="twitter:title" content="Goals Quotes by Brian Tracy | Gadzeke">
   <meta name="twitter:description" content="Hand-picked quotes from Goals by Brian Tracy on Success — curated by Gadzeke, not AI-generated.">
   <meta name="twitter:image" content="https://gadzeke.com/images/Goals.jpg">
-  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/favicon-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
@@ -27,58 +28,87 @@
 </head>
 <body>
 
-  <div class="mobile-menu-backdrop js-mobile-menu-backdrop"></div>
+    <div class="mobile-menu-backdrop js-mobile-menu-backdrop"></div>
   <nav class="drop-down js-drop-down">
     <ul>
-      <li><a href="./" class="home-link">Home</a></li>
+      <li><a href="./" class="home-link">Quotes</a></li>
       <li><a href="best-book-quotes-and-the-books-they-come-from">Books</a></li>
+      <li><a href="authors">Authors</a></li>
+      <li><a href="categories">Categories</a></li>
+      <li><a href="./?bookmarked=true">Bookmarks</a></li>
       <li><a href="about">About</a></li>
       <li><a href="contact">Contact</a></li>
     </ul>
+    <a href="./" class="drop-down-cta">Explore Quotes</a>
   </nav>
 
   <header class="header">
-    <div class="left-section">
-      <a href="./"><div class="page-name">Gadzeke</div></a>
-      <nav>
-        <ul>
-          <a href="./" class="home-link"><li>Home</li></a>
-          <a href="best-book-quotes-and-the-books-they-come-from"><li>Books</li></a>
-          <a href="about"><li>About</li></a>
-          <a href="contact"><li>Contact</li></a>
-        </ul>
-      </nav>
-    </div>
+    <div class="header-inner">
+      <div class="left-section">
+        <a href="./" class="brand-link"><img src="icons/logo-mark.png" alt="" class="brand-logo"><div class="page-name">Gadzeke</div></a>
+        <nav>
+          <ul>
+            <a href="./" class="home-link"><li>Quotes</li></a>
+            <a href="best-book-quotes-and-the-books-they-come-from"><li>Books</li></a>
+            <a href="authors" class="nav-secondary"><li>Authors</li></a>
+            <a href="categories" class="nav-secondary"><li>Categories</li></a>
+          </ul>
+        </nav>
+      </div>
 
-    <div class="right-section">
-      <div class="display-color">
-        <input type="checkbox" id="dark-mode" class="input">
-        <label for="dark-mode" class="label">
-          <div class="circle"></div>
-        </label>
+      <div class="right-section">
+        <button type="button" class="icon-btn-header js-search-trigger" aria-label="Search (Ctrl+K)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="./?bookmarked=true" class="icon-btn-header" aria-label="Bookmarks">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg>
+        </a>
+        <div class="display-color js-display-color">
+          <input type="checkbox" id="dark-mode" class="input">
+          <label for="dark-mode" class="label">
+            <div class="circle"></div>
+          </label>
+        </div>
+        <div class="display-color-name js-display-color-name">
+          <div>Light Mode</div>
+        </div>
+        <a href="./" class="header-cta">Explore Quotes</a>
+        <button type="button" class="icon-container js-icon-container" aria-label="Toggle menu" aria-expanded="false">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
-      
-      <div class="display-color-name">
-        <div>Light Mode</div>
-      </div>
-      <button type="button" class="icon-container js-icon-container" aria-label="Toggle menu" aria-expanded="false">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
     </div>
   </header>
 
+  <div class="search-overlay-backdrop js-search-overlay-backdrop"></div>
+  <div class="search-overlay js-search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay-panel">
+      <div class="search-overlay-input-row">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="search-overlay-input js-search-overlay-input" placeholder="Search quotes, books, authors..." autocomplete="off">
+        <kbd class="search-overlay-esc">Esc</kbd>
+      </div>
+      <div class="search-overlay-results js-search-overlay-results"></div>
+    </div>
+  </div>
+
   <main>
     
+    <div class="js-book-hero"></div>
+
     <h1 class="book-heading">Quotes From Goals by Brian Tracy</h1>
 
     <div class="js-quotes"></div>
+  <div class="js-book-recommended book-recommended"></div>
+
   </main>
 
   <script type="module" src="scripts/bookQuotes.js"></script>
   <script src="scripts/darkmode.js"></script>
   <script src="scripts/header.js"></script>
+  <script type="module" src="scripts/searchOverlay.js"></script>
   <footer class="site-footer">
       <div class="footer-subscribe">
         <p class="footer-subscribe-text">Get a quote in your inbox — no spam, just the good lines.</p>
@@ -89,7 +119,17 @@
         <p class="js-subscribe-status footer-subscribe-status"></p>
       </div>
       <p>&copy; 2026 Gadzeke — quotes are excerpted from their original books for personal inspiration and commentary.</p>
+      <div class="footer-social">
+              <a href="https://www.youtube.com/@RamiZeke" target="_blank" rel="noopener" aria-label="Gadzeke on YouTube">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2c-.3-1.1-1.1-1.9-2.2-2.2C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.3.5c-1.1.3-1.9 1.1-2.2 2.2C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1.1 1.1 1.9 2.2 2.2 1.9.5 9.3.5 9.3.5s7.4 0 9.3-.5c1.1-.3 1.9-1.1 2.2-2.2.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+              </a>
+              <a href="https://instagram.com/gadzeke" target="_blank" rel="noopener" aria-label="Gadzeke on Instagram">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+              </a>
+            </div>
       <div class="footer-links">
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
         <a href="privacy-policy">Privacy Policy</a>
         <a href="terms-and-conditions">Terms &amp; Conditions</a>
       </div>

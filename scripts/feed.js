@@ -422,6 +422,37 @@ async function loadAuthors(){
   });
 }
 
+function applyInitialFiltersFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get('category') || '';
+  const author = params.get('author') || '';
+  const search = params.get('search') || '';
+  const bookmarked = params.get('bookmarked') === 'true';
+
+  if(category){
+    state.category = category;
+    chipBar.querySelectorAll('.chip').forEach((el) => {
+      el.classList.toggle('is-active', el.dataset.category === category);
+    });
+  }
+
+  if(author){
+    state.author = author;
+    chipBar.querySelectorAll('.chip').forEach((el) => el.classList.remove('is-active'));
+  }
+
+  if(search){
+    state.search = search;
+    searchInput.value = search;
+  }
+
+  if(bookmarked){
+    state.bookmarkedOnly = true;
+    bookmarkToggle.classList.add('is-active');
+  }
+}
+
+applyInitialFiltersFromURL();
 loadHero();
 loadRecentlyAdded();
 loadAuthors();

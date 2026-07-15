@@ -34,8 +34,10 @@ const bookTitleInput = document.querySelector('.js-book-title');
 const bookAuthorInput = document.querySelector('.js-book-author');
 const bookCategorySelect = document.querySelector('.js-book-category');
 const bookSlugInput = document.querySelector('.js-book-slug');
+const bookDescriptionInput = document.querySelector('.js-book-description');
 const bookImageFileInput = document.querySelector('.js-book-image-file');
 const bookStatusSelect = document.querySelector('.js-book-status');
+const bookFeaturedInput = document.querySelector('.js-book-featured');
 const bookStatusText = document.querySelector('.js-book-status-text');
 
 const recentQuotesEl = document.querySelector('.js-recent-quotes');
@@ -173,7 +175,7 @@ async function loadQuotesManage(){
 async function loadBooksManage(){
   const { data: books, error } = await supabase
     .from('books')
-    .select('id, title, author, category, status, image, slug')
+    .select('id, title, author, category, status, image, slug, description, featured')
     .order('title');
 
   if(error){
@@ -216,8 +218,15 @@ async function loadBooksManage(){
             <option value="coming_soon" ${book.status === 'coming_soon' ? 'selected' : ''}>Coming soon</option>
           </select>
         </label>
+        <label>Description
+          <textarea class="js-edit-description" rows="2">${book.description ?? ''}</textarea>
+        </label>
         <label>Replace cover (optional)
           <input type="file" accept="image/*" class="js-edit-image-file">
+        </label>
+        <label class="admin-checkbox-label">
+          <input type="checkbox" class="js-edit-featured" ${book.featured ? 'checked' : ''}>
+          Feature on the Books page (rotating hero)
         </label>
       </div>
 
@@ -236,9 +245,11 @@ async function loadBooksManage(){
       const author = card.querySelector('.js-edit-author').value.trim() || null;
       const category = card.querySelector('.js-edit-category').value || null;
       const status = card.querySelector('.js-edit-status').value;
+      const description = card.querySelector('.js-edit-description').value.trim() || null;
+      const featured = card.querySelector('.js-edit-featured').checked;
       const file = card.querySelector('.js-edit-image-file').files[0];
 
-      const updates = { author, category, status };
+      const updates = { author, category, status, description, featured };
 
       if(file){
         saveButton.textContent = 'Uploading...';
@@ -331,7 +342,7 @@ logoutButton.addEventListener('click', async () => {
 
 quoteForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  quoteStatus.textContent = '';
+  quoteStatus.textContent = 'Checking for duplicates...';
 
   const bookId = quoteBookSelect.value;
   const lines = quoteTextInput.value
@@ -340,6 +351,31 @@ quoteForm.addEventListener('submit', async (event) => {
     .filter((line) => line.length > 0);
 
   if(!bookId || lines.length === 0) return;
+
+  const { data: existing } = await supabase
+    .from('quotes')
+    .select('text')
+    .eq('book_id', bookId);
+
+  const existingSet = new Set((existing ?? []).map((q) => q.text.trim().toLowerCase()));
+  const seenInBatch = new Set();
+  const uniqueLines = [];
+  let duplicateCount = 0;
+
+  for(const line of lines){
+    const normalized = line.toLowerCase();
+    if(existingSet.has(normalized) || seenInBatch.has(normalized)){
+      duplicateCount++;
+      continue;
+    }
+    seenInBatch.add(normalized);
+    uniqueLines.push(line);
+  }
+
+  if(uniqueLines.length === 0){
+    quoteStatus.textContent = `All ${lines.length} quote(s) already exist for this book — nothing added.`;
+    return;
+  }
 
   const { data: lastQuote } = await supabase
     .from('quotes')
@@ -350,7 +386,7 @@ quoteForm.addEventListener('submit', async (event) => {
     .maybeSingle();
 
   let nextPosition = (lastQuote?.position ?? 0) + 1;
-  const rows = lines.map((text) => ({ book_id: bookId, text, position: nextPosition++ }));
+  const rows = uniqueLines.map((text) => ({ book_id: bookId, text, position: nextPosition++ }));
 
   const { error } = await supabase.from('quotes').insert(rows);
 
@@ -360,7 +396,9 @@ quoteForm.addEventListener('submit', async (event) => {
   }
 
   quoteTextInput.value = '';
-  quoteStatus.textContent = lines.length === 1 ? 'Quote added.' : `${lines.length} quotes added.`;
+  quoteStatus.textContent = duplicateCount > 0
+    ? `Added ${uniqueLines.length} quote(s), skipped ${duplicateCount} duplicate(s).`
+    : (uniqueLines.length === 1 ? 'Quote added.' : `${uniqueLines.length} quotes added.`);
   loadQuotesManage();
 });
 
@@ -407,8 +445,10 @@ bookForm.addEventListener('submit', async (event) => {
     author: bookAuthorInput.value.trim() || null,
     category: bookCategorySelect.value || null,
     slug,
+    description: bookDescriptionInput.value.trim() || null,
     image,
     status: bookStatusSelect.value,
+    featured: bookFeaturedInput.checked,
   });
 
   if(error){

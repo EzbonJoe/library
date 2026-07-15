@@ -83,6 +83,16 @@ html, body{
   box-shadow: 0 0 0 2px var(--feed-accent);
 }
 
+.admin-checkbox-label{
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px !important;
+}
+
+.admin-checkbox-label input{
+  width: auto;
+}
+
 .admin-main button{
   align-self: flex-start;
   padding: 8px 20px;

@@ -250,10 +250,39 @@ function applyInitialFiltersFromURL(){
   }
 }
 
+// Supabase caps any single select() at 1000 rows by default, and this project
+// has more quotes than that — a plain select() here silently truncated the
+// stats to whichever books' quotes happened to fall in the first 1000 rows,
+// leaving the rest undercounted or at zero. Page through with .range() instead.
+async function fetchAllQuotes(){
+  const PAGE_SIZE = 1000;
+  const rows = [];
+  let from = 0;
+
+  while(true){
+    const { data, error } = await supabase
+      .from('quotes')
+      .select('book_id, text, editors_pick, position')
+      .order('id')
+      .range(from, from + PAGE_SIZE - 1);
+
+    if(error){
+      console.error(error);
+      break;
+    }
+
+    rows.push(...data);
+    if(data.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
+  }
+
+  return rows;
+}
+
 async function init(){
-  const [{ data: books, error: booksError }, { data: quotes, error: quotesError }] = await Promise.all([
+  const [{ data: books, error: booksError }, quotes] = await Promise.all([
     supabase.from('books').select('*'),
-    supabase.from('quotes').select('book_id, text, editors_pick, position'),
+    fetchAllQuotes(),
   ]);
 
   if(booksError || !books){
@@ -263,7 +292,7 @@ async function init(){
 
   allBooks = books;
 
-  if(!quotesError && quotes){
+  if(quotes){
     quotes.forEach((quote) => {
       if(!statsMap.has(quote.book_id)){
         statsMap.set(quote.book_id, { count: 0, totalWords: 0, hasEditorsPick: false, sampleQuote: null, samplePriority: -1 });

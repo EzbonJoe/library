@@ -1,6 +1,8 @@
 # Clean URLs: serve foo.html when /foo (lowercase) is requested, without changing the address bar
 /about  /about.html  200
+/authors  /authors.html  200
 /best-book-quotes-and-the-books-they-come-from  /Best-book-quotes-and-the-books-they-come-from.html  200
+/categories  /categories.html  200
 /coming-soon  /coming-soon.html  200
 /contact  /contact.html  200
 /privacy-policy  /privacy-policy.html  200
@@ -22,7 +24,9 @@
 # Canonicalize: force-redirect requests for the raw .html file to the clean lowercase URL
 /index.html  /  301!
 /about.html  /about  301!
+/authors.html  /authors  301!
 /Best-book-quotes-and-the-books-they-come-from.html  /best-book-quotes-and-the-books-they-come-from  301!
+/categories.html  /categories  301!
 /coming-soon.html  /coming-soon  301!
 /contact.html  /contact  301!
 /privacy-policy.html  /privacy-policy  301!

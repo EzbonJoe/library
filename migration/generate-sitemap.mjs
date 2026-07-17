@@ -11,6 +11,8 @@ const SITE_URL = 'https://gadzeke.com';
 const STATIC_PAGES = [
   { path: '/', priority: '1.00' },
   { path: '/best-book-quotes-and-the-books-they-come-from', priority: '0.90' },
+  { path: '/authors', priority: '0.70' },
+  { path: '/categories', priority: '0.70' },
   { path: '/about', priority: '0.60' },
   { path: '/contact', priority: '0.50' },
   { path: '/privacy-policy', priority: '0.30' },

@@ -93,12 +93,6 @@
   justify-content: center;
   padding: 16px 0;
   background-color: var(--feed-bg);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.chip-bar.is-hidden{
-  transform: translateY(-130%);
-  opacity: 0;
 }
 
 .chip{

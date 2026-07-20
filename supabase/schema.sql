@@ -1,4 +1,4 @@
--- Gadzeke quote storage schema.
+-- GadZeke quote storage schema.
 -- Run this once in the Supabase project's SQL Editor before wiring up the site.
 
 create table if not exists books (

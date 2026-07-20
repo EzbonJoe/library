@@ -2,6 +2,8 @@ import { supabase } from './supabaseClient.js';
 import { LEGACY_BOOK_SLUGS, bookLink } from './legacySlugs.js';
 import { AMAZON_AFFILIATE_TAG } from './config.js';
 import { isSupported as isSpeechSupported, speakOne, speakSequence, stopSpeaking } from './textToSpeech.js';
+import { isBookmarked, toggleBookmark } from './bookmarks.js';
+import { isBookBookmarked, toggleBookBookmark } from './bookBookmarks.js';
 
 function resetListenUI(){
   document.querySelectorAll('.js-listen-quote-btn.is-playing').forEach((btn) => {
@@ -89,8 +91,8 @@ async function loadQuotes(){
   recordRecentlyViewed(book.slug);
 
   const byAuthor = book.author ? ` by ${book.author}` : '';
-  const pageTitle = `${book.title} Quotes${byAuthor} | Gadzeke`;
-  const description = `Hand-picked quotes from ${book.title}${byAuthor}${book.category ? ` on ${book.category}` : ''} — curated by Gadzeke, not AI-generated.`;
+  const pageTitle = `${book.title} Quotes${byAuthor} | GadZeke`;
+  const description = `Hand-picked quotes from ${book.title}${byAuthor}${book.category ? ` on ${book.category}` : ''} — curated by GadZeke, not AI-generated.`;
   const canonicalPath = LEGACY_BOOK_SLUGS.has(book.slug)
     ? `/${book.slug.toLowerCase()}`
     : `${window.location.pathname}?book=${encodeURIComponent(book.slug)}`;
@@ -117,7 +119,7 @@ async function loadQuotes(){
 
   const { data: quotes, error: quotesError } = await supabase
     .from('quotes')
-    .select('text, position, editors_pick')
+    .select('id, text, position, editors_pick')
     .eq('book_id', book.id)
     .order('position');
 
@@ -126,18 +128,35 @@ async function loadQuotes(){
     return;
   }
 
-  const quotesHTML = quotes.map((quote, index) => `
-    <div class="quotes">
+  const quotesHTML = quotes.map((quote, index) => {
+    const bookmarked = isBookmarked(quote.id);
+
+    return `
+    <div class="quotes" data-quote-id="${quote.id}">
       <div class="quote-number">${index + 1}</div>
       <p class="quote-text">${quote.text}</p>
-      ${isSpeechSupported() ? `<button type="button" class="quote-listen-btn js-listen-quote-btn" aria-label="Listen to this quote">🔊</button>` : ''}
+      <div class="quote-actions">
+        <button type="button" class="quote-listen-btn js-bookmark-quote-btn ${bookmarked ? 'is-bookmarked' : ''}" aria-label="Bookmark this quote">${bookmarked ? '★' : '☆'}</button>
+        ${isSpeechSupported() ? `<button type="button" class="quote-listen-btn js-listen-quote-btn" aria-label="Listen to this quote">🔊</button>` : ''}
+      </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   const quotesListEl = document.querySelector('.js-quotes');
   quotesListEl.innerHTML = quotesHTML;
 
   quotesListEl.addEventListener('click', (event) => {
+    const bookmarkButton = event.target.closest('.js-bookmark-quote-btn');
+    if(bookmarkButton){
+      const quoteEl = bookmarkButton.closest('.quotes');
+      const quoteId = Number(quoteEl.dataset.quoteId);
+      const nowBookmarked = toggleBookmark(quoteId);
+      bookmarkButton.classList.toggle('is-bookmarked', nowBookmarked);
+      bookmarkButton.textContent = nowBookmarked ? '★' : '☆';
+      return;
+    }
+
     const button = event.target.closest('.js-listen-quote-btn');
     if(!button) return;
 
@@ -185,6 +204,7 @@ async function loadQuotes(){
             <button type="button" class="book-hero-btn js-read-quotes">Read Quotes</button>
             <button type="button" class="book-hero-btn-secondary js-show-popular-quote">Show Popular Quote</button>
             ${isSpeechSupported() ? `<button type="button" class="book-hero-btn-secondary js-listen-all-btn">🔊 Listen to All Quotes</button>` : ''}
+            <button type="button" class="book-hero-btn-secondary js-save-book-btn ${isBookBookmarked(book.slug) ? 'is-saved' : ''}">${isBookBookmarked(book.slug) ? '✓ Saved' : '🔖 Save Book'}</button>
             <a class="book-hero-btn-secondary" href="${buildAmazonSearchUrl(book.title, book.author)}" target="_blank" rel="noopener sponsored">Buy on Amazon ↗</a>
           </div>
           <div class="book-hero-quote-reveal js-popular-quote-reveal" hidden>"${sampleQuote.text}"</div>
@@ -194,6 +214,12 @@ async function loadQuotes(){
 
     heroEl.querySelector('.js-read-quotes').addEventListener('click', () => {
       document.querySelector('.js-quotes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    heroEl.querySelector('.js-save-book-btn').addEventListener('click', (event) => {
+      const nowSaved = toggleBookBookmark(book.slug);
+      event.target.classList.toggle('is-saved', nowSaved);
+      event.target.textContent = nowSaved ? '✓ Saved' : '🔖 Save Book';
     });
 
     heroEl.querySelector('.js-show-popular-quote').addEventListener('click', (event) => {

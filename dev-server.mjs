@@ -44,4 +44,4 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
     res.end(data);
   });
-}).listen(port, () => console.log(`Gadzeke running at http://localhost:${port}`));
+}).listen(port, () => console.log(`GadZeke running at http://localhost:${port}`));

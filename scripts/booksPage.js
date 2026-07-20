@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
+import { isBookBookmarked, toggleBookBookmark } from './bookBookmarks.js';
 
 const CATEGORY_ORDER = ['Business', 'Psychology', 'Philosophy', 'Money', 'Relationships', 'Leadership', 'Success', 'Habits', 'Spirituality', 'Productivity'];
 const RECENTLY_VIEWED_KEY = 'gadzeke-recently-viewed';
@@ -7,6 +8,7 @@ const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
 
 const searchInput = document.querySelector('.js-search-input');
 const chipBar = document.querySelector('.js-chip-bar');
+const savedToggle = document.querySelector('.js-saved-toggle');
 const browseModeEl = document.querySelector('.js-browse-mode');
 const searchModeEl = document.querySelector('.js-search-mode');
 const rowsEl = document.querySelector('.js-rows');
@@ -19,7 +21,7 @@ const sortSelect = document.querySelector('.js-sort-select');
 
 let allBooks = [];
 const statsMap = new Map();
-const state = { search: '', category: '' };
+const state = { search: '', category: '', savedOnly: false };
 
 function getRecentlyViewed(){
   try{
@@ -39,12 +41,14 @@ function bookCardHTML(book){
     stats.isNew ? `<span class="book-badge book-badge--new">New</span>` : '',
     stats.hasEditorsPick ? `<span class="book-badge book-badge--pick">Pick</span>` : '',
   ].filter(Boolean).join('');
+  const saved = isBookBookmarked(book.slug);
 
   return `
     <a class="book-card" href="${bookLinkFor(book)}">
       <div class="book-card-cover-wrap">
         <img class="book-card-cover" src="${book.image}" alt="${book.title} cover" loading="lazy">
         ${badges ? `<div class="book-card-badges">${badges}</div>` : ''}
+        <button type="button" class="book-card-save-btn js-save-book-btn ${saved ? 'is-saved' : ''}" data-slug="${book.slug}" aria-label="Save this book">${saved ? '★' : '☆'}</button>
         <div class="book-card-cta">Read Quotes →</div>
       </div>
       <div class="book-card-title">${book.title}</div>
@@ -53,6 +57,18 @@ function bookCardHTML(book){
     </a>
   `;
 }
+
+document.addEventListener('click', (event) => {
+  const saveButton = event.target.closest('.js-save-book-btn');
+  if(!saveButton) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const nowSaved = toggleBookBookmark(saveButton.dataset.slug);
+  saveButton.classList.toggle('is-saved', nowSaved);
+  saveButton.textContent = nowSaved ? '★' : '☆';
+});
 
 function rowHTML(title, books){
   if(books.length === 0) return '';
@@ -157,7 +173,8 @@ function filteredBooks(){
     const matchesSearch = !search
       || book.title.toLowerCase().includes(search)
       || (book.author ?? '').toLowerCase().includes(search);
-    return matchesCategory && matchesSearch;
+    const matchesSaved = !state.savedOnly || isBookBookmarked(book.slug);
+    return matchesCategory && matchesSearch && matchesSaved;
   });
 }
 
@@ -183,7 +200,7 @@ function renderSearchMode(){
     emptyStateEl.hidden = false;
     emptyStateTextEl.textContent = state.search
       ? `No books found for "${state.search}".`
-      : 'No books found.';
+      : (state.savedOnly ? "You haven't saved any books yet." : 'No books found.');
 
     const suggestions = allBooks
       .filter((book) => book.status !== 'coming_soon')
@@ -204,16 +221,20 @@ function renderSearchMode(){
 }
 
 function isSearchModeActive(){
-  return state.search.trim() !== '' || state.category !== '';
+  return state.search.trim() !== '' || state.category !== '' || state.savedOnly;
 }
 
-function refresh(){
+function refresh(fromUserAction){
   const searchMode = isSearchModeActive();
   browseModeEl.hidden = searchMode;
   searchModeEl.hidden = !searchMode;
 
   if(searchMode){
     renderSearchMode();
+
+    if(fromUserAction){
+      searchModeEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }
 
@@ -222,7 +243,7 @@ searchInput.addEventListener('input', () => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
     state.search = searchInput.value;
-    refresh();
+    refresh(true);
   }, 150);
 });
 
@@ -233,20 +254,32 @@ chipBar.addEventListener('click', (event) => {
   chipBar.querySelectorAll('.chip').forEach((el) => el.classList.remove('is-active'));
   chip.classList.add('is-active');
   state.category = chip.dataset.category;
-  refresh();
+  refresh(true);
 });
 
 sortSelect.addEventListener('change', () => {
   if(isSearchModeActive()) renderSearchMode();
 });
 
+savedToggle.addEventListener('click', () => {
+  state.savedOnly = !state.savedOnly;
+  savedToggle.classList.toggle('is-active', state.savedOnly);
+  refresh(true);
+});
+
 function applyInitialFiltersFromURL(){
   const params = new URLSearchParams(window.location.search);
   const search = params.get('search') || '';
+  const saved = params.get('saved') === 'true';
 
   if(search){
     state.search = search;
     searchInput.value = search;
+  }
+
+  if(saved){
+    state.savedOnly = true;
+    savedToggle.classList.add('is-active');
   }
 }
 

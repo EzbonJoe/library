@@ -173,6 +173,14 @@ a{
   color: var(--header-text);
 }
 
+.icon-btn-header.has-bookmarks{
+  color: var(--header-accent);
+}
+
+.icon-btn-header.has-bookmarks svg{
+  fill: currentColor;
+}
+
 .header-cta{
   margin-left: 8px;
   padding: 10px 22px;
@@ -232,7 +240,8 @@ a{
   justify-content: center;
   font-size: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-  animation: toggleOff 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform: translateX(0);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .circle::before{
@@ -250,25 +259,7 @@ a{
 }
 
 .input:checked + .label .circle{
-  animation: toggleOn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes toggleOn {
-  0%{
-    transform: translateX(0);
-  }
-  100%{
-    transform: translateX(20px);
-  }
-}
-
-@keyframes toggleOff {
-  0%{
-    transform: translateX(20px);
-  }
-  100%{
-    transform: translateX(0);
-  }
+  transform: translateX(20px);
 }
 
 /* Mobile menu button (hidden on desktop, shown under the breakpoint below) */

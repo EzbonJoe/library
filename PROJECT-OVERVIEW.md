@@ -1,8 +1,8 @@
-# Gadzeke — Project Overview
+# GadZeke — Project Overview
 
 ## What it is
 
-**Gadzeke** is a static website you built (by Rami Zeke) that shares key quotes/takeaways from
+**GadZeke** is a static website you built (by Rami Zeke) that shares key quotes/takeaways from
 self-help and business books — 33 Strategies of War, Rich Dad Poor Dad, The Millionaire Fastlane,
 Mastery, Laws of Human Nature, How to Win Friends and Influence People, 7 Habits, etc.
 

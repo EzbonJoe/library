@@ -1,4 +1,4 @@
-# Adding a new book to Gadzeke
+# Adding a new book to GadZeke
 
 This is the full workflow for adding a book and its quotes, start to finish, without
 needing any code changes. Everything below happens through the admin panel and two

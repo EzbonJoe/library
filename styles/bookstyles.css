@@ -234,10 +234,15 @@ main{
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.quote-listen-btn{
+.quote-actions{
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
+  display: flex;
+  gap: 6px;
+}
+
+.quote-listen-btn{
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -259,6 +264,10 @@ main{
   animation: listenPulse 1.2s ease-in-out infinite;
 }
 
+.quote-listen-btn.is-bookmarked{
+  color: var(--color-accent);
+}
+
 .quotes.is-playing{
   box-shadow: 0 0 0 2px var(--color-accent), var(--shadow-card);
 }
@@ -268,7 +277,8 @@ main{
   50%{ opacity: 0.5; }
 }
 
-.book-hero-btn-secondary.is-playing{
+.book-hero-btn-secondary.is-playing,
+.book-hero-btn-secondary.is-saved{
   background-color: var(--color-accent);
   color: var(--color-accent-contrast);
   border-color: var(--color-accent);

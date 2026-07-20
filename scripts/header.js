@@ -43,3 +43,37 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 handleHeaderScroll();
+
+// Bookmark icon: colored whenever the visitor has any saved quotes (so it's
+// not just a static gray icon forever), on every page. On the home feed
+// specifically, clicking it toggles the "Bookmarked only" filter in place
+// via the existing pill button's own click handler, instead of doing a full
+// page reload back to the top — reloading is only unavoidable from other
+// pages, since bookmarked quotes can currently only be viewed on the feed.
+const bookmarkIconEl = document.querySelector('.js-bookmark-icon');
+const bookmarkToggleEl = document.querySelector('.js-bookmark-toggle');
+
+function refreshBookmarkIconState(){
+  if(!bookmarkIconEl) return;
+
+  let hasBookmarks = false;
+  try{
+    hasBookmarks = (JSON.parse(localStorage.getItem('gadzeke-bookmarks')) || []).length > 0;
+  }catch{
+    hasBookmarks = false;
+  }
+
+  const filterActive = Boolean(bookmarkToggleEl?.classList.contains('is-active'));
+  bookmarkIconEl.classList.toggle('has-bookmarks', hasBookmarks || filterActive);
+}
+
+refreshBookmarkIconState();
+window.addEventListener('gadzeke:bookmarks-changed', refreshBookmarkIconState);
+
+if(bookmarkIconEl && bookmarkToggleEl){
+  bookmarkIconEl.addEventListener('click', (event) => {
+    event.preventDefault();
+    bookmarkToggleEl.click();
+    requestAnimationFrame(refreshBookmarkIconState);
+  });
+}

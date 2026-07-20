@@ -1,9 +1,9 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
 import { isSupported as isSpeechSupported, speakOne, stopSpeaking } from './textToSpeech.js';
+import { getBookmarks, isBookmarked, toggleBookmark } from './bookmarks.js';
 
 const PAGE_SIZE = 12;
-const BOOKMARKS_KEY = 'gadzeke-bookmarks';
 
 const chipBar = document.querySelector('.js-chip-bar');
 const searchInput = document.querySelector('.js-search-input');
@@ -29,32 +29,6 @@ let state = {
 // Running count of cards rendered so far (across pagination), used to place
 // periodic spotlight/magazine cards for visual rhythm instead of a uniform grid.
 let renderedCount = 0;
-
-function getBookmarks(){
-  try{
-    return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || [];
-  }catch{
-    return [];
-  }
-}
-
-function isBookmarked(id){
-  return getBookmarks().includes(id);
-}
-
-function toggleBookmark(id){
-  const bookmarks = getBookmarks();
-  const index = bookmarks.indexOf(id);
-
-  if(index === -1){
-    bookmarks.push(id);
-  }else{
-    bookmarks.splice(index, 1);
-  }
-
-  localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
-  return bookmarks.includes(id);
-}
 
 function estimateReadingTime(text){
   const words = text.trim().split(/\s+/).length;
@@ -242,6 +216,8 @@ function buildQuery(){
   return query.order('created_at', { ascending: false }).range(from, to);
 }
 
+let hasLoadedOnce = false;
+
 async function loadNextPage(){
   if(state.isLoading || !state.hasMore) return;
 
@@ -255,12 +231,26 @@ async function loadNextPage(){
   }
 
   state.isLoading = true;
-  skeletonGrid.hidden = state.page > 0;
+
+  let skeletonTimer = null;
+  if(state.page > 0){
+    skeletonGrid.hidden = true;
+  }else if(!hasLoadedOnce){
+    skeletonGrid.hidden = false;
+  }else{
+    // A filter just changed and the grid was cleared — only show the
+    // shimmer if the refetch actually takes a moment, so a fast lookup
+    // doesn't just flash the skeleton on and immediately back off.
+    skeletonGrid.hidden = true;
+    skeletonTimer = setTimeout(() => { skeletonGrid.hidden = false; }, 150);
+  }
 
   const { data: quotes, error } = await buildQuery();
 
+  clearTimeout(skeletonTimer);
   skeletonGrid.hidden = true;
   state.isLoading = false;
+  hasLoadedOnce = true;
 
   if(error){
     console.error(error);
@@ -278,12 +268,29 @@ async function loadNextPage(){
   state.page += 1;
 }
 
-function resetFeed(){
+function isFilterActive(){
+  return state.category !== '' || state.search !== '' || state.author !== '' || state.bookmarkedOnly;
+}
+
+// The cinematic featured-quote hero is only interesting when browsing —
+// once a filter is applied it just pushes the actual results further down
+// the page, so it hides itself while any filter is active.
+function updateFeaturedVisibility(){
+  featuredEl.hidden = isFilterActive();
+}
+
+function resetFeed(fromUserAction){
   state.page = 0;
   state.hasMore = true;
   renderedCount = 0;
   quoteGrid.innerHTML = '';
   emptyState.hidden = true;
+  updateFeaturedVisibility();
+
+  if(fromUserAction && isFilterActive()){
+    quoteGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   loadNextPage();
 }
 
@@ -295,7 +302,7 @@ chipBar.addEventListener('click', (event) => {
   chip.classList.add('is-active');
   state.category = chip.dataset.category;
   state.author = '';
-  resetFeed();
+  resetFeed(true);
 });
 
 let searchTimer;
@@ -304,14 +311,14 @@ searchInput.addEventListener('input', () => {
   searchTimer = setTimeout(() => {
     state.search = searchInput.value.trim();
     state.author = '';
-    resetFeed();
+    resetFeed(true);
   }, 300);
 });
 
 bookmarkToggle.addEventListener('click', () => {
   state.bookmarkedOnly = !state.bookmarkedOnly;
   bookmarkToggle.classList.toggle('is-active', state.bookmarkedOnly);
-  resetFeed();
+  resetFeed(true);
 });
 
 const scrollObserver = new IntersectionObserver((entries) => {
@@ -321,26 +328,6 @@ const scrollObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '400px' });
 
 scrollObserver.observe(scrollSentinel);
-
-let lastScrollY = window.scrollY;
-let scrollTicking = false;
-
-function handleChipBarScroll(){
-  const currentScrollY = window.scrollY;
-  const scrollingDown = currentScrollY > lastScrollY;
-
-  chipBar.classList.toggle('is-hidden', currentScrollY > 120 && scrollingDown);
-
-  lastScrollY = currentScrollY;
-  scrollTicking = false;
-}
-
-window.addEventListener('scroll', () => {
-  if(!scrollTicking){
-    requestAnimationFrame(handleChipBarScroll);
-    scrollTicking = true;
-  }
-}, { passive: true });
 
 async function loadHero(){
   // The hero rotates daily through quotes marked "Editor's Pick" — same quote
@@ -443,7 +430,7 @@ async function loadAuthors(){
       searchInput.value = '';
       chipBar.querySelectorAll('.chip').forEach((el) => el.classList.remove('is-active'));
       chipBar.querySelector('.chip[data-category=""]')?.classList.add('is-active');
-      resetFeed();
+      resetFeed(true);
     });
   });
 }
@@ -479,6 +466,7 @@ function applyInitialFiltersFromURL(){
 }
 
 applyInitialFiltersFromURL();
+updateFeaturedVisibility();
 loadHero();
 loadRecentlyAdded();
 loadAuthors();

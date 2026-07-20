@@ -1,8 +1,8 @@
-# Gadzeke — design direction & progress log
+# GadZeke — design direction & progress log
 
 ## Where this came from
 
-Gadzeke started as a static personal site sharing quotes from books that inspired the owner
+GadZeke started as a static personal site sharing quotes from books that inspired the owner
 (see `PROJECT-OVERVIEW.md`). After wiring it up to Supabase (real upload flow via `admin.html`),
 the next ask was to make the site "eye catching." That went through a few rounds before landing
 on the actual target below.

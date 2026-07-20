@@ -1,6 +1,21 @@
 import { supabase } from './supabaseClient.js';
 import { LEGACY_BOOK_SLUGS, bookLink } from './legacySlugs.js';
 import { AMAZON_AFFILIATE_TAG } from './config.js';
+import { isSupported as isSpeechSupported, speakOne, speakSequence, stopSpeaking } from './textToSpeech.js';
+
+function resetListenUI(){
+  document.querySelectorAll('.js-listen-quote-btn.is-playing').forEach((btn) => {
+    btn.classList.remove('is-playing');
+    btn.textContent = '🔊';
+  });
+  document.querySelectorAll('.quotes.is-playing').forEach((el) => el.classList.remove('is-playing'));
+
+  const listenAllBtn = document.querySelector('.js-listen-all-btn');
+  if(listenAllBtn){
+    listenAllBtn.classList.remove('is-playing');
+    listenAllBtn.textContent = '🔊 Listen to All Quotes';
+  }
+}
 
 const RECENTLY_VIEWED_KEY = 'gadzeke-recently-viewed';
 
@@ -115,10 +130,38 @@ async function loadQuotes(){
     <div class="quotes">
       <div class="quote-number">${index + 1}</div>
       <p class="quote-text">${quote.text}</p>
+      ${isSpeechSupported() ? `<button type="button" class="quote-listen-btn js-listen-quote-btn" aria-label="Listen to this quote">🔊</button>` : ''}
     </div>
   `).join('');
 
-  document.querySelector('.js-quotes').innerHTML = quotesHTML;
+  const quotesListEl = document.querySelector('.js-quotes');
+  quotesListEl.innerHTML = quotesHTML;
+
+  quotesListEl.addEventListener('click', (event) => {
+    const button = event.target.closest('.js-listen-quote-btn');
+    if(!button) return;
+
+    const wasPlaying = button.classList.contains('is-playing');
+    resetListenUI();
+    stopSpeaking();
+
+    if(wasPlaying) return;
+
+    const quoteEl = button.closest('.quotes');
+    const text = quoteEl.querySelector('.quote-text').textContent;
+
+    button.classList.add('is-playing');
+    button.textContent = '⏸';
+    quoteEl.classList.add('is-playing');
+
+    speakOne(text, {
+      onEnd: () => {
+        button.classList.remove('is-playing');
+        button.textContent = '🔊';
+        quoteEl.classList.remove('is-playing');
+      },
+    });
+  });
 
   const heroEl = document.querySelector('.js-book-hero');
   if(heroEl && quotes.length > 0){
@@ -141,6 +184,7 @@ async function loadQuotes(){
           <div class="book-hero-actions">
             <button type="button" class="book-hero-btn js-read-quotes">Read Quotes</button>
             <button type="button" class="book-hero-btn-secondary js-show-popular-quote">Show Popular Quote</button>
+            ${isSpeechSupported() ? `<button type="button" class="book-hero-btn-secondary js-listen-all-btn">🔊 Listen to All Quotes</button>` : ''}
             <a class="book-hero-btn-secondary" href="${buildAmazonSearchUrl(book.title, book.author)}" target="_blank" rel="noopener sponsored">Buy on Amazon ↗</a>
           </div>
           <div class="book-hero-quote-reveal js-popular-quote-reveal" hidden>"${sampleQuote.text}"</div>
@@ -156,6 +200,32 @@ async function loadQuotes(){
       const reveal = heroEl.querySelector('.js-popular-quote-reveal');
       reveal.hidden = !reveal.hidden;
       event.target.textContent = reveal.hidden ? 'Show Popular Quote' : 'Hide Quote';
+    });
+
+    const listenAllBtn = heroEl.querySelector('.js-listen-all-btn');
+    listenAllBtn?.addEventListener('click', () => {
+      const wasPlaying = listenAllBtn.classList.contains('is-playing');
+      resetListenUI();
+      stopSpeaking();
+
+      if(wasPlaying) return;
+
+      const quoteEls = [...document.querySelectorAll('.js-quotes .quotes')];
+      const texts = quoteEls.map((el) => el.querySelector('.quote-text').textContent);
+
+      listenAllBtn.classList.add('is-playing');
+      listenAllBtn.textContent = '⏸ Stop Listening';
+
+      speakSequence(texts, {
+        onItemStart: (index) => {
+          quoteEls[index].classList.add('is-playing');
+          quoteEls[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        },
+        onItemEnd: (index) => {
+          quoteEls[index].classList.remove('is-playing');
+        },
+        onDone: resetListenUI,
+      });
     });
   }
 

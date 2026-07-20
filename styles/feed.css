@@ -473,6 +473,16 @@
   font-size: 1.1rem;
 }
 
+.icon-btn.js-listen-btn.is-playing{
+  color: var(--feed-accent);
+  animation: listenPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes listenPulse{
+  0%, 100%{ opacity: 1; }
+  50%{ opacity: 0.5; }
+}
+
 .quote-card-link{
   display: inline-block;
   margin-top: 16px;

@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
+import { isSupported as isSpeechSupported, speakOne, stopSpeaking } from './textToSpeech.js';
 
 const PAGE_SIZE = 12;
 const BOOKMARKS_KEY = 'gadzeke-bookmarks';
@@ -86,6 +87,7 @@ function quoteCardHTML(quote, variant){
           <button type="button" class="icon-btn js-bookmark-btn ${bookmarked ? 'is-bookmarked' : ''}" aria-label="Bookmark this quote">${bookmarked ? '★' : '☆'}</button>
           <button type="button" class="icon-btn js-share-btn" aria-label="Share this quote">⤴</button>
           <button type="button" class="icon-btn js-copy-btn" aria-label="Copy this quote">⧉</button>
+          ${isSpeechSupported() ? `<button type="button" class="icon-btn js-listen-btn" aria-label="Listen to this quote">🔊</button>` : ''}
         </div>
       </div>
 
@@ -186,6 +188,30 @@ quoteGrid.addEventListener('click', async (event) => {
     }else{
       await navigator.clipboard.writeText(url);
     }
+  }
+
+  if(event.target.closest('.js-listen-btn')){
+    const button = event.target.closest('.js-listen-btn');
+    const wasPlaying = button.classList.contains('is-playing');
+
+    document.querySelectorAll('.js-listen-btn.is-playing').forEach((el) => {
+      el.classList.remove('is-playing');
+      el.textContent = '🔊';
+    });
+    stopSpeaking();
+
+    if(wasPlaying) return;
+
+    const text = card.querySelector('.quote-card-text').textContent;
+    button.classList.add('is-playing');
+    button.textContent = '⏸';
+
+    speakOne(text, {
+      onEnd: () => {
+        button.classList.remove('is-playing');
+        button.textContent = '🔊';
+      },
+    });
   }
 });
 

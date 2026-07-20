@@ -4,6 +4,7 @@ import { AMAZON_AFFILIATE_TAG } from './config.js';
 import { isSupported as isSpeechSupported, speakOne, speakSequence, stopSpeaking } from './textToSpeech.js';
 import { isBookmarked, toggleBookmark } from './bookmarks.js';
 import { isBookBookmarked, toggleBookBookmark } from './bookBookmarks.js';
+import { escapeHtml } from './escapeHtml.js';
 
 function resetListenUI(){
   document.querySelectorAll('.js-listen-quote-btn.is-playing').forEach((btn) => {
@@ -69,7 +70,10 @@ function setCanonical(href){
 function setJsonLd(data){
   const script = document.createElement('script');
   script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(data);
+  // Guards against a title/description containing a literal "</script>",
+  // which would otherwise prematurely close this tag and let whatever
+  // follows it be parsed as HTML instead of JSON.
+  script.textContent = JSON.stringify(data).replace(/</g, '\\u003c');
   document.head.appendChild(script);
 }
 
@@ -134,7 +138,7 @@ async function loadQuotes(){
     return `
     <div class="quotes" data-quote-id="${quote.id}">
       <div class="quote-number">${index + 1}</div>
-      <p class="quote-text">${quote.text}</p>
+      <p class="quote-text">${escapeHtml(quote.text)}</p>
       <div class="quote-actions">
         <button type="button" class="quote-listen-btn js-bookmark-quote-btn ${bookmarked ? 'is-bookmarked' : ''}" aria-label="Bookmark this quote">${bookmarked ? '★' : '☆'}</button>
         ${isSpeechSupported() ? `<button type="button" class="quote-listen-btn js-listen-quote-btn" aria-label="Listen to this quote">🔊</button>` : ''}
@@ -190,15 +194,15 @@ async function loadQuotes(){
 
     heroEl.innerHTML = `
       <div class="book-hero">
-        <img class="book-hero-cover" src="${imageUrl}" alt="${book.title} cover">
+        <img class="book-hero-cover" src="${imageUrl}" alt="${escapeHtml(book.title)} cover">
         <div>
-          <h2 class="book-hero-title">${book.title}</h2>
-          ${book.author ? `<div class="book-hero-author">${book.author}</div>` : ''}
-          ${book.description ? `<p class="book-hero-description">${book.description}</p>` : ''}
+          <h2 class="book-hero-title">${escapeHtml(book.title)}</h2>
+          ${book.author ? `<div class="book-hero-author">${escapeHtml(book.author)}</div>` : ''}
+          ${book.description ? `<p class="book-hero-description">${escapeHtml(book.description)}</p>` : ''}
           <div class="book-hero-stats">
             <span class="book-stat">${quotes.length} Quote${quotes.length === 1 ? '' : 's'}</span>
             <span class="book-stat">${readingMinutes} min read</span>
-            ${book.category ? `<span class="book-stat">${book.category}</span>` : ''}
+            ${book.category ? `<span class="book-stat">${escapeHtml(book.category)}</span>` : ''}
           </div>
           <div class="book-hero-actions">
             <button type="button" class="book-hero-btn js-read-quotes">Read Quotes</button>
@@ -207,7 +211,7 @@ async function loadQuotes(){
             <button type="button" class="book-hero-btn-secondary js-save-book-btn ${isBookBookmarked(book.slug) ? 'is-saved' : ''}">${isBookBookmarked(book.slug) ? '✓ Saved' : '🔖 Save Book'}</button>
             <a class="book-hero-btn-secondary" href="${buildAmazonSearchUrl(book.title, book.author)}" target="_blank" rel="noopener sponsored">Buy on Amazon ↗</a>
           </div>
-          <div class="book-hero-quote-reveal js-popular-quote-reveal" hidden>"${sampleQuote.text}"</div>
+          <div class="book-hero-quote-reveal js-popular-quote-reveal" hidden>"${escapeHtml(sampleQuote.text)}"</div>
         </div>
       </div>
     `;
@@ -267,12 +271,12 @@ async function loadQuotes(){
 
     if(recommended && recommended.length > 0){
       recommendedEl.innerHTML = `
-        <h2 class="book-recommended-heading">More on ${book.category}</h2>
+        <h2 class="book-recommended-heading">More on ${escapeHtml(book.category)}</h2>
         <div class="book-mini-grid">
           ${recommended.map((otherBook) => `
             <a class="book-mini-card" href="${bookLink(otherBook.slug)}">
-              <img src="${otherBook.image}" alt="${otherBook.title} cover" loading="lazy">
-              <div class="book-mini-card-title">${otherBook.title}</div>
+              <img src="${otherBook.image}" alt="${escapeHtml(otherBook.title)} cover" loading="lazy">
+              <div class="book-mini-card-title">${escapeHtml(otherBook.title)}</div>
             </a>
           `).join('')}
         </div>

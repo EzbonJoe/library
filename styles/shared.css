@@ -95,6 +95,20 @@ html, body{
   max-width: 60vw;
 }
 
+/* Honeypot: invisible to real visitors (off-screen, unreachable by tab),
+   but a form field bots blindly fill in — if it has a value on submit,
+   the request is silently dropped as spam. */
+.js-subscribe-honeypot{
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
 .footer-subscribe-form button{
   padding: 8px 20px;
   font-size: 1.3rem;

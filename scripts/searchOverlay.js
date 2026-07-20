@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
+import { escapeHtml } from './escapeHtml.js';
 
 const RECENT_KEY = 'gadzeke-recent-searches';
 const POPULAR_BOOKS_LIMIT = 4;
@@ -52,7 +53,7 @@ if(triggerEl && overlayEl){
     const recentHTML = recents.length ? `
       <div class="search-overlay-section-label">Recent Searches</div>
       ${recents.map((term) => `
-        <button type="button" class="search-overlay-item js-search-recent" data-term="${term}">🕘 ${term}</button>
+        <button type="button" class="search-overlay-item js-search-recent" data-term="${escapeHtml(term)}">🕘 ${escapeHtml(term)}</button>
       `).join('')}
     ` : '';
 
@@ -68,7 +69,7 @@ if(triggerEl && overlayEl){
     if(popularEl && books){
       popularEl.innerHTML = books.map((book) => `
         <a class="search-overlay-item" href="${bookLink(book.slug)}">
-          📖 ${book.title}${book.author ? `<span class="search-overlay-item-meta"> — ${book.author}</span>` : ''}
+          📖 ${escapeHtml(book.title)}${book.author ? `<span class="search-overlay-item-meta"> — ${escapeHtml(book.author)}</span>` : ''}
         </a>
       `).join('');
     }
@@ -89,17 +90,18 @@ if(triggerEl && overlayEl){
     ]);
 
     const hasResults = (quotes && quotes.length) || (books && books.length);
+    const safeTerm = escapeHtml(term);
 
     if(!hasResults){
-      resultsEl.innerHTML = `<div class="search-overlay-empty">No matches for "${term}".</div>`;
+      resultsEl.innerHTML = `<div class="search-overlay-empty">No matches for "${safeTerm}".</div>`;
       return;
     }
 
     const bookResultsHTML = (books && books.length) ? `
       <div class="search-overlay-section-label">Books</div>
       ${books.map((book) => `
-        <a class="search-overlay-item js-search-result" data-term="${term}" href="${bookLink(book.slug)}">
-          📖 ${book.title}${book.author ? `<span class="search-overlay-item-meta"> — ${book.author}</span>` : ''}
+        <a class="search-overlay-item js-search-result" data-term="${safeTerm}" href="${bookLink(book.slug)}">
+          📖 ${escapeHtml(book.title)}${book.author ? `<span class="search-overlay-item-meta"> — ${escapeHtml(book.author)}</span>` : ''}
         </a>
       `).join('')}
     ` : '';
@@ -107,8 +109,8 @@ if(triggerEl && overlayEl){
     const quoteResultsHTML = (quotes && quotes.length) ? `
       <div class="search-overlay-section-label">Quotes</div>
       ${quotes.map((quote) => `
-        <a class="search-overlay-item js-search-result" data-term="${term}" href="${bookLink(quote.book.slug)}">
-          ❝ ${quote.text.slice(0, 60)}${quote.text.length > 60 ? '…' : ''}<span class="search-overlay-item-meta"> — ${quote.book.title}</span>
+        <a class="search-overlay-item js-search-result" data-term="${safeTerm}" href="${bookLink(quote.book.slug)}">
+          ❝ ${escapeHtml(quote.text.slice(0, 60))}${quote.text.length > 60 ? '…' : ''}<span class="search-overlay-item-meta"> — ${escapeHtml(quote.book.title)}</span>
         </a>
       `).join('')}
     ` : '';

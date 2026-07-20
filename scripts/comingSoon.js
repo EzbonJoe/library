@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
+import { escapeHtml } from './escapeHtml.js';
 
 async function loadSuggestions(){
   const { data: books, error } = await supabase
@@ -17,10 +18,10 @@ async function loadSuggestions(){
     <a href="${bookLink(book.slug)}">
       <div class="book-container">
         <div class="cover-frame">
-          <img class="image" src="${book.image}" alt="${book.title} cover" loading="lazy">
+          <img class="image" src="${book.image}" alt="${escapeHtml(book.title)} cover" loading="lazy">
         </div>
         <div class="text-container">
-          <div class="book-title">${book.title}</div>
+          <div class="book-title">${escapeHtml(book.title)}</div>
         </div>
       </div>
     </a>

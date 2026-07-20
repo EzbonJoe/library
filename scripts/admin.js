@@ -1,4 +1,5 @@
 import { supabase } from './supabaseClient.js';
+import { escapeHtml } from './escapeHtml.js';
 
 const CATEGORIES = ['Business', 'Psychology', 'Philosophy', 'Money', 'Relationships', 'Leadership', 'Success', 'Habits', 'Spirituality', 'Productivity'];
 
@@ -88,7 +89,7 @@ async function loadBooksDropdown(){
   allBooks = books;
 
   const optionsHTML = books
-    .map((book) => `<option value="${book.id}">${book.title}</option>`)
+    .map((book) => `<option value="${book.id}">${escapeHtml(book.title)}</option>`)
     .join('');
 
   quoteBookSelect.innerHTML = optionsHTML;
@@ -121,8 +122,8 @@ async function loadQuotesManage(){
   recentQuotesEl.innerHTML = quotes
     .map((quote) => `
       <div class="recent-quote" data-id="${quote.id}">
-        <div class="recent-quote-book">${quote.books.title}</div>
-        <textarea class="js-edit-quote-text recent-quote-text">${quote.text}</textarea>
+        <div class="recent-quote-book">${escapeHtml(quote.books.title)}</div>
+        <textarea class="js-edit-quote-text recent-quote-text">${escapeHtml(quote.text)}</textarea>
         <div class="recent-quote-actions">
           <button type="button" class="js-save-quote">Save</button>
           <button type="button" class="js-feature-quote ${quote.featured ? 'is-featured' : ''}">
@@ -200,14 +201,14 @@ async function loadBooksManage(){
       <div class="manage-book-header">
         <img class="manage-book-cover" src="${book.image}" alt="" loading="lazy">
         <div>
-          <div class="manage-book-title">${book.title}</div>
-          <div class="manage-book-slug">${book.slug}</div>
+          <div class="manage-book-title">${escapeHtml(book.title)}</div>
+          <div class="manage-book-slug">${escapeHtml(book.slug)}</div>
         </div>
       </div>
 
       <div class="manage-book-fields">
         <label>Author
-          <input type="text" class="js-edit-author" value="${book.author ?? ''}">
+          <input type="text" class="js-edit-author" value="${escapeHtml(book.author ?? '')}">
         </label>
         <label>Category
           <select class="js-edit-category">${categoryOptionsHTML(book.category)}</select>
@@ -219,7 +220,7 @@ async function loadBooksManage(){
           </select>
         </label>
         <label>Description
-          <textarea class="js-edit-description" rows="2">${book.description ?? ''}</textarea>
+          <textarea class="js-edit-description" rows="2">${escapeHtml(book.description ?? '')}</textarea>
         </label>
         <label>Replace cover (optional)
           <input type="file" accept="image/*" class="js-edit-image-file">
@@ -297,7 +298,7 @@ async function loadSubscribers(){
 
   subscribersListEl.innerHTML = subscribers.map((subscriber) => `
     <div class="subscriber-row" data-id="${subscriber.id}">
-      <span class="subscriber-email">${subscriber.email}</span>
+      <span class="subscriber-email">${escapeHtml(subscriber.email)}</span>
       <button type="button" class="js-delete-subscriber">Remove</button>
     </div>
   `).join('');

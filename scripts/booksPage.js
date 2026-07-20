@@ -1,6 +1,7 @@
 import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
 import { isBookBookmarked, toggleBookBookmark } from './bookBookmarks.js';
+import { escapeHtml } from './escapeHtml.js';
 
 const CATEGORY_ORDER = ['Business', 'Psychology', 'Philosophy', 'Money', 'Relationships', 'Leadership', 'Success', 'Habits', 'Spirituality', 'Productivity'];
 const RECENTLY_VIEWED_KEY = 'gadzeke-recently-viewed';
@@ -46,13 +47,13 @@ function bookCardHTML(book){
   return `
     <a class="book-card" href="${bookLinkFor(book)}">
       <div class="book-card-cover-wrap">
-        <img class="book-card-cover" src="${book.image}" alt="${book.title} cover" loading="lazy">
+        <img class="book-card-cover" src="${book.image}" alt="${escapeHtml(book.title)} cover" loading="lazy">
         ${badges ? `<div class="book-card-badges">${badges}</div>` : ''}
-        <button type="button" class="book-card-save-btn js-save-book-btn ${saved ? 'is-saved' : ''}" data-slug="${book.slug}" aria-label="Save this book">${saved ? '★' : '☆'}</button>
+        <button type="button" class="book-card-save-btn js-save-book-btn ${saved ? 'is-saved' : ''}" data-slug="${escapeHtml(book.slug)}" aria-label="Save this book">${saved ? '★' : '☆'}</button>
         <div class="book-card-cta">Read Quotes →</div>
       </div>
-      <div class="book-card-title">${book.title}</div>
-      ${book.author ? `<div class="book-card-author">${book.author}</div>` : ''}
+      <div class="book-card-title">${escapeHtml(book.title)}</div>
+      ${book.author ? `<div class="book-card-author">${escapeHtml(book.author)}</div>` : ''}
       <div class="book-card-meta">${stats.count} Quote${stats.count === 1 ? '' : 's'}</div>
     </a>
   `;
@@ -90,12 +91,12 @@ function editorialBreakoutHTML(featuredPool, excludeId){
 
   return `
     <section class="editorial-breakout">
-      <img class="editorial-breakout-cover" src="${book.image}" alt="${book.title} cover">
+      <img class="editorial-breakout-cover" src="${book.image}" alt="${escapeHtml(book.title)} cover">
       <div>
         <span class="editorial-breakout-label">Editor's Pick of the Week</span>
-        <h2 class="editorial-breakout-title">${book.title}</h2>
-        ${stats.sampleQuote ? `<p class="editorial-breakout-quote">"${stats.sampleQuote}"</p>` : ''}
-        ${book.description ? `<p class="quote-card-author">${book.description}</p>` : ''}
+        <h2 class="editorial-breakout-title">${escapeHtml(book.title)}</h2>
+        ${stats.sampleQuote ? `<p class="editorial-breakout-quote">"${escapeHtml(stats.sampleQuote)}"</p>` : ''}
+        ${book.description ? `<p class="quote-card-author">${escapeHtml(book.description)}</p>` : ''}
         <a class="featured-cta" href="${bookLinkFor(book)}">Read Quotes →</a>
       </div>
     </section>
@@ -120,9 +121,9 @@ function renderFeaturedHero(featuredPool){
     <div class="featured-overlay"></div>
     <div class="featured-content">
       <span class="featured-label">Featured Book</span>
-      <img class="featured-cover" src="${book.image}" alt="${book.title} cover">
-      <p class="featured-quote">${stats.sampleQuote ? `"${stats.sampleQuote}"` : book.title}</p>
-      <div class="featured-book">${book.title}${book.author ? ` — ${book.author}` : ''}</div>
+      <img class="featured-cover" src="${book.image}" alt="${escapeHtml(book.title)} cover">
+      <p class="featured-quote">${stats.sampleQuote ? `"${escapeHtml(stats.sampleQuote)}"` : escapeHtml(book.title)}</p>
+      <div class="featured-book">${escapeHtml(book.title)}${book.author ? ` — ${escapeHtml(book.author)}` : ''}</div>
       <div class="featured-stat">${stats.count} Quote${stats.count === 1 ? '' : 's'} Available</div>
       <a class="featured-cta" href="${bookLinkFor(book)}">Read Quotes →</a>
     </div>

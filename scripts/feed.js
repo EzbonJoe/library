@@ -2,6 +2,7 @@ import { supabase } from './supabaseClient.js';
 import { bookLink } from './legacySlugs.js';
 import { isSupported as isSpeechSupported, speakOne, stopSpeaking } from './textToSpeech.js';
 import { getBookmarks, isBookmarked, toggleBookmark } from './bookmarks.js';
+import { escapeHtml } from './escapeHtml.js';
 
 const PAGE_SIZE = 12;
 
@@ -45,15 +46,15 @@ function quoteCardHTML(quote, variant){
     <article class="quote-card${sizeClass}" data-quote-id="${quote.id}">
       ${quote.editors_pick ? `<span class="quote-card-editors-badge">✨ Editor's Pick</span>` : ''}
       <div class="quote-card-top">
-        <img class="quote-card-cover" src="${book.image}" alt="${book.title} cover" loading="lazy">
+        <img class="quote-card-cover" src="${book.image}" alt="${escapeHtml(book.title)} cover" loading="lazy">
         <div class="quote-card-book-meta">
-          <div class="quote-card-title">${book.title}</div>
-          <div class="quote-card-author">${book.author ?? ''}</div>
+          <div class="quote-card-title">${escapeHtml(book.title)}</div>
+          <div class="quote-card-author">${escapeHtml(book.author ?? '')}</div>
         </div>
-        ${book.category ? `<span class="quote-card-badge">${book.category}</span>` : ''}
+        ${book.category ? `<span class="quote-card-badge">${escapeHtml(book.category)}</span>` : ''}
       </div>
 
-      <p class="quote-card-text">${quote.text}</p>
+      <p class="quote-card-text">${escapeHtml(quote.text)}</p>
 
       <div class="quote-card-footer">
         <span class="quote-card-meta">${estimateReadingTime(quote.text)}</span>
@@ -79,8 +80,8 @@ function spotlightCardHTML(quote){
       <div class="quote-card-spotlight-overlay"></div>
       <div class="quote-card-spotlight-content">
         ${quote.editors_pick ? `<span class="quote-card-editors-badge">✨ Editor's Pick</span>` : ''}
-        <p class="quote-card-text">${quote.text}</p>
-        <div class="quote-card-spotlight-book">${book.title}${book.author ? ` — ${book.author}` : ''}</div>
+        <p class="quote-card-text">${escapeHtml(quote.text)}</p>
+        <div class="quote-card-spotlight-book">${escapeHtml(book.title)}${book.author ? ` — ${escapeHtml(book.author)}` : ''}</div>
         <div class="quote-card-footer">
           <span class="quote-card-meta">${estimateReadingTime(quote.text)}</span>
           <div class="quote-card-actions">
@@ -378,9 +379,9 @@ async function loadHero(){
     <div class="featured-overlay"></div>
     <div class="featured-content">
       <span class="featured-label">${label}</span>
-      <img class="featured-cover" src="${quote.book.image}" alt="${quote.book.title} cover">
-      <p class="featured-quote">${quote.text}</p>
-      <div class="featured-book">${quote.book.title} — ${quote.book.author ?? ''}</div>
+      <img class="featured-cover" src="${quote.book.image}" alt="${escapeHtml(quote.book.title)} cover">
+      <p class="featured-quote">${escapeHtml(quote.text)}</p>
+      <div class="featured-book">${escapeHtml(quote.book.title)} — ${escapeHtml(quote.book.author ?? '')}</div>
       <a class="featured-cta" href="${bookLink(quote.book.slug)}">Read More From This Book</a>
     </div>
   `;
@@ -400,7 +401,7 @@ async function loadRecentlyAdded(){
   recentlyAddedEl.innerHTML = quotes.map((quote) => `
     <a class="sidebar-item" href="${bookLink(quote.book.slug)}">
       <img src="${quote.book.image}" alt="" loading="lazy">
-      <span>${quote.book.title}</span>
+      <span>${escapeHtml(quote.book.title)}</span>
     </a>
   `).join('');
 }
@@ -419,7 +420,7 @@ async function loadAuthors(){
   const authors = [...new Set(books.map((book) => book.author))].slice(0, 8);
 
   authorsListEl.innerHTML = authors.map((author) => `
-    <button type="button" class="sidebar-item js-author-filter" data-author="${author}">${author}</button>
+    <button type="button" class="sidebar-item js-author-filter" data-author="${escapeHtml(author)}">${escapeHtml(author)}</button>
   `).join('');
 
   authorsListEl.querySelectorAll('.js-author-filter').forEach((button) => {

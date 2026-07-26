@@ -1,0 +1,530 @@
+:root{
+  font-size: 62.5%;
+  font-family: 'Manrope', Arial, sans-serif;
+
+  --header-bg: rgba(250, 250, 248, 0.72);
+  --header-bg-top: rgba(250, 250, 248, 0.32);
+  --header-bg-solid: #FAFAF8;
+  --header-text: #111111;
+  --header-text-muted: #6B7280;
+  --header-accent: #C9A227;
+  --header-border: #EAEAEA;
+}
+
+:root[data-theme="dark"]{
+  --header-bg: rgba(13, 17, 23, 0.72);
+  --header-bg-top: rgba(13, 17, 23, 0.32);
+  --header-bg-solid: #0D1117;
+  --header-text: #F2F2F2;
+  --header-text-muted: #9099A3;
+  --header-accent: #D9B54A;
+  --header-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Scoped to .feed-page (the public-site layout's own wrapper, see
+   app/(site)/layout.tsx) rather than the bare body selector -- this offsets
+   the public site's fixed header, which only that wrapper ever renders. A
+   plain `body` rule was leaking this 90px gap onto /admin and /my-quotes
+   too, which have their own unrelated (non-fixed) layout and don't need it. */
+.feed-page{
+  padding-top: 90px;
+}
+
+body.menu-open,
+body.search-open{
+  overflow: hidden;
+}
+
+.header{
+  background-color: var(--header-bg-top);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  height: 72px;
+  padding: 0 24px 0 6px;
+  border-bottom: 1px solid transparent;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+}
+
+.header--scrolled{
+  background-color: var(--header-bg);
+  border-bottom-color: var(--header-border);
+  height: 64px;
+}
+
+.header--scrolled .brand-logo{
+  transform: scale(0.9);
+}
+
+.header-inner{
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-section nav ul a{
+  text-decoration: none;
+}
+
+.left-section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.left-section nav ul{
+  display: flex;
+  flex-direction: row;
+}
+
+.left-section nav ul li{
+  margin-right: 4px;
+  list-style-type: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--header-text);
+}
+
+.brand-link{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.brand-link:hover{
+  opacity: 0.75;
+}
+
+.brand-logo{
+  height: 32px;
+  width: auto;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.page-name{
+  color: var(--header-text);
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  padding: 2px 8px;
+}
+
+.page-name:hover{
+  opacity: 0.75;
+}
+
+a{
+  text-decoration: none;
+}
+
+.left-section nav ul a{
+  position: relative;
+  padding: 10px;
+}
+
+.left-section nav ul a::after{
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  background-color: var(--header-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.left-section nav ul a:hover::after{
+  transform: scaleX(1);
+}
+
+/* Right section: search / bookmarks icons, theme toggle, CTA, hamburger */
+
+.right-section{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--header-text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.icon-btn-header:hover{
+  background-color: var(--header-border);
+  color: var(--header-text);
+}
+
+.icon-btn-header.has-bookmarks{
+  color: var(--header-accent);
+}
+
+.icon-btn-header.has-bookmarks svg{
+  fill: currentColor;
+}
+
+.account-link{
+  display: inline-flex;
+  align-items: center;
+  max-width: 130px;
+  padding: 8px 12px;
+  margin: 0 2px;
+  border-radius: 999px;
+  color: var(--header-text-muted);
+  font-size: 1.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.account-link:hover{
+  background-color: var(--header-border);
+  color: var(--header-text);
+}
+
+.header-cta{
+  margin-left: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background-color: var(--header-text);
+  color: var(--header-bg-solid);
+  font-size: 1.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-cta:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Mobile menu button (hidden on desktop, shown under the breakpoint below) */
+.icon-container{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-bar{
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--header-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-container.is-open .menu-bar:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+
+.icon-container.is-open .menu-bar:nth-child(2){
+  opacity: 0;
+}
+
+.icon-container.is-open .menu-bar:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu panel: sits off-screen at all times unless opened, so it's
+   inert on desktop without needing a separate display:none toggle. */
+.mobile-menu-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+
+.mobile-menu-backdrop.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drop-down{
+  position: fixed;
+  top: 90px;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 80vw);
+  background-color: var(--header-bg-solid);
+  border-radius: 20px 0 0 20px;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-down.is-open{
+  transform: translateX(0);
+}
+
+.drop-down ul{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drop-down li{
+  list-style: none;
+}
+
+.drop-down a{
+  display: block;
+  padding: 16px 6px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--header-text);
+  border-bottom: 1px solid var(--header-border);
+  transition: opacity 0.2s ease, padding-left 0.2s ease;
+}
+
+.drop-down li:last-child a{
+  border-bottom: none;
+}
+
+.drop-down a:hover{
+  opacity: 0.7;
+  padding-left: 12px;
+}
+
+.drop-down li button{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 6px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--header-text);
+  border: none;
+  border-bottom: 1px solid var(--header-border);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.2s ease, padding-left 0.2s ease;
+}
+
+.drop-down li:last-child button{
+  border-bottom: none;
+}
+
+.drop-down li button:hover{
+  opacity: 0.7;
+  padding-left: 12px;
+}
+
+.drop-down-cta{
+  display: block;
+  margin-top: 24px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background-color: var(--header-text);
+  color: var(--header-bg-solid);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Search overlay (Cmd/Ctrl+K command palette) */
+.search-overlay-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 1099;
+}
+
+.search-overlay-backdrop.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-overlay{
+  position: fixed;
+  top: 12vh;
+  left: 50%;
+  width: min(560px, 92vw);
+  transform: translate(-50%, -12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1100;
+}
+
+.search-overlay.is-open{
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.search-overlay-panel{
+  background-color: var(--header-bg-solid);
+  border: 1px solid var(--header-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.search-overlay-input-row{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--header-border);
+  color: var(--header-text-muted);
+}
+
+.search-overlay-input{
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.6rem;
+  font-family: inherit;
+  color: var(--header-text);
+}
+
+.search-overlay-esc{
+  font-size: 1.1rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--header-border);
+  color: var(--header-text-muted);
+  font-family: inherit;
+}
+
+.search-overlay-results{
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.search-overlay-section-label{
+  padding: 10px 12px 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--header-text-muted);
+}
+
+.search-overlay-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--header-text);
+  font-size: 1.4rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.search-overlay-item:hover,
+.search-overlay-item:focus-visible{
+  background-color: var(--header-border);
+  outline: none;
+}
+
+.search-overlay-item-meta{
+  color: var(--header-text-muted);
+  font-size: 1.2rem;
+}
+
+.search-overlay-empty{
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--header-text-muted);
+  font-size: 1.3rem;
+}
+
+@media only screen and (max-width:1024px){
+  .nav-secondary{
+    display: none;
+  }
+}
+
+@media only screen and (max-width:768px){
+  .left-section nav{
+    display: none;
+  }
+
+  .page-name{
+    font-size: 1.9rem;
+  }
+
+  .brand-logo{
+    height: 28px;
+  }
+
+  .icon-container{
+    display: flex;
+  }
+
+  .header-cta{
+    display: none;
+  }
+
+  /* Moved into the drop-down menu on mobile instead — the header row is
+     too tight for search + bookmarks + account link + toggle + hamburger
+     all at once at this width. */
+  .site-theme-toggle{
+    display: none;
+  }
+
+  .drop-down{
+    top: 78px;
+  }
+
+  .search-overlay{
+    top: 8vh;
+  }
+}

@@ -1,0 +1,153 @@
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+:root{
+  font-size: 62.5%;
+  font-family: 'Manrope', Arial, sans-serif;
+  --site-background-color: aliceblue;
+  --site-color: black;
+  --button-background-color:pink;
+}
+
+.site-footer{
+  margin-top: 64px;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--color-text-muted, #6b6055);
+  border-top: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+}
+
+.footer-curator{
+  font-weight: 600;
+  color: var(--color-text, #17140f);
+  margin-bottom: 4px;
+}
+
+.footer-links{
+  margin-top: 8px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a{
+  color: inherit;
+  text-decoration: underline;
+}
+
+.footer-social{
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.footer-social a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.footer-social a:hover{
+  background-color: var(--color-accent, #131720);
+  color: var(--color-accent-contrast, white);
+  transform: translateY(-2px);
+}
+
+.footer-subscribe{
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+}
+
+.footer-subscribe-text{
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text, inherit);
+}
+
+.footer-subscribe-form{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-subscribe-form input{
+  padding: 8px 14px;
+  font-size: 1.3rem;
+  font-family: inherit;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.2));
+  border-radius: 999px;
+  background-color: var(--color-surface, white);
+  color: var(--color-text, inherit);
+  width: 220px;
+  max-width: 60vw;
+}
+
+/* Honeypot: invisible to real visitors (off-screen, unreachable by tab),
+   but a form field bots blindly fill in — if it has a value on submit,
+   the request is silently dropped as spam. */
+.js-subscribe-honeypot{
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+.footer-subscribe-form button{
+  padding: 8px 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--color-accent, #131720);
+  color: var(--color-accent-contrast, white);
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.footer-subscribe-form button:hover{
+  filter: brightness(1.1);
+}
+
+.footer-subscribe-status{
+  margin: 10px 0 0;
+  font-size: 1.2rem;
+}
+
+.footer-subscribe-status.is-error{
+  color: #c0392b;
+}
+
+@media only screen and (max-width:412px){
+  .page-heading h3{
+    margin: 0;
+    font-size: 2.6rem;
+  }
+
+  .book-title{
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,227 @@
+@import "tailwindcss";
+@import "../styles/legacy/header.css";
+@import "../styles/legacy/shared.css";
+@import "../styles/legacy/feed.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Shared icon-button tooltip (components/Tooltip.tsx) — lives here rather
+   than in any one page's stylesheet since it's used across the Tailwind
+   public pages, admin-v2.css, and dashboard.css alike. Sized in px, not
+   rem, to sidestep the site-wide 10px root font-size (see the note further
+   down in this file) entirely rather than needing to account for it. */
+.gz-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.gz-tooltip-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #111111;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 5px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 1000;
+}
+
+.gz-tooltip-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #111111;
+}
+
+.gz-tooltip:hover .gz-tooltip-bubble,
+.gz-tooltip:focus-within .gz-tooltip-bubble {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+:root[data-theme="dark"] .gz-tooltip-bubble {
+  background: #F2F2F2;
+  color: #111111;
+}
+
+:root[data-theme="dark"] .gz-tooltip-bubble::after {
+  border-top-color: #F2F2F2;
+}
+
+/* For triggers sitting near the top edge of an overflow:hidden ancestor
+   (e.g. a card's rounded cover-image wrapper) — the default upward bubble
+   would render outside that clipped area and never actually show. */
+.gz-tooltip-bubble--below {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.gz-tooltip-bubble--below::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: #111111;
+}
+
+:root[data-theme="dark"] .gz-tooltip-bubble--below::after {
+  border-bottom-color: #F2F2F2;
+}
+
+.gz-tooltip:hover .gz-tooltip-bubble--below,
+.gz-tooltip:focus-within .gz-tooltip-bubble--below {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* For triggers sitting close to the right edge of a clipped ancestor (e.g.
+   a top-right overlay button on a book cover) — the default center-aligned
+   bubble is wider than the trigger itself, so its right half spills past
+   that edge and gets cut off. Right-aligning it to the trigger instead
+   keeps it growing leftward, fully inside the clipped area. */
+.gz-tooltip-bubble--align-end {
+  left: auto;
+  right: 0;
+  transform: translateY(4px);
+}
+
+.gz-tooltip-bubble--align-end::after {
+  left: auto;
+  right: 14px;
+  transform: none;
+}
+
+.gz-tooltip:hover .gz-tooltip-bubble--align-end,
+.gz-tooltip:focus-within .gz-tooltip-bubble--align-end {
+  transform: translateY(0);
+}
+
+/* Combined with --below (e.g. a top-right button on a clipped cover) — needs
+   its own rule since two separate classes of equal specificity would
+   otherwise fight over `transform` based on source order alone. */
+.gz-tooltip-bubble--below.gz-tooltip-bubble--align-end {
+  transform: translateY(-4px);
+}
+
+.gz-tooltip:hover .gz-tooltip-bubble--below.gz-tooltip-bubble--align-end,
+.gz-tooltip:focus-within .gz-tooltip-bubble--below.gz-tooltip-bubble--align-end {
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  /* Hover has no meaning on touch, and a stray focus-triggered bubble can
+     get stuck open after a tap — simplest to just not show it there. */
+  .gz-tooltip-bubble {
+    display: none;
+  }
+}
+
+/* styles/legacy/header.css sets :root font-size to 62.5% (10px) — every
+   legacy-ported page's own CSS was authored in rem assuming that 10px base
+   (e.g. "1.4rem" meaning 14px), so it renders correctly. Tailwind's default
+   text-size scale is also in rem, which is always relative to the true
+   document root regardless of nesting (unlike em, no ancestor can rescale
+   it) — so on pages styled with plain Tailwind classes, every text-* utility
+   silently rendered at 62.5% of its intended size. Overriding the scale in
+   px sidesteps the root-dependency entirely; line-heights are already
+   unitless ratios (relative to each element's own resolved font-size), so
+   they don't need the same fix. Safe to apply globally: no legacy-ported
+   page uses Tailwind's text-* utilities for its own type. */
+@theme {
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  --text-6xl: 60px;
+  --text-7xl: 72px;
+  --text-8xl: 96px;
+  --text-9xl: 128px;
+}
+
+/* Same variable names as the old styles/tokens.css, so every copied legacy
+   stylesheet (about.css, contact.css, legal.css, bookstyles.css,
+   books-page.css, body.css) keeps working unmodified — but with the
+   cinematic gold/navy palette from DESIGN-VISION.md's feed redesign as the
+   values, carried forward site-wide rather than the older navy/aliceblue
+   scheme those files originally pointed at. */
+:root {
+  --font-display: 'Clash Display', 'Manrope', sans-serif;
+  --font-body: 'Manrope', Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --color-bg: #FAFAF8;
+  --color-surface: #ffffff;
+  --color-text: #111111;
+  --color-text-muted: #6B7280;
+  --color-border: rgba(17, 17, 17, 0.08);
+  --color-accent: #C9A227;
+  --color-accent-contrast: #111111;
+  --shadow-card: 0 2px 10px rgba(17, 17, 17, 0.06), 0 12px 28px rgba(17, 17, 17, 0.05);
+
+  /* Legacy names darkmode.js used to set inline on <html> — the ported
+     ThemeToggle component sets these the same way, this is just the
+     light-mode default so first paint (before hydration) is correct. */
+  --site-background-color: aliceblue;
+  --site-color: black;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0D1117;
+  --color-surface: #161B22;
+  --color-text: #F2F2F2;
+  --color-text-muted: #9099A3;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #D9B54A;
+  --color-accent-contrast: #0D1117;
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.35), 0 12px 28px rgba(0, 0, 0, 0.3);
+
+  --site-background-color: #131720;
+  --site-color: white;
+}
+
+/* Tailwind utility tokens — distinct names from the plain vars above so
+   Tailwind's generated `:root { --color-canvas: ... }` never shadows the
+   source variable it points at (that would resolve to itself and break). */
+@theme inline {
+  --color-canvas: var(--color-bg);
+  --color-panel: var(--color-surface);
+  --color-ink: var(--color-text);
+  --color-ink-muted: var(--color-text-muted);
+  --color-line: var(--color-border);
+  --color-brand: var(--color-accent);
+  --color-brand-ink: var(--color-accent-contrast);
+  --font-display-ui: var(--font-display);
+  --font-body-ui: var(--font-body);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}

@@ -52,8 +52,30 @@ const subscribersListEl = document.querySelector('.js-subscribers-list');
 const copySubscribersButton = document.querySelector('.js-copy-subscribers');
 const copySubscribersStatus = document.querySelector('.js-copy-subscribers-status');
 
+const adminTabs = document.querySelectorAll('.js-admin-tab');
+const adminPanels = document.querySelectorAll('.js-admin-panel');
+const ADMIN_TAB_STORAGE_KEY = 'gadzeke-admin-tab';
+
 let allBooks = [];
 let allSubscriberEmails = [];
+
+function showAdminTab(tab){
+  adminTabs.forEach((button) => {
+    button.classList.toggle('is-active', button.dataset.tab === tab);
+  });
+  adminPanels.forEach((panel) => {
+    panel.hidden = panel.dataset.tab !== tab;
+  });
+  localStorage.setItem(ADMIN_TAB_STORAGE_KEY, tab);
+}
+
+adminTabs.forEach((button) => {
+  button.addEventListener('click', () => showAdminTab(button.dataset.tab));
+});
+
+const validTabs = new Set(Array.from(adminTabs, (button) => button.dataset.tab));
+const storedTab = localStorage.getItem(ADMIN_TAB_STORAGE_KEY);
+showAdminTab(validTabs.has(storedTab) ? storedTab : adminTabs[0]?.dataset.tab);
 
 function showLoggedIn(){
   loginSection.hidden = true;

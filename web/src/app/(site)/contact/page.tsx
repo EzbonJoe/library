@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main>
-      <h1>Contact GadZeke</h1>
+      <h1 className="page-title">Contact GadZeke</h1>
       <h2>Got a quote worth sharing, a question, or just want to say hello?</h2>
       <div className="contact-container">
         <Image src="/icons/gmail-icon.svg" className="gmail-icon" alt="Gmail icon" width={50} height={50} />

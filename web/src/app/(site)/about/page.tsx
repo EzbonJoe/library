@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <h1>About GadZeke</h1>
+      <h1 className="page-title">About GadZeke</h1>
 
       <div className="image-container">
         <Image

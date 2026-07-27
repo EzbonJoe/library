@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <main className="legal-main">
-      <h1>Terms &amp; Conditions</h1>
+      <h1 className="page-title">Terms &amp; Conditions</h1>
       <p className="legal-updated">Last updated July 2026</p>
 
       <p>

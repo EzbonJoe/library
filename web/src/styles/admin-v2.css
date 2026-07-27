@@ -4,12 +4,12 @@
    site-wide [data-theme="dark"] attribute already set by ThemeToggle. */
 
 .admin-v2 {
-  --av-bg: #FAFAF8;
-  --av-sidebar: #ffffff;
-  --av-card: #ffffff;
-  --av-text: #111111;
-  --av-text-muted: #6B7280;
-  --av-accent: #C9A227;
+  --av-bg: var(--brand-canvas);
+  --av-sidebar: var(--brand-surface);
+  --av-card: var(--brand-surface);
+  --av-text: var(--brand-ink);
+  --av-text-muted: var(--brand-ink-muted);
+  --av-accent: var(--brand-accent);
   --av-border: #ECECEC;
   --av-danger: #DC2626;
   --av-shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 1px 3px rgba(17, 17, 17, 0.06);
@@ -33,12 +33,12 @@
 }
 
 :root[data-theme="dark"] .admin-v2 {
-  --av-bg: #0D1117;
-  --av-sidebar: #161B22;
-  --av-card: #161B22;
-  --av-text: #F2F2F2;
-  --av-text-muted: #9099A3;
-  --av-accent: #D9B54A;
+  --av-bg: var(--brand-canvas);
+  --av-sidebar: var(--brand-surface);
+  --av-card: var(--brand-surface);
+  --av-text: var(--brand-ink);
+  --av-text-muted: var(--brand-ink-muted);
+  --av-accent: var(--brand-accent);
   --av-border: rgba(255, 255, 255, 0.08);
   --av-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.35);
   --av-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);

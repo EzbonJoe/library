@@ -195,7 +195,7 @@ export default function BookQuotesSection({ book, quotes }: { book: Book; quotes
               <div className="quote-number">{index + 1}</div>
               <p className="quote-text">{quote.text}</p>
               <div className="quote-actions">
-                <Tooltip label={bookmarkedNow ? "Remove bookmark" : "Bookmark this quote"}>
+                <Tooltip label={bookmarkedNow ? "Remove bookmark" : "Bookmark this quote"} align="end">
                   <button
                     type="button"
                     className={`quote-listen-btn ${bookmarkedNow ? "is-bookmarked" : ""}`}
@@ -206,7 +206,7 @@ export default function BookQuotesSection({ book, quotes }: { book: Book; quotes
                   </button>
                 </Tooltip>
                 {speechSupported && (
-                  <Tooltip label={isPlaying ? "Stop listening" : "Listen to this quote"}>
+                  <Tooltip label={isPlaying ? "Stop listening" : "Listen to this quote"} align="end">
                     <button
                       type="button"
                       className={`quote-listen-btn ${isPlaying ? "is-playing" : ""}`}

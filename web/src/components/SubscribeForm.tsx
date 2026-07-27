@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SubscribeForm() {
+export default function SubscribeForm({
+  formClassName = "footer-subscribe-form",
+  statusClassName = "footer-subscribe-status",
+}: {
+  formClassName?: string;
+  statusClassName?: string;
+}) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState("");
@@ -43,7 +49,7 @@ export default function SubscribeForm() {
 
   return (
     <>
-      <form className="js-subscribe-form footer-subscribe-form" onSubmit={handleSubmit}>
+      <form className={`js-subscribe-form ${formClassName}`} onSubmit={handleSubmit}>
         <input
           type="email"
           className="js-subscribe-email"
@@ -64,7 +70,7 @@ export default function SubscribeForm() {
         />
         <button type="submit">Subscribe</button>
       </form>
-      <p className={`js-subscribe-status footer-subscribe-status ${isError ? "is-error" : ""}`}>{status}</p>
+      <p className={`js-subscribe-status ${statusClassName} ${isError ? "is-error" : ""}`}>{status}</p>
     </>
   );
 }

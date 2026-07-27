@@ -5,12 +5,12 @@
    brief asked for the same premium visual language site-wide. */
 
 .user-dashboard {
-  --ud-bg: #FAFAF8;
-  --ud-sidebar: #ffffff;
-  --ud-card: #ffffff;
-  --ud-text: #111111;
-  --ud-text-muted: #6B7280;
-  --ud-accent: #C9A227;
+  --ud-bg: var(--brand-canvas);
+  --ud-sidebar: var(--brand-surface);
+  --ud-card: var(--brand-surface);
+  --ud-text: var(--brand-ink);
+  --ud-text-muted: var(--brand-ink-muted);
+  --ud-accent: var(--brand-accent);
   --ud-accent-soft: rgba(201, 162, 39, 0.12);
   --ud-border: #ECECEC;
   --ud-danger: #DC2626;
@@ -36,12 +36,12 @@
 }
 
 :root[data-theme="dark"] .user-dashboard {
-  --ud-bg: #0D1117;
-  --ud-sidebar: #161B22;
-  --ud-card: #161B22;
-  --ud-text: #F2F2F2;
-  --ud-text-muted: #9099A3;
-  --ud-accent: #D9B54A;
+  --ud-bg: var(--brand-canvas);
+  --ud-sidebar: var(--brand-surface);
+  --ud-card: var(--brand-surface);
+  --ud-text: var(--brand-ink);
+  --ud-text-muted: var(--brand-ink-muted);
+  --ud-accent: var(--brand-accent);
   --ud-accent-soft: rgba(217, 181, 74, 0.14);
   --ud-border: rgba(255, 255, 255, 0.08);
   --ud-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.35);

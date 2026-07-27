@@ -11,10 +11,13 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gadzeke.com"),
-  title: {
-    default: "GadZeke — Words That Change Perspectives",
-    template: "%s — GadZeke",
-  },
+  // No template: every page's own title already includes "GadZeke" in its
+  // own format ("About GadZeke", "X | GadZeke", "X — GadZeke") — a "%s —
+  // GadZeke" template here would double it up on every single page, not
+  // just this one. A plain string still acts as the fallback for any route
+  // that doesn't set its own title (same as `default` would, without
+  // TypeScript requiring a `template` alongside it).
+  title: "GadZeke — Words That Change Perspectives",
   description:
     "Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books — curated by GadZeke, not AI-generated.",
   openGraph: {

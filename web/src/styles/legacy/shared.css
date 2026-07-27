@@ -9,12 +9,58 @@ html, body{
   overflow-x: hidden;
 }
 
+/* Every (site) page's <main> is a flex child of the shared layout's
+   .feed-page wrapper (display: flex; flex-direction: column), and flex
+   items default to min-width: auto -- refusing to shrink below their
+   content's intrinsic width. feed.css's own .feed-main already sets this
+   explicitly, but plain <main> (About, Contact, Privacy, Terms, Coming
+   Soon, book detail, 404) never did -- wide unshrinkable content anywhere
+   on the page (e.g. Coming Soon's minmax(210px, 1fr) suggestions grid)
+   would force the whole page wider than the viewport instead of wrapping,
+   and since body has overflow-x: hidden, the excess doesn't scroll into
+   view, it just clips content silently. */
+main{
+  /* .feed-page is flex-direction: column, so cross-axis (width) sizing
+     comes from align-items: stretch, not flex-shrink -- min-width: 0 alone
+     isn't enough here (that trick is for the *main* axis of a row-direction
+     flex container). Wide content can still force this box past the
+     stretched width unless width is pinned explicitly. */
+  width: 100%;
+  min-width: 0;
+}
+
 :root{
   font-size: 62.5%;
   font-family: 'Manrope', Arial, sans-serif;
   --site-background-color: aliceblue;
   --site-color: black;
   --button-background-color:pink;
+}
+
+/* Opt-in page-title style for the legacy-CSS pages whose own stylesheets
+   (about.css, contact.css, legal.css, body.css) never styled h1 at all --
+   the actual page title was rendering as plain unstyled text (Tailwind's
+   preflight reset strips default browser heading sizing/weight) while a
+   section heading further down the same page (about.css's h3
+   "Foundation") had the full prominent treatment instead, backwards from
+   the intended hierarchy. A class rather than a bare h1 selector so it
+   can't bleed into pages whose h1 is already styled (.hero-heading,
+   .book-heading, etc. don't set text-align/color themselves, relying on
+   inheritance -- a global h1 rule would have silently re-centered and
+   re-colored those too). */
+.page-title{
+  text-align: center;
+  font-family: var(--font-display, Georgia, serif);
+  font-weight: bold;
+  font-size: 6rem;
+  color: var(--site-color);
+  margin: 32px 0 24px;
+}
+
+@media only screen and (max-width:768px){
+  .page-title{
+    font-size: 4rem;
+  }
 }
 
 .site-footer{

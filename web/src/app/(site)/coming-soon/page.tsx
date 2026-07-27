@@ -31,7 +31,7 @@ export default async function ComingSoonPage() {
 
   return (
     <main>
-      <h1>Coming Soon</h1>
+      <h1 className="page-title">Coming Soon</h1>
       <p className="coming-soon-text">We haven&apos;t added quotes from this book yet — check back soon.</p>
 
       {suggestions.length > 0 && (

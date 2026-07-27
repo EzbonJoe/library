@@ -1,0 +1,33 @@
+/* Single source of truth for the values that GadZeke public site
+   (feed.css/header.css), admin dashboard (admin-v2.css), and user dashboard
+   (dashboard.css) each independently re-declared with the same exact hex
+   values -- the gold accent and base canvas/surface/text colors. Loaded
+   once via globals.css (imported by the root layout, so it is live on
+   every route including /admin and /my-quotes), then each design system
+   own prefixed tokens (feed, header, av, ud) reference these instead of
+   hardcoding a separate copy. A future palette tweak now happens once here
+   instead of needing the same edit repeated in four places.
+
+   Deliberately limited to values that were already byte-identical across
+   all four systems -- border colors, shadows, and border-radius scales
+   differ slightly between them by design (each system has its own
+   tuning), so those stay local rather than being forced into a false
+   unification. */
+
+:root {
+  --brand-canvas: #FAFAF8;
+  --brand-surface: #FFFFFF;
+  --brand-ink: #111111;
+  --brand-ink-muted: #6B7280;
+  --brand-accent: #C9A227;
+  --brand-accent-contrast: #111111;
+}
+
+:root[data-theme="dark"] {
+  --brand-canvas: #0D1117;
+  --brand-surface: #161B22;
+  --brand-ink: #F2F2F2;
+  --brand-ink-muted: #9099A3;
+  --brand-accent: #D9B54A;
+  --brand-accent-contrast: #0D1117;
+}

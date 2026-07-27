@@ -4,13 +4,13 @@
   --feed-font-display: 'Clash Display', 'Manrope', sans-serif;
   --feed-font-body: 'Manrope', sans-serif;
 
-  --feed-bg: #FAFAF8;
-  --feed-surface: #ffffff;
-  --feed-text: #111111;
-  --feed-text-muted: #6B7280;
+  --feed-bg: var(--brand-canvas);
+  --feed-surface: var(--brand-surface);
+  --feed-text: var(--brand-ink);
+  --feed-text-muted: var(--brand-ink-muted);
   --feed-border: rgba(17, 17, 17, 0.08);
-  --feed-accent: #C9A227;
-  --feed-accent-contrast: #111111;
+  --feed-accent: var(--brand-accent);
+  --feed-accent-contrast: var(--brand-accent-contrast);
   --feed-shadow: 0 2px 10px rgba(17, 17, 17, 0.06), 0 12px 28px rgba(17, 17, 17, 0.05);
   --feed-shadow-hover: 0 8px 20px rgba(17, 17, 17, 0.08), 0 20px 40px rgba(17, 17, 17, 0.08);
 
@@ -20,19 +20,27 @@
 }
 
 :root[data-theme="dark"] .feed-page{
-  --feed-bg: #0D1117;
-  --feed-surface: #161B22;
-  --feed-text: #F2F2F2;
-  --feed-text-muted: #9099A3;
+  --feed-bg: var(--brand-canvas);
+  --feed-surface: var(--brand-surface);
+  --feed-text: var(--brand-ink);
+  --feed-text-muted: var(--brand-ink-muted);
   --feed-border: rgba(255, 255, 255, 0.08);
-  --feed-accent: #D9B54A;
-  --feed-accent-contrast: #0D1117;
+  --feed-accent: var(--brand-accent);
+  --feed-accent-contrast: var(--brand-accent-contrast);
   --feed-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 12px 28px rgba(0, 0, 0, 0.3);
   --feed-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.4), 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .feed-main{
   max-width: 1280px;
+  width: 100%;
+  /* .feed-page is a flex column, and flex items default to min-width: auto
+     -- refusing to shrink below their content's intrinsic width. Without
+     this, wide content further down the tree (e.g. .book-row's horizontal
+     scroll strip) forces this whole element wider than the viewport
+     instead of being clipped by its own overflow-x: auto, dragging the
+     entire page into horizontal scroll on narrow screens. */
+  min-width: 0;
   margin: 0 auto;
   padding: 0 32px 96px;
 }
@@ -269,6 +277,165 @@
   transform: translateY(-2px);
 }
 
+/* "Build your own library" — markets the account/dashboard to logged-out
+   visitors, who otherwise have no way to discover it exists. */
+.build-library{
+  margin-top: 64px;
+  padding: 56px 32px;
+  border-radius: 28px;
+  background-color: var(--feed-surface);
+  border: 1px solid var(--feed-border);
+  text-align: center;
+}
+
+.build-library-heading{
+  font-family: var(--feed-font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 3.6vw, 3rem);
+  margin: 0;
+}
+
+.build-library-subtext{
+  max-width: 560px;
+  margin: 16px auto 0;
+  color: var(--feed-text-muted);
+  font-size: 1.5rem;
+}
+
+.build-library-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.build-library-card{
+  padding: 24px;
+  border-radius: 16px;
+  background-color: var(--feed-bg);
+  border: 1px solid var(--feed-border);
+}
+
+.build-library-card svg{
+  width: 22px;
+  height: 22px;
+  color: var(--feed-accent);
+  stroke-width: 1.85;
+}
+
+.build-library-card-title{
+  font-family: var(--feed-font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-top: 14px;
+}
+
+.build-library-card p{
+  margin: 6px 0 0;
+  font-size: 1.3rem;
+  color: var(--feed-text-muted);
+  line-height: 1.5;
+}
+
+.build-library-cta{
+  display: inline-block;
+  margin-top: 36px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background-color: var(--feed-accent);
+  color: var(--feed-accent-contrast);
+  font-weight: 700;
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+.build-library-cta:hover{
+  transform: translateY(-2px);
+}
+
+/* Homepage newsletter — promoted out of footer-only, reframed around the
+   payoff (one good quote) rather than the mechanism (an email list). */
+.home-newsletter{
+  margin-top: 80px;
+  padding: 56px 32px;
+  border-radius: 28px;
+  background-color: var(--feed-text);
+  color: var(--feed-bg);
+  text-align: center;
+}
+
+.home-newsletter-heading{
+  font-family: var(--feed-font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  margin: 0;
+}
+
+.home-newsletter-subtext{
+  margin: 12px 0 0;
+  opacity: 0.7;
+  font-size: 1.4rem;
+}
+
+.home-newsletter-form{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 32px auto 0;
+  max-width: 440px;
+}
+
+.home-newsletter-form input{
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 20px;
+  font-size: 1.4rem;
+  font-family: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--feed-bg);
+}
+
+.home-newsletter-form input::placeholder{
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.home-newsletter-form input:focus{
+  outline: none;
+  border-color: var(--feed-accent);
+}
+
+.home-newsletter-form button{
+  padding: 14px 28px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--feed-accent);
+  color: var(--feed-accent-contrast);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.home-newsletter-form button:hover{
+  transform: translateY(-2px);
+}
+
+.home-newsletter-status{
+  margin: 14px 0 0;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.home-newsletter-status.is-error{
+  color: #ff9a8b;
+}
+
 /* Layout: feed + sidebar */
 .feed-layout{
   display: grid;
@@ -276,6 +443,18 @@
   gap: 48px;
   margin-top: 64px;
   align-items: start;
+}
+
+.feed-column,
+.feed-sidebar{
+  /* Grid items default to min-width: auto, same trap as flex items (see
+     .feed-main above) -- without this, wide content further down (the
+     bookmark toggle's label, a long quote) forces this column past its
+     grid track's width instead of wrapping/shrinking to fit, and since
+     body has overflow-x: hidden, the excess doesn't scroll into view, it
+     just gets silently clipped -- quote text and buttons visibly cut off
+     mid-word on narrow screens. */
+  min-width: 0;
 }
 
 .feed-toolbar{
@@ -475,6 +654,13 @@
   color: var(--feed-text-muted);
   border: 1px solid var(--feed-border);
   white-space: nowrap;
+  /* Without this, the badge competes with the book title for flex-shrink
+     space and loses -- its text can't wrap (nowrap), so on a narrow card
+     it just spills past its own shrunk pill background instead of staying
+     legible. .quote-card-cover gets the same protection; .quote-card-title
+     already handles the resulting space pressure gracefully via its own
+     min-width: 0 + ellipsis truncation. */
+  flex-shrink: 0;
 }
 
 .quote-card-text{
@@ -697,5 +883,12 @@
 
   .featured-content{
     padding: 40px 20px;
+  }
+
+  /* 34px falls under the ~44px minimum touch-target guideline -- most
+     worth fixing exactly here, where taps are least precise. */
+  .icon-btn{
+    width: 40px;
+    height: 40px;
   }
 }

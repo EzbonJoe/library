@@ -10,6 +10,8 @@ import { getBookmarks } from "@/lib/bookmarks";
 import { BOOKMARK_TOGGLE_CLICK_EVENT } from "@/lib/events";
 import { interleaveByBook } from "@/lib/interleaveByBook";
 import { CATEGORIES } from "@/lib/categories";
+import BuildLibrarySection from "./BuildLibrarySection";
+import SubscribeForm from "./SubscribeForm";
 import QuoteCard, { type FeedQuote } from "./QuoteCard";
 
 // How many cards get appended to the visible feed per scroll trigger.
@@ -293,6 +295,8 @@ export default function HomeFeed({
         </section>
       )}
 
+      {!isFilterActive && <BuildLibrarySection />}
+
       <div className="feed-layout">
         <div className="feed-column">
           <div className="feed-toolbar">
@@ -366,6 +370,12 @@ export default function HomeFeed({
           </div>
         </aside>
       </div>
+
+      <section className="home-newsletter">
+        <h2 className="home-newsletter-heading">One quote a week worth remembering.</h2>
+        <p className="home-newsletter-subtext">No spam, no noise — just the line that stuck with us this week.</p>
+        <SubscribeForm formClassName="home-newsletter-form" statusClassName="home-newsletter-status" />
+      </section>
     </main>
   );
 }

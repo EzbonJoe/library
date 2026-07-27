@@ -11,7 +11,7 @@ export function DesktopLogoutButton() {
 
   return (
     <Tooltip label="Log out" position="below">
-      <button type="button" className="icon-btn-header" aria-label="Log out" onClick={handleLogout}>
+      <button type="button" className="icon-btn-header desktop-logout-btn" aria-label="Log out" onClick={handleLogout}>
         <LogOut size={18} />
       </button>
     </Tooltip>

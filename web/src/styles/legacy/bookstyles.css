@@ -303,4 +303,11 @@ main{
   .js-quotes{
     column-count: 1;
   }
+
+  /* 30px falls under the ~44px minimum touch-target guideline -- most
+     worth fixing exactly here, where taps are least precise. */
+  .quote-listen-btn{
+    width: 40px;
+    height: 40px;
+  }
 }

@@ -14,21 +14,22 @@ const CATEGORIES = [
   "Productivity",
 ];
 
+const title = "Quotes by Category: Business, Money, Psychology & More | GadZeke";
 const description =
-  "Browse GadZeke's hand-picked book quotes by category — Business, Psychology, Philosophy, Money, and more.";
+  "Hand-picked book quotes sorted by category — Business, Psychology, Philosophy, Money, Leadership, and more. Curated by GadZeke, not AI-generated.";
 
 export const metadata: Metadata = {
-  title: "Browse by Category | GadZeke",
+  title,
   description,
   alternates: { canonical: "/categories" },
-  openGraph: { title: "Browse by Category | GadZeke", description, url: "/categories" },
+  openGraph: { title, description, url: "/categories" },
 };
 
 export default function CategoriesPage() {
   return (
     <main className="feed-main">
       <section className="hero">
-        <h1 className="hero-heading">Browse by Category</h1>
+        <h1 className="hero-heading">Book Quotes by Category</h1>
         <p className="hero-subtext">Every quote on GadZeke, sorted by the theme it speaks to.</p>
       </section>
 

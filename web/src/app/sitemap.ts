@@ -17,19 +17,30 @@ const STATIC_PAGES: { path: string; priority: number }[] = [
 // route (Phase 2), so unlike the old migration/generate-sitemap.mjs there's
 // no separate legacy-slug branch to account for here.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/books?select=slug,status&order=id`,
-    {
+  const [booksResponse, quotesResponse] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/books?select=slug,status&order=id`, {
       headers: {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
       },
       next: { revalidate: 3600 },
-    },
-  );
+    }),
+    // PostgREST embedded-resource filter: only quotes whose book is published.
+    fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/quotes?select=position,books!inner(slug,status)&books.status=eq.published`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+        next: { revalidate: 3600 },
+      },
+    ),
+  ]);
 
-  const books: { slug: string; status: string }[] = response.ok
-    ? await response.json()
+  const books: { slug: string; status: string }[] = booksResponse.ok ? await booksResponse.json() : [];
+  const quotes: { position: number; books: { slug: string; status: string } }[] = quotesResponse.ok
+    ? await quotesResponse.json()
     : [];
 
   const lastModified = new Date();
@@ -42,11 +53,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
+  const quoteEntries: MetadataRoute.Sitemap = quotes.map((quote) => ({
+    url: `${SITE_URL}/book/${encodeURIComponent(quote.books.slug)}/${quote.position}`,
+    lastModified,
+    priority: 0.5,
+  }));
+
   const staticEntries: MetadataRoute.Sitemap = STATIC_PAGES.map((page) => ({
     url: `${SITE_URL}${page.path}`,
     lastModified,
     priority: page.priority,
   }));
 
-  return [...staticEntries, ...bookEntries];
+  return [...staticEntries, ...bookEntries, ...quoteEntries];
 }

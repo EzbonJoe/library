@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/public";
 
-const description = "Every author featured on GadZeke, browse their books and quotes in one place.";
+const title = "Book Quotes by Author | GadZeke";
+const description =
+  "Hand-picked quotes organized by author — browse every writer featured on GadZeke and jump straight to their books and quotes.";
 
 export const metadata: Metadata = {
-  title: "Browse by Author | GadZeke",
+  title,
   description,
   alternates: { canonical: "/authors" },
-  openGraph: { title: "Browse by Author | GadZeke", description, url: "/authors" },
+  openGraph: { title, description, url: "/authors" },
 };
 
 export const revalidate = 3600;
@@ -22,7 +24,7 @@ export default async function AuthorsPage() {
   return (
     <main className="feed-main">
       <section className="hero">
-        <h1 className="hero-heading">Browse by Author</h1>
+        <h1 className="hero-heading">Book Quotes by Author</h1>
         <p className="hero-subtext">Every author featured on GadZeke, in one place.</p>
       </section>
 

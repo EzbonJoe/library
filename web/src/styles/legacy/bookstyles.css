@@ -243,6 +243,9 @@ main{
 }
 
 .quote-listen-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -285,7 +288,13 @@ main{
 }
 
 .quote-text{
-  margin: var(--space-2) 0 0;
+  /* .quote-actions is absolutely positioned (top: var(--space-3), 16px)
+     with 30px icons, ending ~46px from the card's top edge -- taller than
+     the card's own padding-top (32px) + this element's old 8px margin, so
+     the icons' background circles were overlapping (and on narrow screens,
+     visibly cutting through) the quote's first line. 28px of clearance
+     keeps text starting safely below the icons regardless. */
+  margin: 28px 0 0;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.7rem;
@@ -309,5 +318,140 @@ main{
   .quote-listen-btn{
     width: 40px;
     height: 40px;
+  }
+
+  /* Taller icons here need more clearance below them than the 28px set
+     above (sized for the 30px desktop icons) to keep clearing .quote-text. */
+  .quote-text{
+    margin-top: 36px;
+  }
+}
+
+/* ---------- Individual quote page ---------- */
+
+.quote-page-crumb{
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.quote-page-crumb a{
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
+
+.quote-page-hero{
+  position: relative;
+  padding: var(--space-6) var(--space-5);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.quote-page-text{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.quote-page-actions{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-5);
+}
+
+.quote-page-book{
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.quote-page-book img{
+  width: 64px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.quote-page-book-title{
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.quote-page-book-author{
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+}
+
+.quote-page-book-link{
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: 1.3rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.quote-page-nav{
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.quote-page-nav-link{
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1.3rem;
+}
+
+.quote-page-nav-link.is-next{
+  text-align: right;
+}
+
+.quote-page-nav-label{
+  display: block;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+@media only screen and (max-width: 600px){
+  .quote-page-hero{
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .quote-page-text{
+    font-size: 2rem;
+  }
+
+  .quote-page-book{
+    flex-wrap: wrap;
+  }
+
+  .quote-page-book-link{
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
   }
 }

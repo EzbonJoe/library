@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { isBookBookmarked, toggleBookBookmark } from "@/lib/bookBookmarks";
 import { syncSavedQuote } from "@/lib/savedQuotes";
 import { syncSavedBook } from "@/lib/savedBooks";
 import { recordBookView } from "@/lib/recentlyViewed";
-import { quoteLink } from "@/lib/quoteLink";
 import { speakOne, speakSequence, stopSpeaking } from "@/lib/textToSpeech";
 import { useSpeechSupported } from "@/hooks/useSpeechSupported";
 import { useAuthUser } from "@/hooks/useAuthUser";
@@ -219,11 +217,6 @@ export default function BookQuotesSection({ book, quotes }: { book: Book; quotes
                     </button>
                   </Tooltip>
                 )}
-                <Tooltip label="Open this quote's own page" align="end">
-                  <Link className="quote-listen-btn" aria-label="Open this quote's own page" href={quoteLink(book.slug, quote.position)}>
-                    🔗
-                  </Link>
-                </Tooltip>
               </div>
             </div>
           );

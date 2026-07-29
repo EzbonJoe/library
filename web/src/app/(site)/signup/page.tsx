@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { ensureProfile } from "@/lib/profile";
 import { isValidUsername, normalizeUsername } from "@/lib/username";
 import PasswordInput from "@/components/PasswordInput";
-import Turnstile from "@/components/Turnstile";
+import Turnstile, { type TurnstileHandle } from "@/components/Turnstile";
 import { TURNSTILE_SITE_KEY } from "@/lib/config";
 
 export default function SignupPage() {
@@ -20,6 +20,7 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -65,6 +66,11 @@ export default function SignupPage() {
 
     if (signUpError) {
       setError(signUpError.message);
+      // The token just spent on this failed attempt is dead -- without a
+      // fresh one, retrying fails with Cloudflare's "timeout-or-duplicate"
+      // regardless of whether the resubmitted details are valid.
+      setCaptchaToken("");
+      turnstileRef.current?.reset();
       return;
     }
 
@@ -124,7 +130,7 @@ export default function SignupPage() {
           Password
           <PasswordInput value={password} onChange={setPassword} minLength={6} required />
         </label>
-        <Turnstile siteKey={TURNSTILE_SITE_KEY} onVerify={setCaptchaToken} />
+        <Turnstile ref={turnstileRef} siteKey={TURNSTILE_SITE_KEY} onVerify={setCaptchaToken} />
         <button
           type="submit"
           disabled={submitting || !captchaToken}

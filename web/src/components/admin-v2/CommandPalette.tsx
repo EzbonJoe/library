@@ -15,7 +15,7 @@ export default function CommandPalette({
   onNavigate,
 }: {
   supabase: SupabaseClient;
-  onNavigate: (tab: NavKey) => void;
+  onNavigate: (tab: NavKey, term?: string) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [term, setTerm] = useState("");
@@ -78,9 +78,13 @@ export default function CommandPalette({
     }, 250);
   }
 
-  function goTo(tab: NavKey) {
+  // The destination tab's own list defaults to an unfiltered/recent view,
+  // so landing there without the clicked item's own title/text just drops
+  // you back in the same list you searched from -- passing it through as
+  // the destination's initial search filters straight to that item instead.
+  function goTo(tab: NavKey, term?: string) {
     setIsOpen(false);
-    onNavigate(tab);
+    onNavigate(tab, term);
   }
 
   const hasResults = books.length > 0 || quotes.length > 0;
@@ -106,7 +110,7 @@ export default function CommandPalette({
             <>
               <div className="av-palette-section-label">Books</div>
               {books.map((book) => (
-                <button key={book.id} type="button" className="av-palette-item" onClick={() => goTo("books")}>
+                <button key={book.id} type="button" className="av-palette-item" onClick={() => goTo("books", book.title)}>
                   <BookOpen size={16} />
                   {book.title}
                   {book.author && <span className="av-palette-item-meta">— {book.author}</span>}
@@ -118,7 +122,7 @@ export default function CommandPalette({
             <>
               <div className="av-palette-section-label">Quotes</div>
               {quotes.map((quote) => (
-                <button key={quote.id} type="button" className="av-palette-item" onClick={() => goTo("quotes")}>
+                <button key={quote.id} type="button" className="av-palette-item" onClick={() => goTo("quotes", quote.text)}>
                   <Quote size={16} />
                   {quote.text.slice(0, 60)}
                   {quote.text.length > 60 ? "…" : ""}

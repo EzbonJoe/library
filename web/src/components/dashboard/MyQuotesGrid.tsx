@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { Pencil, Trash2, Copy, Check, PenLine, Quote } from "lucide-react";
+import { Pencil, Trash2, Copy, Check, PenLine, Quote, Volume2, Pause } from "lucide-react";
 import Tooltip from "@/components/Tooltip";
 import AddToCollectionButton from "./AddToCollectionButton";
+import { speakOne, stopSpeaking } from "@/lib/textToSpeech";
+import { useSpeechSupported } from "@/hooks/useSpeechSupported";
 
 export type MyQuote = { id: number; text: string; book_title: string | null; created_at: string };
 
@@ -29,6 +31,8 @@ export default function MyQuotesGrid({
   const [editText, setEditText] = useState("");
   const [editBookTitle, setEditBookTitle] = useState("");
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [playingId, setPlayingId] = useState<number | null>(null);
+  const speechSupported = useSpeechSupported();
 
   const filtered = search.trim()
     ? quotes.filter(
@@ -77,6 +81,16 @@ export default function MyQuotesGrid({
     setTimeout(() => setCopiedId(null), 1500);
   }
 
+  function handleListen(quote: MyQuote) {
+    const wasPlaying = playingId === quote.id;
+    stopSpeaking();
+    setPlayingId(null);
+    if (wasPlaying) return;
+
+    setPlayingId(quote.id);
+    speakOne(quote.text, { onEnd: () => setPlayingId(null) });
+  }
+
   if (quotes.length === 0) {
     return (
       <div className="ud-empty">
@@ -84,7 +98,7 @@ export default function MyQuotesGrid({
           <PenLine />
         </div>
         <div className="ud-empty-title">Nothing saved yet</div>
-        <p>Add the first line that&apos;s stuck with you using the Add Quote button above.</p>
+        <p>Add the first line that&apos;s stuck with you using the + button.</p>
       </div>
     );
   }
@@ -177,6 +191,18 @@ export default function MyQuotesGrid({
                     <Trash2 />
                   </button>
                 </Tooltip>
+                {speechSupported && (
+                  <Tooltip label={playingId === quote.id ? "Stop listening" : "Listen to this quote"}>
+                    <button
+                      type="button"
+                      className={`ud-quote-card-action ${playingId === quote.id ? "is-saved" : ""}`}
+                      aria-label={playingId === quote.id ? "Stop listening" : "Listen to this quote"}
+                      onClick={() => handleListen(quote)}
+                    >
+                      {playingId === quote.id ? <Pause /> : <Volume2 />}
+                    </button>
+                  </Tooltip>
+                )}
               </div>
             </>
           )}

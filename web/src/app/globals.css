@@ -206,6 +206,20 @@
   --site-color: white;
 }
 
+/* Browser autofill (Chrome/Safari) paints its own light background and dark
+   text on autofilled fields, ignoring site CSS -- jarring on the dark theme
+   since it's the only input on the page not honoring --color-surface/text.
+   The inset box-shadow trick is the standard override: autofill only lets
+   you touch box-shadow and text-fill-color, not background-color directly. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-surface) inset;
+  box-shadow: 0 0 0px 1000px var(--color-surface) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 /* Tailwind utility tokens — distinct names from the plain vars above so
    Tailwind's generated `:root { --color-canvas: ... }` never shadows the
    source variable it points at (that would resolve to itself and break). */

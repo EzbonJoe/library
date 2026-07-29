@@ -9,6 +9,12 @@ function applyTheme(isDark: boolean) {
   // Legacy vars kept until every stylesheet migrates off these.
   document.documentElement.style.setProperty("--site-background-color", isDark ? "#131720" : "aliceblue");
   document.documentElement.style.setProperty("--site-color", isDark ? "white" : "black");
+  // Without a theme-color meta tag, mobile browsers paint the status
+  // bar/URL bar area with their own default instead of the page's actual
+  // background -- in dark mode that shows up as a mismatched blank strip
+  // right above the app content. --brand-canvas from brand-tokens.css.
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", isDark ? "#0D1117" : "#FAFAF8");
 }
 
 // Shared by every theme toggle in the app (public header, mobile menu,

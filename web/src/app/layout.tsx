@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import Analytics from "@/components/Analytics";
+import { getSiteSettings } from "@/lib/settings";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -9,33 +10,46 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://gadzeke.com"),
-  // No template: every page's own title already includes "GadZeke" in its
-  // own format ("About GadZeke", "X | GadZeke", "X — GadZeke") — a "%s —
-  // GadZeke" template here would double it up on every single page, not
-  // just this one. A plain string still acts as the fallback for any route
-  // that doesn't set its own title (same as `default` would, without
-  // TypeScript requiring a `template` alongside it).
-  title: "GadZeke — Words That Change Perspectives",
-  description:
-    "Discover timeless, hand-picked quotes from the world's greatest business, psychology, and philosophy books — curated by GadZeke, not AI-generated.",
-  openGraph: {
-    type: "website",
-    siteName: "GadZeke",
-    images: ["/icons/logo-social.png"],
-  },
-  twitter: {
-    card: "summary",
-    images: ["/icons/logo-social.png"],
-  },
-  icons: {
-    icon: "/icons/favicon-logo.png",
-    apple: "/icons/apple-touch-icon.png",
-  },
-  verification: {
-    google: "0w4K5NJ-pqjsc2m85-1xPzD56Pc0klw5v9ndY3Je50A",
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+
+  return {
+    metadataBase: new URL("https://gadzeke.com"),
+    // No template: every page's own title already includes the site name in
+    // its own format ("About GadZeke", "X | GadZeke", "X — GadZeke") — a
+    // "%s — GadZeke" template here would double it up on every single page,
+    // not just this one. A plain string still acts as the fallback for any
+    // route that doesn't set its own title (same as `default` would,
+    // without TypeScript requiring a `template` alongside it).
+    title: `${settings.siteName} — ${settings.siteTagline}`,
+    description: settings.seoDescription,
+    openGraph: {
+      type: "website",
+      siteName: settings.siteName,
+      images: [settings.ogImageUrl],
+    },
+    twitter: {
+      card: "summary",
+      images: [settings.ogImageUrl],
+    },
+    icons: {
+      icon: "/icons/favicon-logo.png",
+      apple: "/icons/apple-touch-icon.png",
+    },
+    verification: {
+      google: "0w4K5NJ-pqjsc2m85-1xPzD56Pc0klw5v9ndY3Je50A",
+    },
+  };
+}
+
+// Without this, mobile browsers color the status/URL bar area with their
+// own default instead of the page's actual background -- most visible in
+// dark mode as a mismatched blank strip above the app content. The light
+// value here is the first-paint default; themeInitScript below corrects it
+// to dark before paint when that's the stored/preferred theme, and
+// useThemeToggle keeps it in sync after any later toggle.
+export const viewport: Viewport = {
+  themeColor: "#FAFAF8",
 };
 
 // Reads the theme choice before paint so pages never flash the wrong theme —
@@ -49,6 +63,10 @@ const themeInitScript = `
       ? JSON.parse(stored)
       : window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    if (isDark) {
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', '#0D1117');
+    }
   } catch (e) {}
 })();
 `;

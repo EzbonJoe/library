@@ -3,6 +3,7 @@
 import { Search, Menu, Bell } from "lucide-react";
 import { TOGGLE_ADMIN_SEARCH_EVENT } from "./CommandPalette";
 import QuickAdd from "./QuickAdd";
+import AdminTopbarThemeToggle from "./AdminTopbarThemeToggle";
 import { NAV_ITEMS, type NavKey } from "./nav";
 import Tooltip from "@/components/Tooltip";
 
@@ -38,7 +39,7 @@ export default function TopBar({
           onClick={() => window.dispatchEvent(new CustomEvent(TOGGLE_ADMIN_SEARCH_EVENT))}
         >
           <Search />
-          Search...
+          <span className="av-search-trigger-text">Search...</span>
           <kbd>Ctrl K</kbd>
         </button>
         <Tooltip label="Notifications" position="below">
@@ -46,6 +47,7 @@ export default function TopBar({
             <Bell />
           </button>
         </Tooltip>
+        <AdminTopbarThemeToggle />
         <QuickAdd onAddQuote={onQuickAddQuote} />
       </div>
     </div>

@@ -49,13 +49,17 @@ export default function BooksPage({
   supabase,
   autoOpenAdd,
   onBooksChanged,
+  initialSearch,
 }: {
   supabase: SupabaseClient;
   autoOpenAdd: boolean;
   onBooksChanged?: () => void;
+  initialSearch?: string;
 }) {
   const [books, setBooks] = useState<BookRow[] | null>(null);
-  const [search, setSearch] = useState("");
+  // Seeded straight from the prop, same reasoning as slideoverOpen below --
+  // this component unmounts and remounts on every tab switch.
+  const [search, setSearch] = useState(initialSearch ?? "");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [sortKey, setSortKey] = useState<"title" | "author" | "newest">("newest");

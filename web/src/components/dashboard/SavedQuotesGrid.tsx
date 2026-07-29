@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { Heart, Copy, Check, ArrowUpRight } from "lucide-react";
+import { Heart, Copy, Check, ArrowUpRight, Volume2, Pause } from "lucide-react";
 import Tooltip from "@/components/Tooltip";
 import AddToCollectionButton from "./AddToCollectionButton";
 import { bookLink } from "@/lib/bookLink";
 import { resolveCoverUrl } from "@/lib/coverUrl";
 import { toggleBookmark } from "@/lib/bookmarks";
+import { speakOne, stopSpeaking } from "@/lib/textToSpeech";
+import { useSpeechSupported } from "@/hooks/useSpeechSupported";
 import type { SavedQuote } from "@/lib/savedQuotes";
 
 export default function SavedQuotesGrid({
@@ -24,6 +26,8 @@ export default function SavedQuotesGrid({
   onChanged: () => void;
 }) {
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [playingId, setPlayingId] = useState<number | null>(null);
+  const speechSupported = useSpeechSupported();
 
   const filtered = search.trim()
     ? quotes.filter(
@@ -43,6 +47,16 @@ export default function SavedQuotesGrid({
     await navigator.clipboard.writeText(`"${quote.text}" — ${quote.book.title}`);
     setCopiedId(quote.quote_id);
     setTimeout(() => setCopiedId(null), 1500);
+  }
+
+  function handleListen(quote: SavedQuote) {
+    const wasPlaying = playingId === quote.quote_id;
+    stopSpeaking();
+    setPlayingId(null);
+    if (wasPlaying) return;
+
+    setPlayingId(quote.quote_id);
+    speakOne(quote.text, { onEnd: () => setPlayingId(null) });
   }
 
   if (quotes.length === 0) {
@@ -111,6 +125,18 @@ export default function SavedQuotesGrid({
                 <ArrowUpRight />
               </a>
             </Tooltip>
+            {speechSupported && (
+              <Tooltip label={playingId === quote.quote_id ? "Stop listening" : "Listen to this quote"}>
+                <button
+                  type="button"
+                  className={`ud-quote-card-action ${playingId === quote.quote_id ? "is-saved" : ""}`}
+                  aria-label={playingId === quote.quote_id ? "Stop listening" : "Listen to this quote"}
+                  onClick={() => handleListen(quote)}
+                >
+                  {playingId === quote.quote_id ? <Pause /> : <Volume2 />}
+                </button>
+              </Tooltip>
+            )}
           </div>
         </div>
       ))}

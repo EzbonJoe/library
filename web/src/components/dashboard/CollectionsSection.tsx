@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { Tag, Plus, Pencil, Trash2, ArrowLeft, ArrowUpRight } from "lucide-react";
+import { Tag, Plus, Pencil, Trash2, ArrowLeft, ArrowUpRight, Volume2, Pause } from "lucide-react";
 import Tooltip from "@/components/Tooltip";
 import {
   type Collection,
@@ -16,6 +16,8 @@ import {
 } from "@/lib/collections";
 import { bookLink } from "@/lib/bookLink";
 import { resolveCoverUrl } from "@/lib/coverUrl";
+import { speakOne, stopSpeaking } from "@/lib/textToSpeech";
+import { useSpeechSupported } from "@/hooks/useSpeechSupported";
 
 export default function CollectionsSection({
   supabase,
@@ -34,6 +36,23 @@ export default function CollectionsSection({
   const [itemsLoading, setItemsLoading] = useState(false);
   const [renamingId, setRenamingId] = useState<number | null>(null);
   const [renameValue, setRenameValue] = useState("");
+  const [playingKey, setPlayingKey] = useState<string | null>(null);
+  const speechSupported = useSpeechSupported();
+
+  function itemKey(item: CollectionQuote) {
+    return `${item.itemType}-${item.itemRef}`;
+  }
+
+  function handleListen(item: CollectionQuote) {
+    const key = itemKey(item);
+    const wasPlaying = playingKey === key;
+    stopSpeaking();
+    setPlayingKey(null);
+    if (wasPlaying) return;
+
+    setPlayingKey(key);
+    speakOne(item.text, { onEnd: () => setPlayingKey(null) });
+  }
 
   function refreshCollections() {
     loadCollections(supabase, ownerId).then((cols) => {
@@ -174,6 +193,18 @@ export default function CollectionsSection({
                       <a className="ud-quote-card-action" aria-label="Read in book" href={bookLink(item.bookSlug)}>
                         <ArrowUpRight />
                       </a>
+                    </Tooltip>
+                  )}
+                  {speechSupported && (
+                    <Tooltip label={playingKey === itemKey(item) ? "Stop listening" : "Listen to this quote"}>
+                      <button
+                        type="button"
+                        className={`ud-quote-card-action ${playingKey === itemKey(item) ? "is-saved" : ""}`}
+                        aria-label={playingKey === itemKey(item) ? "Stop listening" : "Listen to this quote"}
+                        onClick={() => handleListen(item)}
+                      >
+                        {playingKey === itemKey(item) ? <Pause /> : <Volume2 />}
+                      </button>
                     </Tooltip>
                   )}
                 </div>

@@ -30,7 +30,19 @@ export default function AddToCollectionButton({
   const [collections, setCollections] = useState<Collection[]>([]);
   const [memberOf, setMemberOf] = useState<Set<number>>(new Set());
   const [newName, setNewName] = useState("");
+  const [leftAligned, setLeftAligned] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    // The popover is ~220px wide and normally hangs off the trigger
+    // button's right edge (right: 0). When the trigger sits mid-row on a
+    // narrow viewport, that pushes the popover's left edge off-screen --
+    // flip to hanging off the left edge instead so it stays fully visible.
+    const rect = wrapRef.current?.getBoundingClientRect();
+    if (rect && rect.right - 220 < 8) setLeftAligned(true);
+    else setLeftAligned(false);
+  }, [open]);
 
   useEffect(() => {
     if (!open || loaded) return;
@@ -90,7 +102,7 @@ export default function AddToCollectionButton({
         </button>
       </Tooltip>
       {open && (
-        <div className="ud-popover ud-collection-popover">
+        <div className={`ud-popover ud-collection-popover ${leftAligned ? "is-left-aligned" : ""}`}>
           {loaded && collections.length === 0 && <p style={{ marginBottom: 8 }}>No collections yet.</p>}
           {collections.map((collection) => (
             <button

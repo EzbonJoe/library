@@ -21,12 +21,17 @@
   --header-border: rgba(255, 255, 255, 0.08);
 }
 
-/* Scoped to .feed-page (the public-site layout's own wrapper, see
-   app/(site)/layout.tsx) rather than the bare body selector -- this offsets
-   the public site's fixed header, which only that wrapper ever renders. A
-   plain `body` rule was leaking this 90px gap onto /admin and /my-quotes
-   too, which have their own unrelated (non-fixed) layout and don't need it. */
-.feed-page{
+/* A plain `body` rule here once leaked this 90px gap onto /admin and
+   /my-quotes too, which have their own unrelated (non-fixed) layout and
+   don't need it -- so this got scoped to .feed-page instead, since only the
+   public site's layout (app/(site)/layout.tsx) renders the fixed header
+   this offsets. But /admin's layout also applies the .feed-page class
+   (purely to pick up its --feed-* CSS variables, which some still-unmigrated
+   legacy panels depend on) without ever rendering that fixed header --
+   reintroducing the exact same leaked-gap bug one level down. Scoped to its
+   own class, applied only where the fixed header actually renders, so
+   .feed-page itself can be reused anywhere just for its CSS variables. */
+.has-fixed-header{
   padding-top: 90px;
 }
 

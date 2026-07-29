@@ -21,7 +21,7 @@ const NAV_LINKS = [
   { href: "/categories", label: "Categories", secondary: true },
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({ siteName = "GadZeke" }: { siteName?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [hasBookmarks, setHasBookmarks] = useState(false);
@@ -122,7 +122,7 @@ export default function SiteHeader() {
           <div className="left-section">
             <Link href="/" className="brand-link">
               <Image src="/icons/logo-mark.png" alt="" width={32} height={32} className="brand-logo" priority />
-              <div className="page-name">GadZeke</div>
+              <div className="page-name">{siteName}</div>
             </Link>
             <nav>
               <ul>

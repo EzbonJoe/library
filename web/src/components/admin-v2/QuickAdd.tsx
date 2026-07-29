@@ -5,9 +5,16 @@ import { Plus, BookOpen, Quote } from "lucide-react";
 
 export const QUICK_ADD_BOOK_EVENT = "gadzeke-admin:quick-add-book";
 
-export default function QuickAdd({ onAddQuote }: { onAddQuote: () => void }) {
+export default function QuickAdd({
+  onAddQuote,
+  variant = "topbar",
+}: {
+  onAddQuote: () => void;
+  variant?: "topbar" | "fab";
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const isFab = variant === "fab";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -18,16 +25,18 @@ export default function QuickAdd({ onAddQuote }: { onAddQuote: () => void }) {
   }, []);
 
   return (
-    <div ref={ref} style={{ position: "relative" }}>
-      <button type="button" className="av-btn av-btn-primary av-btn-sm" onClick={() => setIsOpen((open) => !open)}>
+    <div ref={ref} className={isFab ? "av-quickadd-fab" : "av-quickadd-topbar"}>
+      <button
+        type="button"
+        className={isFab ? "av-fab-btn" : "av-btn av-btn-primary av-btn-sm"}
+        onClick={() => setIsOpen((open) => !open)}
+        aria-label={isFab ? "Add" : undefined}
+      >
         <Plus />
-        Add
+        {!isFab && <span className="av-quickadd-label">Add</span>}
       </button>
       {isOpen && (
-        <div
-          className="av-card"
-          style={{ position: "absolute", right: 0, top: "calc(100% + 6px)", minWidth: 180, padding: 6, zIndex: 20 }}
-        >
+        <div className={`av-card av-quickadd-menu ${isFab ? "av-quickadd-menu--fab" : ""}`}>
           <button
             type="button"
             className="av-palette-item"

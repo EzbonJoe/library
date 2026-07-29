@@ -92,10 +92,21 @@ function QuoteRow({
   );
 }
 
-export default function ManageQuotesPanel({ supabase, refreshKey }: { supabase: SupabaseClient; refreshKey: number }) {
+export default function ManageQuotesPanel({
+  supabase,
+  refreshKey,
+  initialSearch,
+}: {
+  supabase: SupabaseClient;
+  refreshKey: number;
+  initialSearch?: string;
+}) {
   const [books, setBooks] = useState<Book[]>([]);
   const [bookFilter, setBookFilter] = useState("");
-  const [search, setSearch] = useState("");
+  // Seeded straight from the prop, not a change-detecting effect -- this
+  // panel unmounts and remounts on every tab switch (AdminApp only renders
+  // the active tab), same reasoning as BooksPage's autoOpenAdd.
+  const [search, setSearch] = useState(initialSearch ?? "");
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [reloadCount, setReloadCount] = useState(0);
 

@@ -63,15 +63,21 @@
 
 .av-shell {
   display: flex;
-  min-height: 100vh;
+  /* Fixed to exactly the viewport, rather than min-height: 100vh + relying
+     on document/body scroll, so the sidebar's pinning can't be broken by a
+     stray `overflow-x: hidden` on <body> leaking in from the public site's
+     CSS (a real, previously-hit bug -- Chrome stops honoring
+     position: sticky on a sibling once body has any non-visible overflow,
+     even just on the x-axis). .av-main becomes the one scroll container,
+     entirely self-contained regardless of what body's overflow is doing. */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .av-sidebar {
   flex-shrink: 0;
   width: 260px;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: var(--av-sidebar);
@@ -82,6 +88,8 @@
 .av-main {
   flex: 1;
   min-width: 0;
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -107,6 +115,79 @@
   padding: var(--av-space-6);
 }
 
+.av-sidebar-backdrop {
+  display: none;
+}
+
+.av-quickadd-topbar {
+  position: relative;
+}
+
+.av-quickadd-fab {
+  display: none;
+}
+
+.av-quickadd-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 180px;
+  padding: 6px;
+  z-index: 20;
+}
+
+/* Mirrors the same overflow fix already applied to the user dashboard's
+   topbar: without this, "Search... Ctrl K" plus a labeled "Add" button
+   plus the notification bell and theme toggle don't fit next to the page
+   title on narrow viewports, and since nothing here wraps or shrinks, the
+   excess silently pushes past the edge instead of staying reachable —
+   including the theme toggle itself. Icon-only shrinking alone still isn't
+   enough room (same conclusion the dashboard's topbar reached), so the Add
+   button is pulled out of the topbar entirely below this width and
+   replaced by its own floating action button, decoupled from the row's
+   space budget. */
+@media (max-width: 640px) {
+  .av-search-trigger-text {
+    display: none;
+  }
+
+  .av-quickadd-topbar {
+    display: none;
+  }
+
+  .av-quickadd-fab {
+    display: flex;
+    position: fixed;
+    right: var(--av-space-5);
+    bottom: var(--av-space-5);
+    z-index: 30;
+  }
+
+  .av-fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--av-accent);
+    color: var(--av-bg);
+    box-shadow: var(--av-shadow-hover);
+    cursor: pointer;
+  }
+
+  .av-fab-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .av-quickadd-menu--fab {
+    top: auto;
+    bottom: calc(100% + 8px);
+  }
+}
+
 @media (max-width: 960px) {
   .av-sidebar {
     position: fixed;
@@ -119,6 +200,22 @@
 
   .av-sidebar.is-open {
     transform: translateX(0);
+  }
+
+  .av-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s var(--av-ease);
+  }
+
+  .av-sidebar-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .av-content {
@@ -247,6 +344,21 @@
   font-weight: 600;
 }
 
+/* Same width the sidebar goes off-canvas behind the hamburger button --
+   the topbar's own breadcrumb + title are redundant with whichever nav
+   link is highlighted once you open that sidebar, and on every tab this
+   was squeezing the row right next to the hamburger icon. Placed after the
+   base .av-topbar-left rule above (not just inside a max-width query
+   earlier in the file) because a media query adds no specificity of its
+   own -- at equal specificity, source order alone decides the winner, and
+   the base rule below would otherwise always beat an override placed
+   before it, regardless of viewport width. */
+@media (max-width: 960px) {
+  .av-topbar-left {
+    display: none;
+  }
+}
+
 .av-topbar-right {
   display: flex;
   align-items: center;
@@ -281,6 +393,23 @@
   border-radius: 5px;
   border: 1px solid var(--av-border);
   color: var(--av-text-muted);
+}
+
+/* Placed after the base .av-search-trigger rule above, not just inside an
+   earlier max-width query -- a media query adds no specificity of its own,
+   so at equal specificity the base rule's min-width: 200px and padding:
+   8px 12px would otherwise always win regardless of viewport width
+   (same ordering mistake already hit once on .av-topbar-left). The kbd
+   hint has no reason to show once its own text is hidden. */
+@media (max-width: 640px) {
+  .av-search-trigger {
+    min-width: 0;
+    padding: 8px;
+  }
+
+  .av-search-trigger kbd {
+    display: none;
+  }
 }
 
 .av-icon-btn {
@@ -944,6 +1073,26 @@
   color: var(--av-text);
   font-size: 1.3rem;
   font-family: inherit;
+}
+
+.av-password-field {
+  position: relative;
+}
+
+.av-password-field input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.av-password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--av-text-muted);
 }
 
 .av-field input:focus,

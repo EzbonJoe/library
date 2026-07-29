@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { Plus } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { ensureProfile, type Profile } from "@/lib/profile";
@@ -60,6 +61,31 @@ export default function UserDashboardApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const overviewResultsRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const hasScrolledForSearchRef = useRef(false);
+
+  // Overview's search results replace the small 3-item "Latest Quotes"
+  // preview below the hero and stats -- easy to miss if the user's still
+  // scrolled up near the search bar. Scrolls down to them once per typing
+  // session (not on every keystroke), and resets so it can fire again the
+  // next time they search after clearing it.
+  useEffect(() => {
+    if (activeTab !== "overview") return;
+
+    if (!search.trim()) {
+      hasScrolledForSearchRef.current = false;
+      return;
+    }
+
+    if (hasScrolledForSearchRef.current) return;
+    hasScrolledForSearchRef.current = true;
+
+    const timer = setTimeout(() => {
+      overviewResultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [search, activeTab]);
 
   function loadQuotes(ownerId: string) {
     supabase
@@ -105,6 +131,14 @@ export default function UserDashboardApp() {
     setSidebarOpen(false);
     setSearch("");
     localStorage.setItem(TAB_STORAGE_KEY, tab);
+    // Without this, switching tabs while scrolled down on the previous one
+    // lands the new tab's content at that same scroll position -- its
+    // first element (e.g. Collections' "create" row) can end up sitting
+    // behind the sticky, frosted-glass top bar: visually blurred through
+    // it and unclickable, since the bar sits above it in stacking order.
+    // .ud-main is its own scroll container (not the document), so this
+    // resets its scroll position directly rather than window.scrollTo.
+    mainRef.current?.scrollTo({ top: 0 });
   }
 
   async function handleLogout() {
@@ -146,19 +180,23 @@ export default function UserDashboardApp() {
   return (
     <div className="user-dashboard">
       <div className="ud-shell">
+        <div
+          className={`ud-sidebar-backdrop ${sidebarOpen ? "is-open" : ""}`}
+          onClick={() => setSidebarOpen(false)}
+        />
         <Sidebar activeTab={activeTab} onSelectTab={selectTab} onLogout={handleLogout} isOpen={sidebarOpen} />
-        <div className="ud-main">
+        <div className="ud-main" ref={mainRef}>
           <TopBar
             search={search}
             onSearchChange={setSearch}
             searchEnabled={
+              activeTab === "overview" ||
               activeTab === "my-quotes" ||
               activeTab === "saved" ||
               activeTab === "collections" ||
               activeTab === "my-books" ||
               activeTab === "recent"
             }
-            onOpenAddModal={() => setModalOpen(true)}
             onToggleSidebar={() => setSidebarOpen((open) => !open)}
             displayLetter={displayLetter}
           />
@@ -171,15 +209,21 @@ export default function UserDashboardApp() {
                   savedThisMonth={savedThisMonth}
                   savedQuotesCount={savedQuotes.length}
                   memberSince={memberSince}
+                  onSelectTab={selectTab}
                 />
-                <div className="ud-section-header">
-                  <div className="ud-section-title">Latest Quotes</div>
+                <div className="ud-section-header" ref={overviewResultsRef}>
+                  <div className="ud-section-title">{search.trim() ? "My Quotes" : "Latest Quotes"}</div>
                 </div>
+                {/* Searching here searches every quote, not just the 3-item
+                    preview below -- an empty search falls back to that
+                    preview since filtering only 3 items would make search
+                    look broken (near-certain "no matches" for anything not
+                    already in the top 3). */}
                 <MyQuotesGrid
-                  quotes={quotes.slice(0, 3)}
+                  quotes={search.trim() ? quotes : quotes.slice(0, 3)}
                   supabase={supabase}
                   ownerId={user.id}
-                  search=""
+                  search={search}
                   onChanged={() => loadQuotes(user.id)}
                 />
               </>
@@ -261,6 +305,13 @@ export default function UserDashboardApp() {
           </div>
         </div>
       </div>
+
+      {/* The only Add Quote entry point in this dashboard -- a floating
+          action button with its own fixed position, decoupled from the
+          topbar's space constraints, shown at every screen size. */}
+      <button type="button" className="ud-add-quote-fab" onClick={() => setModalOpen(true)} aria-label="Add a quote">
+        <Plus />
+      </button>
 
       <AddQuoteModal
         isOpen={modalOpen}

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowLeft, LogOut } from "lucide-react";
 import { NAV_ITEMS, type NavKey } from "./nav";
-import AdminThemeToggle from "./AdminThemeToggle";
 
 export default function Sidebar({
   activeTab,
@@ -48,7 +47,6 @@ export default function Sidebar({
           <ArrowLeft />
           View Website
         </Link>
-        <AdminThemeToggle />
         <button type="button" className="av-nav-link" onClick={onLogout}>
           <LogOut />
           Log out

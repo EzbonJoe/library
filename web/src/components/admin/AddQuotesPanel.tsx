@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { resolveCoverUrl } from "@/lib/coverUrl";
 
-type Book = { id: number; title: string };
+type Book = { id: number; title: string; author: string | null; image: string };
 
 export default function AddQuotesPanel({ supabase, refreshKey }: { supabase: SupabaseClient; refreshKey: number }) {
   const [books, setBooks] = useState<Book[]>([]);
@@ -14,7 +15,7 @@ export default function AddQuotesPanel({ supabase, refreshKey }: { supabase: Sup
   useEffect(() => {
     supabase
       .from("books")
-      .select("id, title")
+      .select("id, title, author, image")
       .order("title")
       .then(({ data }) => {
         setBooks(data ?? []);
@@ -93,37 +94,69 @@ export default function AddQuotesPanel({ supabase, refreshKey }: { supabase: Sup
     );
   }
 
+  const selectedBook = books.find((book) => String(book.id) === bookId);
+
   return (
-    <div className="admin-card js-admin-panel" data-tab="add-quotes">
-      <h2>Add quotes</h2>
-      <p className="admin-hint">
+    <div className="av-card" style={{ padding: 24 }}>
+      <h2 style={{ fontFamily: "var(--av-font-display)", fontSize: "1.6rem", fontWeight: 600, marginBottom: 4 }}>
+        Add quotes
+      </h2>
+      <p className="av-activity-meta" style={{ marginBottom: 20 }}>
         Paste one quote per line to add several at once — each line becomes its own quote. Duplicates already saved
         for this book are automatically skipped.
       </p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Book
-          <select value={bookId} onChange={(event) => setBookId(event.target.value)} required>
-            {books.map((book) => (
-              <option key={book.id} value={book.id}>
-                {book.title}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Quote(s)
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <div className="av-field">
+          <label className="av-field-label">Book</label>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            {selectedBook?.image ? (
+              // eslint-disable-next-line @next/next/no-img-element -- covers come from Supabase storage, arbitrary remote host
+              <img
+                src={resolveCoverUrl(selectedBook.image)}
+                alt=""
+                style={{ width: 40, height: 56, objectFit: "cover", borderRadius: 6, flexShrink: 0 }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 40,
+                  height: 56,
+                  borderRadius: 6,
+                  flexShrink: 0,
+                  background: "var(--av-bg)",
+                  border: "1px solid var(--av-border)",
+                }}
+              />
+            )}
+            <select value={bookId} onChange={(event) => setBookId(event.target.value)} required style={{ flex: 1 }}>
+              {books.map((book) => (
+                <option key={book.id} value={book.id}>
+                  {book.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="av-field">
+          <label className="av-field-label">Quote(s)</label>
           <textarea
             rows={8}
             placeholder="One quote per line..."
             value={text}
             onChange={(event) => setText(event.target.value)}
             required
+            style={{ width: "100%", resize: "vertical" }}
           />
-        </label>
-        <button type="submit">Add quote(s)</button>
+        </div>
+        <button type="submit" className="av-btn av-btn-primary" style={{ alignSelf: "flex-start" }}>
+          Add quote(s)
+        </button>
       </form>
-      <p className="status-text">{status}</p>
+      {status && (
+        <p className="av-activity-meta" style={{ marginTop: 12 }}>
+          {status}
+        </p>
+      )}
     </div>
   );
 }

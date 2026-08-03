@@ -202,9 +202,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center;
   box-shadow: var(--feed-shadow);
+}
+
+.featured-bg-image{
+  object-fit: cover;
 }
 
 .featured-overlay{
@@ -890,5 +892,142 @@
   .icon-btn{
     width: 40px;
     height: 40px;
+  }
+}
+
+/* Feedback prompt (components/FeedbackPrompt.tsx) -- a small dismissible
+   card, not a blocking modal, so it never intercepts clicks meant for the
+   page underneath it. */
+.feedback-prompt{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 900;
+  width: min(320px, calc(100vw - 40px));
+  padding: 20px;
+  background-color: var(--feed-surface);
+  border: 1px solid var(--feed-border);
+  border-radius: 16px;
+  box-shadow: var(--feed-shadow-hover);
+  animation: feedback-prompt-in 0.25s ease;
+}
+
+@keyframes feedback-prompt-in{
+  from{ opacity: 0; transform: translateY(12px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+.feedback-prompt-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: var(--feed-text-muted);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.feedback-prompt-title{
+  margin: 0 24px 12px 0;
+  font-family: var(--feed-font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--feed-text);
+}
+
+.feedback-prompt-stars{
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.feedback-prompt-star{
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--feed-border);
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.feedback-prompt-star.is-filled{
+  color: var(--feed-accent);
+  transform: scale(1.05);
+}
+
+.feedback-prompt-textarea{
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 12px;
+  font-family: var(--feed-font-body);
+  font-size: 1.3rem;
+  color: var(--feed-text);
+  background-color: var(--feed-surface);
+  border: 1px solid var(--feed-border);
+  border-radius: 10px;
+  resize: vertical;
+}
+
+.feedback-prompt-honeypot{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.feedback-prompt-actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.feedback-prompt-later{
+  border: none;
+  background: none;
+  padding: 8px 10px;
+  font-family: var(--feed-font-body);
+  font-size: 1.3rem;
+  color: var(--feed-text-muted);
+  cursor: pointer;
+}
+
+.feedback-prompt-submit{
+  padding: 8px 16px;
+  font-family: var(--feed-font-body);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--feed-accent-contrast);
+  background-color: var(--feed-accent);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.feedback-prompt-submit:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.feedback-prompt-thanks{
+  margin: 4px 24px 0 0;
+  font-family: var(--feed-font-body);
+  font-size: 1.4rem;
+  color: var(--feed-text);
+}
+
+@media (max-width: 600px){
+  .feedback-prompt{
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    width: auto;
   }
 }

@@ -39,6 +39,12 @@ export default function CategoriesPage() {
             {category}
           </Link>
         ))}
+        <Link className="browse-card" href="/quotes-about-tactics">
+          Tactics &amp; Strategy
+        </Link>
+        <Link className="browse-card" href="/editors-picks">
+          Editor&apos;s Picks
+        </Link>
       </div>
     </main>
   );

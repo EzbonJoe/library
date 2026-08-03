@@ -52,6 +52,23 @@ export const viewport: Viewport = {
   themeColor: "#FAFAF8",
 };
 
+const CLASH_DISPLAY_CSS_URL = "https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap";
+
+// A plain `rel="stylesheet"` link here would block first paint on every
+// single page behind a round trip to a third-party host, for a font that
+// every one of its call sites already lists 'Manrope' as a fallback for --
+// and Manrope is self-hosted via next/font above, so there's no visual
+// reason to block on it. `media="print"` makes the browser fetch it without
+// applying (or blocking render for) it; the script right after flips it to
+// `media="all"` the moment it's parsed, applying the swap as soon as the
+// (already in-flight) download finishes instead of holding up paint.
+const loadClashDisplayScript = `
+(function () {
+  var link = document.getElementById('clash-display-css');
+  if (link) link.media = 'all';
+})();
+`;
+
 // Reads the theme choice before paint so pages never flash the wrong theme —
 // mirrors scripts/darkmode.js's localStorage['display-color'] + data-theme
 // attribute convention from the current static site, ported as-is.
@@ -79,10 +96,22 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        {/* Login/signup (and admin login) load the Turnstile captcha
+            entirely client-side, on demand -- warming this connection here
+            means the widget's own script/iframe requests don't have to pay
+            for DNS+TLS setup on top of the JS chain that triggers them. */}
+        <link rel="preconnect" href="https://challenges.cloudflare.com" crossOrigin="" />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap"
+          id="clash-display-css"
           rel="stylesheet"
+          media="print"
+          href={CLASH_DISPLAY_CSS_URL}
         />
+        <script dangerouslySetInnerHTML={{ __html: loadClashDisplayScript }} />
+        <noscript>
+          <link rel="stylesheet" href={CLASH_DISPLAY_CSS_URL} />
+        </noscript>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full">

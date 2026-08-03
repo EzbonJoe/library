@@ -34,15 +34,36 @@ type QuoteRow = { id: number; text: string; position: number; book_id: number };
 // share across the ~1030 separate page generations in the same build).
 let allDataPromise: Promise<{ books: BookRow[]; quotes: QuoteRow[] }> | null = null;
 
+// PostgREST caps any unpaginated select at this project's max-rows setting
+// (1000 here) -- with 1273 quotes in the table, a plain .select() silently
+// dropped the last ~270 rows, so whole books past that cutoff never got a
+// generateStaticParams entry and 404'd on every quote page. Paging through
+// with .range() until a partial page comes back is the only way to get
+// every row regardless of how large the table grows.
+async function fetchAllRows<T>(supabase: ReturnType<typeof createClient>, table: string, columns: string): Promise<T[]> {
+  const pageSize = 1000;
+  const rows: T[] = [];
+  // .range() pagination without a stable order can skip or repeat rows if
+  // the underlying scan order shifts between requests -- ordering by id
+  // (same fix already applied in lib/bookStats.ts's fetchAllQuotes) keeps
+  // every page's boundary deterministic.
+  for (let from = 0; ; from += pageSize) {
+    const { data } = await supabase.from(table).select(columns).order("id").range(from, from + pageSize - 1);
+    rows.push(...((data ?? []) as T[]));
+    if (!data || data.length < pageSize) break;
+  }
+  return rows;
+}
+
 function loadAllData() {
   if (!allDataPromise) {
     allDataPromise = (async () => {
       const supabase = createClient();
-      const [{ data: books }, { data: quotes }] = await Promise.all([
-        supabase.from("books").select("id, slug, title, author, category, image, status"),
-        supabase.from("quotes").select("id, text, position, book_id"),
+      const [books, quotes] = await Promise.all([
+        fetchAllRows<BookRow>(supabase, "books", "id, slug, title, author, category, image, status"),
+        fetchAllRows<QuoteRow>(supabase, "quotes", "id, text, position, book_id"),
       ]);
-      return { books: (books ?? []) as BookRow[], quotes: (quotes ?? []) as QuoteRow[] };
+      return { books, quotes };
     })();
   }
   return allDataPromise;

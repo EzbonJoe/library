@@ -27,7 +27,7 @@ export default function Hero({ name, heroQuote }: { name: string; heroQuote: Her
             — {heroQuote.book.title}
             {heroQuote.book.author ? `, ${heroQuote.book.author}` : ""}
           </p>
-          <Link href="/" className="ud-btn ud-btn-primary ud-hero-quote-cta">
+          <Link href="/#feed" className="ud-btn ud-btn-primary ud-hero-quote-cta">
             Explore Quotes
           </Link>
         </div>

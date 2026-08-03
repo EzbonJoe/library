@@ -8,12 +8,14 @@ import {
   Mail,
   BarChart3,
   Settings,
+  Newspaper,
 } from "lucide-react";
 
 export const NAV_ITEMS = [
   { key: "dashboard", label: "Dashboard", icon: Home },
   { key: "books", label: "Books", icon: BookOpen },
   { key: "quotes", label: "Quotes", icon: Quote },
+  { key: "blog", label: "Blog", icon: Newspaper },
   { key: "authors", label: "Authors", icon: PenLine },
   { key: "categories", label: "Categories", icon: FolderOpen },
   { key: "featured", label: "Featured", icon: Star },

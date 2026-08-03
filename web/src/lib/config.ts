@@ -13,6 +13,14 @@ export const AMAZON_AFFILIATE_TAG = "gadzeke-20-placeholder";
 export const TURNSTILE_SITE_KEY =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 
+// Matches the UID hardcoded into every admin-locked RLS policy across
+// supabase/migration-*.sql (search for it there before changing this). Not a
+// secret -- it's already baked into those migration files -- used here only
+// to bounce any other authenticated session out of /admin immediately
+// instead of rendering the dashboard shell and relying solely on RLS to
+// silently no-op their reads/writes once they're already looking at it.
+export const ADMIN_USER_ID = "aaa8656a-e03f-4a6b-aef3-da9448f5cdeb";
+
 // Analytics — both undefined in local dev unless set in .env.local, in
 // which case the scripts that read these just don't render.
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";

@@ -5,7 +5,7 @@ import type { User } from "@supabase/supabase-js";
 import { BarChart3, Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import Turnstile, { type TurnstileHandle } from "@/components/Turnstile";
-import { TURNSTILE_SITE_KEY } from "@/lib/config";
+import { ADMIN_USER_ID, TURNSTILE_SITE_KEY } from "@/lib/config";
 import Sidebar from "@/components/admin-v2/Sidebar";
 import TopBar from "@/components/admin-v2/TopBar";
 import CommandPalette from "@/components/admin-v2/CommandPalette";
@@ -22,6 +22,7 @@ import type { NavKey } from "@/components/admin-v2/nav";
 import AddQuotesPanel from "./AddQuotesPanel";
 import ManageQuotesPanel from "./ManageQuotesPanel";
 import SubscribersPanel from "./SubscribersPanel";
+import BlogPage from "@/components/admin-v2/BlogPage";
 import "@/styles/admin-v2.css";
 import "@/styles/legacy/admin.css";
 
@@ -30,6 +31,7 @@ const VALID_TABS: NavKey[] = [
   "dashboard",
   "books",
   "quotes",
+  "blog",
   "authors",
   "categories",
   "featured",
@@ -164,6 +166,22 @@ export default function AdminApp() {
     );
   }
 
+  if (user.id !== ADMIN_USER_ID) {
+    return (
+      <div className="admin-v2" style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center" }}>
+        <div className="av-card" style={{ width: "min(380px, 90vw)", padding: 32, textAlign: "center" }}>
+          <div className="av-brand-name" style={{ marginBottom: 8 }}>Access denied</div>
+          <p style={{ fontSize: "1.3rem", marginBottom: 20 }}>
+            This account doesn&apos;t have access to the admin panel.
+          </p>
+          <button type="button" className="av-btn av-btn-primary" onClick={handleLogout}>
+            Log out
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="admin-v2">
       <div className="av-shell">
@@ -201,6 +219,7 @@ export default function AdminApp() {
                 <ManageQuotesPanel supabase={supabase} refreshKey={refreshKey} initialSearch={quotesInitialSearch} />
               </div>
             )}
+            {activeTab === "blog" && <BlogPage supabase={supabase} />}
             {activeTab === "authors" && <AuthorsPage supabase={supabase} />}
             {activeTab === "categories" && <CategoriesPage supabase={supabase} />}
             {activeTab === "featured" && <FeaturedPage supabase={supabase} />}

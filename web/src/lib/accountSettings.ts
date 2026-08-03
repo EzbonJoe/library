@@ -11,7 +11,7 @@ export async function updateProfile(
   userId: string,
   fields: { username: string; display_name: string | null },
 ) {
-  const { error } = await supabase.from("profiles").update(fields).eq("id", userId);
+  const { error } = await supabase.from("profiles").upsert({ id: userId, ...fields });
   if (error) throw error;
 }
 

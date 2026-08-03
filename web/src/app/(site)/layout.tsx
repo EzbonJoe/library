@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import SearchOverlay from "@/components/SearchOverlay";
 import SiteFooter from "@/components/SiteFooter";
+import FeedbackPrompt from "@/components/FeedbackPrompt";
 import { getSiteSettings } from "@/lib/settings";
 
 // Public-site chrome (header, search overlay, footer) — split into its own
@@ -16,6 +17,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteHeader siteName={settings.siteName} />
       <SearchOverlay />
       {children}
+      <FeedbackPrompt />
       <SiteFooter
         curatorText={settings.footerCuratorText}
         copyrightText={settings.footerCopyrightText}

@@ -197,9 +197,9 @@ export default function BooksPageClient({
   return (
     <>
       <section className="hero">
-        <h1 className="hero-heading">Discover Timeless Books</h1>
+        <h1 className="hero-heading">Browse All Books</h1>
         <p className="hero-subtext">
-          Explore the books behind history&apos;s most memorable ideas, quotes, and life-changing lessons.
+          Search the full library by title or author, or narrow it down by category below.
         </p>
         <div className="hero-search">
           <input
@@ -241,7 +241,18 @@ export default function BooksPageClient({
       {!isSearchMode ? (
         <div>
           {heroBook && (
-            <section className="featured" style={{ backgroundImage: `url('${resolveCoverUrl(heroBook.image)}')` }}>
+            <section className="featured">
+              {/* Same LCP fix as HomeFeed's hero -- a CSS background-image
+                  here was serving the raw, unoptimized cover file instead
+                  of going through next/image. */}
+              <Image
+                className="featured-bg-image"
+                src={resolveCoverUrl(heroBook.image)}
+                alt=""
+                fill
+                priority
+                sizes="100vw"
+              />
               <div className="featured-overlay" />
               <div className="featured-content">
                 <span className="featured-label">Featured Book</span>
@@ -251,6 +262,7 @@ export default function BooksPageClient({
                   alt={`${heroBook.title} cover`}
                   width={96}
                   height={144}
+                  priority
                 />
                 <p className="featured-quote">
                   {heroStats?.sampleQuote ? `"${heroStats.sampleQuote}"` : heroBook.title}

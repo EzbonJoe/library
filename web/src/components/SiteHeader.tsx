@@ -15,8 +15,8 @@ import { BOOKMARK_TOGGLE_CLICK_EVENT } from "@/lib/events";
 import { useAuthUser } from "@/hooks/useAuthUser";
 
 const NAV_LINKS = [
-  { href: "/", label: "Quotes" },
   { href: "/books", label: "Books" },
+  { href: "/blog", label: "Blog", secondary: true },
   { href: "/authors", label: "Authors", secondary: true },
   { href: "/categories", label: "Categories", secondary: true },
 ];
@@ -96,11 +96,6 @@ export default function SiteHeader({ siteName = "GadZeke" }: { siteName?: string
             </Link>
           </li>
           <li>
-            <Link href="/my-quotes" onClick={() => setIsMenuOpen(false)}>
-              My Quotes
-            </Link>
-          </li>
-          <li>
             <AccountLink onNavigate={() => setIsMenuOpen(false)} />
           </li>
           {user && (
@@ -112,7 +107,7 @@ export default function SiteHeader({ siteName = "GadZeke" }: { siteName?: string
             <MobileThemeToggle onToggled={() => setIsMenuOpen(false)} />
           </li>
         </ul>
-        <Link href="/" className="drop-down-cta" onClick={() => setIsMenuOpen(false)}>
+        <Link href="/#feed" className="drop-down-cta" onClick={() => setIsMenuOpen(false)}>
           Explore Quotes
         </Link>
       </nav>
@@ -164,7 +159,7 @@ export default function SiteHeader({ siteName = "GadZeke" }: { siteName?: string
             <AccountLink className="account-link" />
             {user && <DesktopLogoutButton />}
             <SiteThemeToggle />
-            <Link href="/" className="header-cta">
+            <Link href="/#feed" className="header-cta">
               Explore Quotes
             </Link>
             <button

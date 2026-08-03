@@ -273,7 +273,22 @@ export default function HomeFeed({
       </div>
 
       {hero && !isFilterActive && (
-        <section className="featured" style={{ backgroundImage: `url('${resolveCoverUrl(hero.quote.book.image)}')` }}>
+        <section className="featured">
+          {/* This is almost always the page's LCP element -- a plain CSS
+              background-image here bypasses next/image entirely (no
+              resizing/compression to a modern format, no priority preload),
+              which was serving admin-uploaded covers at their full original
+              size and dominating load time. fill + priority gets it the
+              same optimization and preloading the small cover below
+              already had. */}
+          <Image
+            className="featured-bg-image"
+            src={resolveCoverUrl(hero.quote.book.image)}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+          />
           <div className="featured-overlay" />
           <div className="featured-content">
             <span className="featured-label">{hero.label}</span>
@@ -283,6 +298,7 @@ export default function HomeFeed({
               alt={`${hero.quote.book.title} cover`}
               width={96}
               height={144}
+              priority
             />
             <p className="featured-quote">{hero.quote.text}</p>
             <div className="featured-book">

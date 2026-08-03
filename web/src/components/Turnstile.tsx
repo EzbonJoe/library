@@ -83,7 +83,12 @@ const Turnstile = forwardRef<TurnstileHandle, { siteKey: string; onVerify: (toke
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [siteKey]);
 
-    return <div ref={containerRef} />;
+    // Reserves Turnstile's default rendered size (300x65) before the widget
+    // actually loads -- without this the container starts at 0 height and
+    // jumps once the async script/iframe finally arrives, shoving the
+    // submit button down (the layout shift Clarity was flagging as CLS on
+    // login/signup, the only pages that render this).
+    return <div ref={containerRef} style={{ minHeight: 65 }} />;
   },
 );
 

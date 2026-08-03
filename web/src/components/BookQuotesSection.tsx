@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { isBookBookmarked, toggleBookBookmark } from "@/lib/bookBookmarks";
 import { syncSavedQuote } from "@/lib/savedQuotes";
@@ -13,6 +14,7 @@ import { useAuthUser } from "@/hooks/useAuthUser";
 import { createClient } from "@/lib/supabase/client";
 import { AMAZON_AFFILIATE_TAG } from "@/lib/config";
 import { resolveCoverUrl } from "@/lib/coverUrl";
+import { quoteLink } from "@/lib/quoteLink";
 import Tooltip from "./Tooltip";
 
 type Quote = { id: number; text: string; position: number; editors_pick: boolean };
@@ -193,7 +195,9 @@ export default function BookQuotesSection({ book, quotes }: { book: Book; quotes
           return (
             <div key={quote.id} className={`quotes ${isPlaying ? "is-playing" : ""}`}>
               <div className="quote-number">{index + 1}</div>
-              <p className="quote-text">{quote.text}</p>
+              <Link href={quoteLink(book.slug, quote.position)} style={{ display: "block" }}>
+                <p className="quote-text">{quote.text}</p>
+              </Link>
               <div className="quote-actions">
                 <Tooltip label={bookmarkedNow ? "Remove bookmark" : "Bookmark this quote"} align="end">
                   <button

@@ -4,21 +4,17 @@ import Link from "next/link";
 import { useAuthUser } from "@/hooks/useAuthUser";
 
 export default function AccountLink({ onNavigate, className }: { onNavigate?: () => void; className?: string }) {
-  const { user, username } = useAuthUser();
+  const { user } = useAuthUser();
 
   if (user === undefined) return null;
 
-  if (!user) {
-    return (
-      <Link href="/login" className={className} onClick={onNavigate}>
-        Log in
-      </Link>
-    );
-  }
-
+  // Logged-out visitors land on /my-quotes's own gate (account pitch + a
+  // Log in CTA) rather than being sent straight to /login -- a feature-named
+  // link converts better than a bare "Log in", and the destination already
+  // handles the auth branching so this component doesn't need to duplicate it.
   return (
     <Link href="/my-quotes" className={className} onClick={onNavigate}>
-      {username ? `@${username}` : "My quotes"}
+      My Quotes
     </Link>
   );
 }
